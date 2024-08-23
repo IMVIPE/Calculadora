@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td>${mes}</td>
-                <td>$${capital.toFixed(2)}</td>
+                <td class="capital-propio">$${capital.toFixed(2)}</td>
                 <td>$${gananciaInv1G.toFixed(2)}</td>
                 <td>$${gananciaInv2G.toFixed(2)}</td>
                 <td>$${totalGanancia}</td>
