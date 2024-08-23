@@ -1,52 +1,117 @@
+/* Estilos Generales */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f2f5;
     color: #333;
+    margin: 0;
+    padding: 0;
 }
 
+/* Contenedor Principal */
 .container {
-    width: 80%;
-    max-width: 600px;
+    width: 90%;
+    max-width: 800px;
     margin: 50px auto;
-    background: #fff;
-    padding: 20px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    padding: 40px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
 }
 
+/* Títulos */
 h1, h2 {
     text-align: center;
+    margin-bottom: 20px;
 }
 
+/* Formulario */
 form label {
     display: block;
-    margin-top: 15px;
+    margin: 15px 0 5px;
+    font-weight: bold;
 }
 
-form input {
+form input, form select {
     width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
+    padding: 10px;
+    border: 1px solid #ccc;
     border-radius: 4px;
 }
 
-button {
+form button {
     width: 100%;
-    padding: 10px;
-    background: #007bff;
-    color: white;
+    padding: 12px;
+    margin-top: 20px;
+    background-color: #28a745;
     border: none;
+    color: #ffffff;
+    font-size: 16px;
     border-radius: 4px;
     cursor: pointer;
 }
 
-button:hover {
-    background: #0056b3;
+form button:hover {
+    background-color: #218838;
+}
+
+/* Resultados */
+#resultados {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #e9ecef;
+    border-radius: 4px;
 }
 
 #resultados p {
-    font-size: 1.1em;
     margin: 10px 0;
+    font-size: 16px;
+}
+
+/* Pop-up */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.popup-content h2 {
+    margin-bottom: 15px;
+}
+
+.popup-content textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.popup-content button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    border: none;
+    color: #ffffff;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.popup-content button:hover {
+    background-color: #0056b3;
 }
