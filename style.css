@@ -64,50 +64,6 @@ h1 {
     background-color: #357ABD;
 }
 
-/* Cuenta regresiva */
-.countdown-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 1000;
-}
-
-.countdown-circle {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    background-color: #4A90E2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 48px;
-    color: white;
-    position: relative;
-    overflow: hidden;
-}
-
-.countdown-circle:before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: white;
-    transform-origin: center bottom;
-    transform: rotate(0deg);
-    animation: fillCircle 5s linear forwards;
-}
-
-@keyframes fillCircle {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
 /* Resultados */
 .results-section {
     margin-top: 30px;
@@ -115,8 +71,6 @@ h1 {
     background-color: #ffffff;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
-    opacity: 0;
-    transition: opacity 1s;
 }
 
 .result-highlight {
