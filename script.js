@@ -2,13 +2,19 @@ function calcular() {
     // Obtener valores del formulario
     const capitalInicial = parseInt(document.getElementById('rangoActual').value);
     const cicloMeses = parseInt(document.getElementById('cicloMeses').value);
-    const interesMensual = 0.15;
+    const interesMensual = 0.10; // Interés compuesto del 10%
 
     let capital = capitalInicial;
     let totalGananciaInteres = 0;
     let totalRecompensas = 0;
+    let ganancias1G = 0;
+    let ganancias2G = 0;
     let rangoFinal = 0;
     let capitalFaltante = 1000000 - capital;
+
+    // Simulación de invitaciones (1 invitado por mes)
+    let invitaciones1G = 0;
+    let invitaciones2G = 0;
 
     // Realizar los cálculos para cada mes
     for (let mes = 1; mes <= cicloMeses; mes++) {
@@ -16,17 +22,26 @@ function calcular() {
         totalGananciaInteres += gananciaInteres;
 
         const gananciaUsuario = gananciaInteres * 0.10; // 10% para el usuario
-        const reinversion = gananciaInteres * 0.03; // 3% reinvertido
-
         totalRecompensas += gananciaUsuario;
-        capital += reinversion + gananciaUsuario;
+
+        // Simulación de invitaciones
+        invitaciones1G += 1; // Cada mes el usuario invita a 1 persona
+        invitaciones2G += invitaciones1G; // Cada invitado invita a 1 persona más
+
+        const gananciaInv1G = (invitaciones1G * gananciaInteres) * 0.02; // 2% de la ganancia de los invitados de 1G
+        const gananciaInv2G = (invitaciones2G * gananciaInteres) * 0.01; // 1% de la ganancia de los invitados de 2G
+
+        ganancias1G += gananciaInv1G;
+        ganancias2G += gananciaInv2G;
+
+        capital += gananciaUsuario;
 
         // Calcular cuánto falta para alcanzar $1,000,000
         capitalFaltante = 1000000 - capital;
 
         // Actualizar rango final basado en el capital acumulado
         if (capital >= capitalInicial) {
-            rangoFinal = mes; // Suponiendo que cada mes se revisa el rango
+            rangoFinal = mes; // Actualización de rango mes a mes
         }
     }
 
@@ -38,6 +53,8 @@ function calcular() {
     document.getElementById('resultadoRango').textContent = `Mes ${rangoFinal}`;
     document.getElementById('resultadoCapitalFinal').textContent = `$${capital.toFixed(2)}`;
     document.getElementById('mensajeCapital').textContent = `$${totalGananciaInteres.toFixed(2)}`;
+    document.getElementById('ganancias1G').textContent = `$${ganancias1G.toFixed(2)}`;
+    document.getElementById('ganancias2G').textContent = `$${ganancias2G.toFixed(2)}`;
     document.getElementById('totalRecompensas').textContent = `$${totalRecompensas.toFixed(2)}`;
     document.getElementById('mensajeEstrategia').textContent = estrategia;
 
