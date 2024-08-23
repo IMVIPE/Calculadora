@@ -2,6 +2,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const calcularBtn = document.getElementById('calcularBtn');
     const resultsContainer = document.getElementById('resultsContainer');
     const tablaGanancias = document.getElementById('tablaGanancias').querySelector('tbody');
+    const totalGananciasElement = document.getElementById('totalGanancias');
+    const gananciasInteresElement = document.getElementById('gananciasInteres');
+    const capitalFinalElement = document.getElementById('resultadoCapitalFinal');
+    const mensajeEstrategiaElement = document.getElementById('mensajeEstrategia');
 
     calcularBtn.addEventListener('click', calcular);
 
@@ -26,11 +30,9 @@ document.addEventListener('DOMContentLoaded', () => {
             totalGananciaInteres += gananciaInteres;
             capital += gananciaInteres;
 
-            // Lógica para calcular usuarios invitados
-            usuarios1G += 1; // Un usuario nuevo en cada mes
-            usuarios2G += usuarios1G; // Cada usuario de 1ª gen trae otro en la 2ª gen
+            usuarios1G += 1;
+            usuarios2G += usuarios1G;
 
-            // Ganancias por los usuarios invitados
             const capitalInvitado1G = capitalInicial / 2;
             const capitalInvitado2G = capitalInvitado1G / 2;
 
@@ -42,7 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const totalGanancia = capital + ganancias1G + ganancias2G;
 
-            // Agregar fila a la tabla
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td>${mes}</td>
@@ -61,12 +62,11 @@ document.addEventListener('DOMContentLoaded', () => {
             ? 'Para mejorar tus ganancias, considera aumentar tu inversión inicial en los primeros meses.'
             : '¡Felicidades! Has alcanzado $1,000,000 en capital.';
 
-        document.getElementById('resultadoCapitalFinal').textContent = capital.toFixed(2);
-        document.getElementById('gananciasInteres').textContent = totalGananciaInteres.toFixed(2);
-        document.getElementById('totalGanancias').textContent = totalGanancias.toFixed(2);
-        document.getElementById('mensajeEstrategia').textContent = estrategia;
+        capitalFinalElement.textContent = capital.toFixed(2);
+        gananciasInteresElement.textContent = totalGananciaInteres.toFixed(2);
+        totalGananciasElement.textContent = totalGanancias.toFixed(2);
+        mensajeEstrategiaElement.textContent = estrategia;
 
-        // Mostrar los resultados inmediatamente después del cálculo
         resultsContainer.style.display = 'block';
     }
 });
