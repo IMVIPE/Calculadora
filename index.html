@@ -20,10 +20,29 @@
             <input type="number" id="interesMensual" value="15" required>
             
             <label for="rangoActual">Rango Actual:</label>
-            <input type="number" id="rangoActual" required>
+            <select id="rangoActual" required>
+                <option value="6">Rango 6</option>
+                <option value="7">Rango 7</option>
+                <option value="8">Rango 8</option>
+                <option value="9">Rango 9</option>
+                <option value="10">Rango 10</option>
+                <option value="11">Rango 11</option>
+                <option value="12">Rango 12</option>
+                <option value="13">Rango 13</option>
+                <option value="14">Rango 14</option>
+                <option value="15">Rango 15</option>
+                <option value="16">Rango 16</option>
+                <option value="17">Rango 17</option>
+                <option value="18">Rango 18</option>
+                <option value="19">Rango 19</option>
+                <option value="20">Rango 20</option>
+            </select>
             
-            <label for="numInvitados">Número de Invitados:</label>
+            <label for="numInvitados">Número de Invitados de Primera Generación:</label>
             <input type="number" id="numInvitados" value="3" required>
+            
+            <label for="numInvitados2G">Número de Invitados de Segunda Generación por Invitado:</label>
+            <input type="number" id="numInvitados2G" value="3" required>
             
             <button type="button" onclick="calcular()">Calcular</button>
         </form>
@@ -35,6 +54,10 @@
             <p id="resultadoExtraccion"></p>
             <p id="resultadoReinversion"></p>
             <p id="resultadoCapitalFinal"></p>
+            <p id="ganancia1G"></p>
+            <p id="ganancia2G"></p>
+            <p id="gananciaTotal"></p>
+            <p id="ingresoCapital"></p>
         </div>
     </div>
     <script src="script.js"></script>
