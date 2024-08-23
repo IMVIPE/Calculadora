@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
     const calcularBtn = document.getElementById('calcularBtn');
     const verGraficoBtn = document.getElementById('verGraficoBtn');
-    const verGananciasBtn = document.getElementById('verGananciasBtn');
+    const cerrarPopupBtn = document.getElementById('cerrarPopupBtn');
 
     calcularBtn.addEventListener('click', calcular);
     verGraficoBtn.addEventListener('click', mostrarGrafico);
-    verGananciasBtn.addEventListener('click', mostrarGanancias);
+    cerrarPopupBtn.addEventListener('click', cerrarPopup);
 
     let chartData = {};
 
@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
         let ganancias1G = 0;
         let ganancias2G = 0;
         let rangoFinal = 0;
-        let rangoActual = capitalInicial;
 
         const capitalMensual = [];
         const ganancias1GMensual = [];
@@ -31,11 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
             totalGananciaInteres += gananciaInteres;
             capital += gananciaInteres;
 
-            // Sumar un usuario 2 rangos por debajo
-            const nuevoRango = Math.max(rangoActual / 2, 50);
-            rangoActual = nuevoRango;
-
-            const capitalInvitado1G = rangoActual; 
+            // Simulación de invitaciones (usuario de 2 rangos inferiores)
+            const capitalInvitado1G = capitalInicial / 2; 
             const capitalInvitado2G = capitalInvitado1G / 2;
 
             const gananciaInv1G = (capitalInvitado1G * interesMensual) * 0.02;
@@ -67,7 +63,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('mensajeEstrategia').textContent = estrategia;
 
         document.getElementById('resultsContainer').style.display = 'block';
-        document.getElementById('chartContainer').style.display = 'none';
 
         // Guardar datos para el gráfico
         chartData = {
@@ -115,18 +110,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 responsive: true,
                 scales: {
                     y: {
-                        beginAtZero: true
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Capital Ganado ($)'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Tiempo (Meses)'
+                        }
                     }
                 }
             }
         });
 
-        document.getElementById('resultsContainer').style.display = 'none';
-        document.getElementById('chartContainer').style.display = 'block';
+        document.getElementById('popup').style.display = 'flex';
     }
 
-    function mostrarGanancias() {
-        document.getElementById('resultsContainer').style.display = 'block';
-        document.getElementById('chartContainer').style.display = 'none';
+    function cerrarPopup() {
+        document.getElementById('popup').style.display = 'none';
     }
 });
