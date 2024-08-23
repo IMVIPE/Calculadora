@@ -1,7 +1,7 @@
 function calcular() {
     const capitalInicial = parseInt(document.getElementById('rangoActual').value);
     const cicloMeses = parseInt(document.getElementById('cicloMeses').value);
-    const interesMensual = 0.10; 
+    const interesMensual = 0.10; // Interés compuesto del 10%
 
     let capital = capitalInicial;
     let totalGananciaInteres = 0;
@@ -13,25 +13,23 @@ function calcular() {
 
     let invitaciones1G = 0;
     let invitaciones2G = 0;
-    
-    let rangoActual = capitalInicial;
 
     const capitalMensual = [];
     const ganancias1GMensual = [];
     const ganancias2GMensual = [];
-    const totalRecompensasMensual = [];
+    const totalGananciasMensual = [];
 
     for (let mes = 1; mes <= cicloMeses; mes++) {
         const gananciaInteres = capital * interesMensual;
         totalGananciaInteres += gananciaInteres;
 
-        const gananciaUsuario = gananciaInteres * 0.10;
+        const gananciaUsuario = gananciaInteres; // 10% de ganancia acumulativa sobre el capital
         totalRecompensas += gananciaUsuario;
 
         invitaciones1G += 1;
         invitaciones2G += invitaciones1G;
 
-        let capitalInvitado1G = rangoActual / 2;
+        let capitalInvitado1G = capitalInicial / 2;
         let capitalInvitado2G = capitalInvitado1G / 2;
 
         const gananciaInv1G = (capitalInvitado1G * interesMensual) * 0.02;
@@ -45,11 +43,11 @@ function calcular() {
         capitalMensual.push(capital.toFixed(2));
         ganancias1GMensual.push(gananciaInv1G.toFixed(2));
         ganancias2GMensual.push(gananciaInv2G.toFixed(2));
-        totalRecompensasMensual.push(totalRecompensas.toFixed(2));
+        totalGananciasMensual.push((capital + ganancias1G + ganancias2G).toFixed(2));
 
         capitalFaltante = 1000000 - capital;
 
-        if (capital >= rangoActual) {
+        if (capital >= capitalInicial) {
             rangoFinal = mes;
         }
     }
@@ -60,18 +58,17 @@ function calcular() {
 
     document.getElementById('resultadoRango').textContent = `Mes ${rangoFinal}`;
     document.getElementById('resultadoCapitalFinal').textContent = `$${capital.toFixed(2)}`;
-    document.getElementById('mensajeCapital').textContent = `$${totalGananciaInteres.toFixed(2)}`;
     document.getElementById('ganancias1G').textContent = `$${ganancias1G.toFixed(2)}`;
     document.getElementById('ganancias2G').textContent = `$${ganancias2G.toFixed(2)}`;
-    document.getElementById('totalRecompensas').textContent = `$${totalRecompensas.toFixed(2)}`;
+    document.getElementById('totalGanancias').textContent = `$${(capital + ganancias1G + ganancias2G).toFixed(2)}`;
     document.getElementById('mensajeEstrategia').textContent = estrategia;
 
-    mostrarGrafico(capitalMensual, ganancias1GMensual, ganancias2GMensual);
+    document.getElementById('resultsContainer').style.display = 'block';
 
-    document.getElementById('popup').style.display = 'flex';
+    mostrarGrafico(capitalMensual, ganancias1GMensual, ganancias2GMensual, totalGananciasMensual);
 }
 
-function mostrarGrafico(capitalMensual, ganancias1GMensual, ganancias2GMensual) {
+function mostrarGrafico(capitalMensual, ganancias1GMensual, ganancias2GMensual, totalGananciasMensual) {
     const ctx = document.getElementById('gananciasChart').getContext('2d');
     new Chart(ctx, {
         type: 'line',
@@ -96,6 +93,12 @@ function mostrarGrafico(capitalMensual, ganancias1GMensual, ganancias2GMensual) 
                     borderColor: 'red',
                     fill: false,
                 },
+                {
+                    label: 'Total Ganancias',
+                    data: totalGananciasMensual,
+                    borderColor: 'purple',
+                    fill: false,
+                }
             ],
         },
         options: {
@@ -107,8 +110,4 @@ function mostrarGrafico(capitalMensual, ganancias1GMensual, ganancias2GMensual) 
             }
         }
     });
-}
-
-function cerrarPopup() {
-    document.getElementById('popup').style.display = 'none';
 }
