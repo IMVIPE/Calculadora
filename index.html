@@ -23,4 +23,20 @@
             <input type="number" id="rangoActual" required>
             
             <label for="numInvitados">Número de Invitados:</label>
-            <input
+            <input type="number" id="numInvitados" value="3" required>
+            
+            <button type="button" onclick="calcular()">Calcular</button>
+        </form>
+        
+        <div id="resultados">
+            <h2>Resultados:</h2>
+            <p id="resultadoRango"></p>
+            <p id="resultadoGanancia"></p>
+            <p id="resultadoExtraccion"></p>
+            <p id="resultadoReinversion"></p>
+            <p id="resultadoCapitalFinal"></p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
