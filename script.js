@@ -57,19 +57,4 @@ document.addEventListener('DOMContentLoaded', () => {
         const totalGanancias = capital + ganancias1G + ganancias2G;
         const estrategia = capital < 1000000 
             ? 'Para mejorar tus ganancias, considera aumentar tu inversión inicial en los primeros meses.'
-            : '¡Felicidades! Has alcanzado $1,000,000 en capital.';
-
-        document.getElementById('resultadoCapitalFinal').textContent = capital.toFixed(2);
-        document.getElementById('gananciasInteres').textContent = totalGananciaInteres.toFixed(2);
-        document.getElementById('ganancias1G').textContent = ganancias1G.toFixed(2);
-        document.getElementById('ganancias2G').textContent = ganancias2G.toFixed(2);
-        document.getElementById('totalGanancias').textContent = totalGanancias.toFixed(2);
-        document.getElementById('mensajeEstrategia').textContent = estrategia;
-
-        // Mostrar resultados con animación suave
-        resultsContainer.style.display = 'block';
-        setTimeout(() => {
-            resultsContainer.style.opacity = 1;
-        }, 100);
-    }
-});
+            : '¡Felicidades! Has alcanzado $1,000,
