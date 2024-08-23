@@ -1,14 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     const calcularBtn = document.getElementById('calcularBtn');
     const tablaGanancias = document.getElementById('tablaGanancias').querySelector('tbody');
-    const countdownContainer = document.getElementById('countdownContainer');
-    const resultsContainer = document.getElementById('resultsContainer');
-    const countdownElement = document.getElementById('countdown');
-    const clockSound = document.getElementById('clockSound');
 
-    calcularBtn.addEventListener('click', () => {
-        startCountdown();
-    });
+    calcularBtn.addEventListener('click', calcular);
 
     function formatK(value) {
         if (value >= 1000000) {
@@ -32,40 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             return 'transparent'; // Sin fondo especial para valores menores a 100k
         }
-    }
-
-    function startCountdown() {
-        let countdownValue = 5;
-        countdownContainer.style.display = 'flex';
-        clockSound.play();
-
-        const interval = setInterval(() => {
-            countdownElement.textContent = countdownValue;
-            if (countdownValue === 1) {
-                clearInterval(interval);
-                countdownContainer.style.display = 'none';
-                showResults();
-            } else {
-                countdownValue--;
-            }
-        }, 1000);
-    }
-
-    function showResults() {
-        calcular(); // Realiza la simulación
-        resultsContainer.style.display = 'block';
-        animateResults(); // Añadir animación para los resultados
-    }
-
-    function animateResults() {
-        const resultsElements = resultsContainer.querySelectorAll('span');
-        resultsElements.forEach((element, index) => {
-            element.style.opacity = 0;
-            setTimeout(() => {
-                element.style.transition = 'opacity 1s';
-                element.style.opacity = 1;
-            }, index * 500); // Retraso para la animación de cada resultado
-        });
     }
 
     function calcular() {
@@ -129,5 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('ganancias2G').textContent = formatK(ganancias2G);
         document.getElementById('totalGanancias').textContent = formatK(totalGanancias);
         document.getElementById('mensajeEstrategia').textContent = estrategia;
+
+        document.getElementById('resultsContainer').style.display = 'block';
     }
 });
