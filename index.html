@@ -55,11 +55,13 @@
         <p><strong>Ganancias por Invitaciones (Generación 1):</strong> <span id="ganancias1G"></span></p>
         <p><strong>Ganancias por Invitaciones (Generación 2):</strong> <span id="ganancias2G"></span></p>
         <p><strong>Estrategia Sugerida:</strong> <span id="mensajeEstrategia"></span></p>
+        <button type="button" id="verGraficoBtn">Ver Gráfico</button>
     </div>
 
     <!-- Gráfico -->
-    <div class="chart-container" style="position: relative; height:40vh; width:80vw">
+    <div class="chart-container" id="chartContainer" style="display: none;">
         <canvas id="gananciasChart"></canvas>
+        <button type="button" id="verGananciasBtn">Ver Ganancias</button>
     </div>
 
     <script src="script.js"></script>
