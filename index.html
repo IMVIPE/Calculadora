@@ -50,20 +50,24 @@
         <div class="result-highlight">
             <p><strong>Total de Ganancias del Usuario:</strong> <span id="totalGanancias"></span></p>
         </div>
-        <p><strong>Rango Final Alcanzado:</strong> <span id="resultadoRango"></span></p>
         <p><strong>Capital Final:</strong> <span id="resultadoCapitalFinal"></span></p>
-        <p><strong>Ganancias por Invitaciones (Generación 1):</strong> <span id="ganancias1G"></span></p>
-        <p><strong>Ganancias por Invitaciones (Generación 2):</strong> <span id="ganancias2G"></span></p>
         <p><strong>Estrategia Sugerida:</strong> <span id="mensajeEstrategia"></span></p>
-        <button type="button" id="verGraficoBtn">Ver Gráfico</button>
-    </div>
 
-    <!-- Pop-up de Gráfico -->
-    <div class="popup" id="popup" style="display: none;">
-        <div class="popup-content">
-            <h2>Gráfico de Ganancias</h2>
+        <!-- Datos de Generaciones -->
+        <div class="generations-container">
+            <h3>Detalles de Generaciones</h3>
+            <p><strong>Usuarios en 1ª Generación:</strong> <span id="usuarios1G"></span></p>
+            <p><strong>Ganancias 1ª Generación:</strong> <span id="ganancias1G"></span></p>
+            <p><strong>Usuarios en 2ª Generación:</strong> <span id="usuarios2G"></span></p>
+            <p><strong>Ganancias 2ª Generación:</strong> <span id="ganancias2G"></span></p>
+        </div>
+
+        <!-- Botón para Ver Gráfico -->
+        <button type="button" id="verGraficoBtn">Ver Gráfico</button>
+
+        <!-- Gráfico -->
+        <div class="chart-container" id="chartContainer" style="display: none;">
             <canvas id="gananciasChart"></canvas>
-            <button type="button" id="cerrarPopupBtn">Cerrar</button>
         </div>
     </div>
 
