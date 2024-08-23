@@ -53,4 +53,48 @@ form button {
     font-size: 16px;
     border-radius: 6px;
     cursor: pointer;
-    transition: background-color
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #357ABD;
+}
+
+/* Resultados */
+.results-container {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+}
+
+.result-highlight {
+    background-color: #4A90E2;
+    color: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+/* Datos de Generaciones */
+.generations-container {
+    background-color: #f0f0f0;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+/* Gráfico */
+.chart-container {
+    margin-top: 30px;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+    .container, .results-container, .generations-container {
+        padding: 20px;
+    }
+}
