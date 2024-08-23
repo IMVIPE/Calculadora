@@ -26,15 +26,19 @@ h1 {
     color: #4A90E2;
 }
 
-/* Formulario */
-form label {
+/* Sección de Entrada de Datos */
+.input-section {
+    margin-bottom: 30px;
+}
+
+.input-section label {
     display: block;
     margin: 15px 0 5px;
     font-weight: bold;
     font-size: 14px;
 }
 
-form select, form input {
+.input-section select, .input-section input {
     width: 100%;
     padding: 12px;
     border: 1px solid #ddd;
@@ -44,7 +48,7 @@ form select, form input {
     margin-bottom: 15px;
 }
 
-form button {
+.input-section button {
     width: 100%;
     padding: 14px;
     background-color: #4A90E2;
@@ -56,12 +60,12 @@ form button {
     transition: background-color 0.3s ease;
 }
 
-form button:hover {
+.input-section button:hover {
     background-color: #357ABD;
 }
 
 /* Resultados */
-.results-container {
+.results-section {
     margin-top: 30px;
     padding: 20px;
     background-color: #ffffff;
@@ -76,15 +80,6 @@ form button:hover {
     border-radius: 8px;
     margin-bottom: 15px;
     font-size: 18px;
-}
-
-/* Datos de Generaciones */
-.generations-container {
-    background-color: #f0f0f0;
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 15px;
-    font-size: 16px;
 }
 
 /* Tabla de Ganancias */
@@ -110,26 +105,9 @@ form button:hover {
     background-color: #d0e7ff;
 }
 
-/* Degradados para valores específicos */
-.gradient-100000 {
-    background-color: #b3cde0;
-}
-
-.gradient-250000 {
-    background-color: #6497b1;
-}
-
-.gradient-500000 {
-    background-color: #005b96;
-}
-
-.gradient-1000000 {
-    background-color: #03396c;
-}
-
 /* Responsivo */
 @media (max-width: 600px) {
-    .container, .results-container, .generations-container {
+    .container, .results-section, .input-section {
         padding: 20px;
     }
 }
