@@ -36,51 +36,42 @@ function calcular(event) {
     const rangoActual = parseInt(document.getElementById('rangoActual').value);
     let capital = capitalPorRango[rangoActual];
     const cicloMeses = parseInt(document.getElementById('cicloMeses').value);
-    const interesMensual = 0.10; // 10% de interés mensual
+    const interesMensual = 0.15; // 15% de interés mensual
     let siguienteRango = rangoActual;
 
     let totalGananciaInteres = 0;
     let gananciaBruta = 0;
     let ganancias1G = 0;
     let ganancias2G = 0;
-    let gananciaInvitados2G = 0;
+    let totalRecompensas = 0;
     let capitalFaltante = 1000000 - capital;
 
     for (let mes = 1; mes <= cicloMeses; mes++) {
         // Cálculo del interés compuesto mensual sobre el capital inicial
         const gananciaInteres = capital * interesMensual;
-        gananciaBruta += gananciaInteres;
         totalGananciaInteres += gananciaInteres;
 
+        // Distribución de ganancias
+        const gananciaUsuario = gananciaInteres * 0.10; // 10% para el usuario
+        const ganancia1G = gananciaInteres * 0.02; // 2% para la generación 1
+        const ganancia2G = gananciaInteres * 0.01; // 1% para la generación 2
+        const reinversion = gananciaInteres * 0.03; // 3% reinvertido
+        totalRecompensas += gananciaUsuario;
+
+        // Actualización de las ganancias por generación
+        ganancias1G += ganancia1G;
+        ganancias2G += ganancia2G;
+
         // Revisión para subir de rango
-        while (siguienteRango < 20 && capital + gananciaInteres >= capitalPorRango[siguienteRango + 1]) {
+        while (siguienteRango < 20 && capital + reinversion >= capitalPorRango[siguienteRango + 1]) {
             siguienteRango++;
         }
 
-        // Acumular el interés ganado
-        capital += gananciaInteres;
-
-        // Ganancias por invitado de 2 rangos inferiores
-        if (siguienteRango > 2) {
-            const rangoInvitado = siguienteRango - 2;
-            const gananciaInvitado = capitalPorRango[rangoInvitado] * interesMensual;
-            const comisionInvitado = gananciaInvitado * 0.12; // 12% de la ganancia del invitado
-            ganancias1G += comisionInvitado;
-            capital += comisionInvitado;
-
-            // Generar ganancia para la segunda generación
-            const comision2G = gananciaInvitado * 0.005; // 0.5% de las ganancias de segunda generación
-            ganancias2G += comision2G;
-            gananciaInvitados2G += comision2G;
-        }
+        // Acumular el interés ganado y reinvertirlo
+        capital += reinversion + gananciaUsuario;
 
         // Calcular cuánto falta para llegar a $1,000,000
         capitalFaltante = 1000000 - capital;
-
-        // Evitar ciclos innecesarios si se alcanza el millón
-        if (capital >= 1000000) {
-            break;
-        }
     }
 
     // Estrategia recomendada para alcanzar $1,000,000
@@ -90,12 +81,9 @@ function calcular(event) {
     document.getElementById('resultadoRango').textContent = siguienteRango;
     document.getElementById('resultadoCapitalFinal').textContent = `$${capital.toFixed(2)}`;
     document.getElementById('gananciaTotalInvitados').textContent = `$${(ganancias1G + ganancias2G).toFixed(2)}`;
-    document.getElementById('mensajeCapital').textContent = `Ganancia bruta total: $${gananciaBruta.toFixed(2)}. Faltan $${capitalFaltante.toFixed(2)} para alcanzar $1,000,000.`;
+    document.getElementById('mensajeCapital').textContent = `Ganancia bruta total: $${totalGananciaInteres.toFixed(2)}. Faltan $${capitalFaltante.toFixed(2)} para alcanzar $1,000,000.`;
     document.getElementById('mensajeEstrategia').textContent = estrategia;
-
-    // Detalles de Generación 1 y Generación 2
-    document.getElementById('ganancias1G').textContent = `Ganancias Generación 1: $${ganancias1G.toFixed(2)}`;
-    document.getElementById('ganancias2G').textContent = `Ganancias Generación 2: $${gananciaInvitados2G.toFixed(2)}`;
+    document.getElementById('totalRecompensas').textContent = `Recompensas totales: $${totalRecompensas.toFixed(2)}`;
 
     document.getElementById('popup').style.display = 'flex';
 }
