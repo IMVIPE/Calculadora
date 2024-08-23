@@ -110,6 +110,23 @@ form button:hover {
     background-color: #d0e7ff;
 }
 
+/* Degradados para valores específicos */
+.gradient-100000 {
+    background-color: #b3cde0;
+}
+
+.gradient-250000 {
+    background-color: #6497b1;
+}
+
+.gradient-500000 {
+    background-color: #005b96;
+}
+
+.gradient-1000000 {
+    background-color: #03396c;
+}
+
 /* Responsivo */
 @media (max-width: 600px) {
     .container, .results-container, .generations-container {
