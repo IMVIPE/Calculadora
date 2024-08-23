@@ -1,14 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     const calcularBtn = document.getElementById('calcularBtn');
-    const verTablaBtn = document.getElementById('verTablaBtn');
-    const tablaContainer = document.getElementById('tablaContainer');
     const tablaGanancias = document.getElementById('tablaGanancias').querySelector('tbody');
 
     calcularBtn.addEventListener('click', calcular);
-    verTablaBtn.addEventListener('click', () => {
-        tablaContainer.style.display = tablaContainer.style.display === 'none' ? 'block' : 'none';
-        verTablaBtn.textContent = tablaContainer.style.display === 'none' ? 'Ver Tabla de Ganancias' : 'Ocultar Tabla de Ganancias';
-    });
 
     function calcular() {
         const capitalInicial = parseInt(document.getElementById('rangoActual').value);
@@ -22,11 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let usuarios1G = 0;
         let usuarios2G = 0;
-
-        const capitalMensual = [];
-        const ganancias1GMensual = [];
-        const ganancias2GMensual = [];
-        const totalGananciasMensual = [];
 
         // Limpiar la tabla de ganancias anterior
         tablaGanancias.innerHTML = '';
@@ -51,11 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const totalGanancia = (capital + ganancias1G + ganancias2G).toFixed(2);
 
-            capitalMensual.push(capital.toFixed(2));
-            ganancias1GMensual.push(gananciaInv1G.toFixed(2));
-            ganancias2GMensual.push(gananciaInv2G.toFixed(2));
-            totalGananciasMensual.push(totalGanancia);
-
             // Agregar fila a la tabla
             const row = document.createElement('tr');
             row.innerHTML = `
@@ -68,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
             tablaGanancias.appendChild(row);
         }
 
-        const totalGanancias = totalGananciasMensual[cicloMeses - 1];
+        const totalGanancias = (capital + ganancias1G + ganancias2G).toFixed(2);
         const estrategia = capital < 1000000 
             ? `Para mejorar tus ganancias, considera aumentar tu inversión inicial en los primeros meses.`
             : `¡Felicidades! Has alcanzado $1,000,000 en capital.`;
@@ -83,60 +67,5 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('usuarios2G').textContent = usuarios2G;
 
         document.getElementById('resultsContainer').style.display = 'block';
-
-        // Crear el gráfico
-        crearGrafico({ capitalMensual, ganancias1GMensual, ganancias2GMensual });
-    }
-
-    function crearGrafico({ capitalMensual, ganancias1GMensual, ganancias2GMensual }) {
-        const ctx = document.getElementById('gananciasChart').getContext('2d');
-        if (window.gananciasChart) {
-            window.gananciasChart.destroy();
-        }
-
-        window.gananciasChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: Array.from({ length: capitalMensual.length }, (_, i) => `Mes ${i + 1}`),
-                datasets: [
-                    {
-                        label: 'Capital Propio',
-                        data: capitalMensual,
-                        borderColor: 'red',
-                        fill: false,
-                    },
-                    {
-                        label: 'Ganancias 1ª Generación',
-                        data: ganancias1GMensual,
-                        borderColor: 'yellow',
-                        fill: false,
-                    },
-                    {
-                        label: 'Ganancias 2ª Generación',
-                        data: ganancias2GMensual,
-                        borderColor: 'green',
-                        fill: false,
-                    }
-                ],
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        title: {
-                            display: true,
-                            text: 'Capital Ganado ($)'
-                        }
-                    },
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Tiempo (Meses)'
-                        }
-                    }
-                }
-            }
-        });
     }
 });
