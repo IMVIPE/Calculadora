@@ -76,6 +76,11 @@ function calcular(event) {
 
         // Calcular cuánto falta para llegar a $1,000,000
         capitalFaltante = 1000000 - capital;
+
+        // Evitar ciclos innecesarios si se alcanza el millón
+        if (capital >= 1000000) {
+            break;
+        }
     }
 
     // Estrategia recomendada para alcanzar $1,000,000
