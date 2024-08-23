@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
             totalGananciaInteres += gananciaInteres;
             capital += gananciaInteres;
 
-            // Incremento de usuarios: el usuario invita a 1, y cada usuario de 1ª Gen invita a 1.
+            // Simulación de invitaciones
             usuarios1G += 1;
             usuarios2G += usuarios1G;
 
@@ -35,8 +35,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const gananciaInv1G = (capitalInvitado1G * interesMensual) * 0.02;
             const gananciaInv2G = (capitalInvitado2G * interesMensual) * 0.01;
 
-            ganancias1G += gananciaInv1G * usuarios1G;
-            ganancias2G += gananciaInv2G * usuarios2G;
+            ganancias1G += gananciaInv1G;
+            ganancias2G += gananciaInv2G;
 
             const totalGanancia = (capital + ganancias1G + ganancias2G).toFixed(2);
 
@@ -44,11 +44,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td>${mes}</td>
-                <td>${usuarios1G}</td>
-                <td>${usuarios2G}</td>
                 <td class="capital-propio">$${capital.toFixed(2)}</td>
-                <td>$${(gananciaInv1G * usuarios1G).toFixed(2)}</td>
-                <td>$${(gananciaInv2G * usuarios2G).toFixed(2)}</td>
+                <td>$${gananciaInv1G.toFixed(2)}</td>
+                <td>$${gananciaInv2G.toFixed(2)}</td>
                 <td>$${totalGanancia}</td>
             `;
             tablaGanancias.appendChild(row);
