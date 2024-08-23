@@ -3,9 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const resultsContainer = document.getElementById('resultsContainer');
     const tablaGanancias = document.getElementById('tablaGanancias').querySelector('tbody');
 
-    calcularBtn.addEventListener('click', () => {
-        calcular();
-    });
+    calcularBtn.addEventListener('click', calcular);
 
     function calcular() {
         const capitalInicial = parseInt(document.getElementById('rangoActual').value);
@@ -20,7 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let usuarios1G = 0;
         let usuarios2G = 0;
 
-        tablaGanancias.innerHTML = '';  // Limpiar tabla de resultados anteriores
+        // Limpiar tabla de resultados anteriores
+        tablaGanancias.innerHTML = '';
 
         for (let mes = 1; mes <= cicloMeses; mes++) {
             const gananciaInteres = capital * interesMensual;
@@ -30,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
             usuarios1G += 1;
             usuarios2G += usuarios1G;
 
-            const capitalInvitado1G = capitalInicial / 2; 
+            const capitalInvitado1G = capitalInicial / 2;
             const capitalInvitado2G = capitalInvitado1G / 2;
 
             const gananciaInv1G = (capitalInvitado1G * interesMensual) * 0.02;
@@ -57,4 +56,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const totalGanancias = capital + ganancias1G + ganancias2G;
         const estrategia = capital < 1000000 
             ? 'Para mejorar tus ganancias, considera aumentar tu inversión inicial en los primeros meses.'
-            : '¡Felicidades! Has alcanzado $1,000,
+            : '¡Felicidades! Has alcanzado $1,000,000 en capital.';
+
+        document.getElementById('resultadoCapitalFinal').textContent = capital.toFixed(2);
+        document.getElementById('gananciasInteres').textContent = totalGananciaInteres.toFixed(2);
+        document.getElementById('totalGanancias').textContent = totalGanancias.toFixed(2);
+        document.getElementById('mensajeEstrategia').textContent = estrategia;
+
+        resultsContainer.style.display = 'block';
+    }
+});
