@@ -11,7 +11,7 @@
         <h1>Calculadora de Rangos e Interés Compuesto</h1>
         <p>El interés compuesto es como sembrar semillas: plantas hoy y cada día tu cosecha crece más, permitiéndote sembrar aún más semillas y obtener una cosecha cada vez mayor con el tiempo.</p>
         
-        <form id="calculatorForm" onsubmit="return calcular(event)">
+        <form id="calculatorForm" onsubmit="calcular(event)">
             <label for="rangoActual">Selecciona tu Rango Actual:</label>
             <select id="rangoActual" required onchange="actualizarCapital()">
                 <option value="20">Rango 20 - $10,000</option>
@@ -81,7 +81,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <button onclick="mostrarDetallesGeneraciones()">Mostrar Detalles de Generaciones</button>
+                <button type="button" onclick="mostrarDetallesGeneraciones()">Mostrar Detalles de Generaciones</button>
             </div>
             <div id="detallesGeneraciones" style="display:none;">
                 <table>
@@ -102,9 +102,9 @@
                         </tr>
                     </tbody>
                 </table>
-                <button onclick="volverResultadosGenerales()">Volver a Resultados Generales</button>
+                <button type="button" onclick="volverResultadosGenerales()">Volver a Resultados Generales</button>
             </div>
-            <button onclick="cerrarPopup()">Cerrar</button>
+            <button type="button" onclick="cerrarPopup()">Cerrar</button>
         </div>
     </div>
 
