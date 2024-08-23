@@ -1,18 +1,13 @@
 function calcular() {
     const capitalInicial = parseInt(document.getElementById('rangoActual').value);
     const cicloMeses = parseInt(document.getElementById('cicloMeses').value);
-    const interesMensual = 0.10; // Interés compuesto del 10%
+    const interesMensual = 0.10;
 
     let capital = capitalInicial;
     let totalGananciaInteres = 0;
-    let totalRecompensas = 0;
     let ganancias1G = 0;
     let ganancias2G = 0;
     let rangoFinal = 0;
-    let capitalFaltante = 1000000 - capital;
-
-    let invitaciones1G = 0;
-    let invitaciones2G = 0;
 
     const capitalMensual = [];
     const ganancias1GMensual = [];
@@ -22,14 +17,10 @@ function calcular() {
     for (let mes = 1; mes <= cicloMeses; mes++) {
         const gananciaInteres = capital * interesMensual;
         totalGananciaInteres += gananciaInteres;
+        capital += gananciaInteres;
 
-        const gananciaUsuario = gananciaInteres; // 10% de ganancia acumulativa sobre el capital
-        totalRecompensas += gananciaUsuario;
-
-        invitaciones1G += 1;
-        invitaciones2G += invitaciones1G;
-
-        let capitalInvitado1G = capitalInicial / 2;
+        // Simulación de invitaciones
+        let capitalInvitado1G = capitalInicial / 2; 
         let capitalInvitado2G = capitalInvitado1G / 2;
 
         const gananciaInv1G = (capitalInvitado1G * interesMensual) * 0.02;
@@ -38,29 +29,26 @@ function calcular() {
         ganancias1G += gananciaInv1G;
         ganancias2G += gananciaInv2G;
 
-        capital += gananciaUsuario;
-
         capitalMensual.push(capital.toFixed(2));
         ganancias1GMensual.push(gananciaInv1G.toFixed(2));
         ganancias2GMensual.push(gananciaInv2G.toFixed(2));
         totalGananciasMensual.push((capital + ganancias1G + ganancias2G).toFixed(2));
-
-        capitalFaltante = 1000000 - capital;
 
         if (capital >= capitalInicial) {
             rangoFinal = mes;
         }
     }
 
-    const estrategia = capitalFaltante > 0
-        ? `Podrías haber obtenido más ganancia invirtiendo más capital en los primeros meses.`
-        : `¡Felicidades! Has alcanzado el capital de $1,000,000.`;
+    const totalGanancias = (capital + ganancias1G + ganancias2G).toFixed(2);
+    const estrategia = capital < 1000000 
+        ? `Para mejorar tus ganancias, considera aumentar tu inversión inicial en los primeros meses.`
+        : `¡Felicidades! Has alcanzado $1,000,000 en capital.`;
 
     document.getElementById('resultadoRango').textContent = `Mes ${rangoFinal}`;
     document.getElementById('resultadoCapitalFinal').textContent = `$${capital.toFixed(2)}`;
     document.getElementById('ganancias1G').textContent = `$${ganancias1G.toFixed(2)}`;
     document.getElementById('ganancias2G').textContent = `$${ganancias2G.toFixed(2)}`;
-    document.getElementById('totalGanancias').textContent = `$${(capital + ganancias1G + ganancias2G).toFixed(2)}`;
+    document.getElementById('totalGanancias').textContent = `$${totalGanancias}`;
     document.getElementById('mensajeEstrategia').textContent = estrategia;
 
     document.getElementById('resultsContainer').style.display = 'block';
