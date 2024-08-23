@@ -56,6 +56,15 @@ form button:hover {
     background-color: #218838;
 }
 
+/* Gráfico */
+.chart-container {
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
 /* Pop-up de Resultados */
 .popup {
     position: fixed;
