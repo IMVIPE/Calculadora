@@ -30,7 +30,9 @@ function actualizarCapital() {
 }
 
 // Función Principal de Cálculo
-function calcular() {
+function calcular(event) {
+    event.preventDefault();
+
     const rangoActual = parseInt(document.getElementById('rangoActual').value);
     let capitalInicial = capitalPorRango[rangoActual];
     const cicloMeses = parseInt(document.getElementById('cicloMeses').value);
@@ -42,6 +44,8 @@ function calcular() {
     let totalInvitados2G = 0;
     let ganancias1G = 0;
     let ganancias2G = 0;
+
+    let siguienteRango = rangoActual;
 
     for (let mes = 1; mes <= cicloMeses; mes++) {
         // Actualización de Invitados
@@ -60,23 +64,17 @@ function calcular() {
         capital += reinversionMensual;
 
         // Comprobación y Actualización de Rango
-        const siguienteRango = rangoActual + 1;
-        if (siguienteRango <= 20 && capital >= capitalPorRango[siguienteRango]) {
-            capitalInicial = capitalPorRango[siguienteRango];
+        if (siguienteRango < 20 && capital >= capitalPorRango[siguienteRango + 1]) {
+            siguienteRango++;
         }
     }
 
     // Cálculo de Ganancias por Invitados
     const gananciaTotalInvitados = ganancias1G + ganancias2G;
 
-    // Determinar si hay Estancamiento
-    const estancamiento = capital < capitalPorRango[siguienteRango] ? 
-        "Estancamiento: Considera reinvertir más o aumentar tus invitaciones." : 
-        "¡Excelente! No hay estancamientos.";
-
     // Mensaje sobre Ingreso de Capital Adicional
-    const ingresoCapital = capital < capitalPorRango[siguienteRango] ? 
-        `Para alcanzar el Rango ${siguienteRango}, necesitas invertir capital adicional hasta alcanzar $${capitalPorRango[siguienteRango]}.` : 
+    const ingresoCapital = siguienteRango < 20 && capital < capitalPorRango[siguienteRango + 1] ? 
+        `Para alcanzar el Rango ${siguienteRango + 1}, necesitas invertir capital adicional hasta alcanzar $${capitalPorRango[siguienteRango + 1]}.` : 
         `Has alcanzado el Rango ${siguienteRango} con tu inversión actual.`;
 
     // Mostrar Resultados en el Pop-up
