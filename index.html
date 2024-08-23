@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Interés Compuesto y Rangos</title>
+    <title>Calculadora de Interés Compuesto y Ganancias</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="container">
-        <h1>Calculadora de Interés Compuesto y Rangos</h1>
-        <p>Calcula tus ganancias con un 10% de interés mensual y recompensas por invitaciones.</p>
+        <h1>Calculadora de Interés Compuesto y Ganancias</h1>
+        <p>Simula tus ganancias con un 10% mensual de interés compuesto, incluyendo las ganancias por invitaciones.</p>
         
         <form id="calculatorForm">
             <label for="rangoActual">Selecciona tu Rango Actual:</label>
@@ -44,49 +44,22 @@
         </form>
     </div>
 
+    <!-- Área de Resultados -->
+    <div class="results-container" id="resultsContainer" style="display: none;">
+        <h2>Resultados del Cálculo</h2>
+        <div class="result-highlight">
+            <p><strong>Total de Ganancias del Usuario:</strong> <span id="totalGanancias"></span></p>
+        </div>
+        <p><strong>Rango Final Alcanzado:</strong> <span id="resultadoRango"></span></p>
+        <p><strong>Capital Final:</strong> <span id="resultadoCapitalFinal"></span></p>
+        <p><strong>Ganancias por Invitaciones (Generación 1):</strong> <span id="ganancias1G"></span></p>
+        <p><strong>Ganancias por Invitaciones (Generación 2):</strong> <span id="ganancias2G"></span></p>
+        <p><strong>Estrategia Sugerida:</strong> <span id="mensajeEstrategia"></span></p>
+    </div>
+
     <!-- Gráfico -->
     <div class="chart-container" style="position: relative; height:40vh; width:80vw">
         <canvas id="gananciasChart"></canvas>
-    </div>
-
-    <!-- Pop-up de Resultados -->
-    <div class="popup" id="popup" style="display:none;">
-        <div class="popup-content">
-            <h2>Resultados del Cálculo</h2>
-            <table id="resultadosTabla">
-                <tbody>
-                    <tr>
-                        <td>Rango Final Alcanzado</td>
-                        <td id="resultadoRango"></td>
-                    </tr>
-                    <tr>
-                        <td>Capital Final</td>
-                        <td id="resultadoCapitalFinal"></td>
-                    </tr>
-                    <tr>
-                        <td>Ganancia Bruta Total</td>
-                        <td id="mensajeCapital"></td>
-                    </tr>
-                    <tr>
-                        <td>Ganancias por Invitaciones (Generación 1)</td>
-                        <td id="ganancias1G"></td>
-                    </tr>
-                    <tr>
-                        <td>Ganancias por Invitaciones (Generación 2)</td>
-                        <td id="ganancias2G"></td>
-                    </tr>
-                    <tr>
-                        <td>Total de Recompensas</td>
-                        <td id="totalRecompensas"></td>
-                    </tr>
-                    <tr>
-                        <td>Estrategia para Alcanzar $1,000,000</td>
-                        <td id="mensajeEstrategia"></td>
-                    </tr>
-                </tbody>
-            </table>
-            <button onclick="cerrarPopup()">Cerrar</button>
-        </div>
     </div>
 
     <script src="script.js"></script>
