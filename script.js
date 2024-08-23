@@ -1,5 +1,10 @@
-// Mapeo de Capital por Rango hasta el Rango 20
+// Mapeo de Capital por Rango desde 1 hasta 20
 const capitalPorRango = {
+    1: 50,
+    2: 100,
+    3: 200,
+    4: 300,
+    5: 400,
     6: 500,
     7: 1000,
     8: 1500,
@@ -30,8 +35,7 @@ function calcular() {
     let capitalInicial = capitalPorRango[rangoActual];
     const cicloMeses = parseInt(document.getElementById('cicloMeses').value);
     const interesMensual = 0.10; // Interés compuesto fijo del 10% mensual
-    const numInvitadosMensuales = parseInt(document.getElementById('numInvitados').value);
-    const numInvitados2G = parseInt(document.getElementById('numInvitados2G').value);
+    const numInvitadosMensuales = rangoActual > 5 ? cicloMeses * 3 : 0;
 
     let capital = capitalInicial;
     let totalInvitados1G = 0;
@@ -42,12 +46,11 @@ function calcular() {
     for (let mes = 1; mes <= cicloMeses; mes++) {
         // Actualización de Invitados
         totalInvitados1G += numInvitadosMensuales;
-        totalInvitados2G += numInvitadosMensuales * numInvitados2G;
+        totalInvitados2G += numInvitadosMensuales * 2; // Cada invitado trae 2 más
 
         // Cálculo de Ganancias
         const gananciaMensual = capital * interesMensual;
-        const extraccionMensual = gananciaMensual / 3;
-        const reinversionMensual = gananciaMensual - extraccionMensual;
+        const reinversionMensual = gananciaMensual * (2/3);  // 2/3 de las ganancias se reinvierten
 
         // Acumulación de Ganancias por Invitados
         ganancias1G += totalInvitados1G * reinversionMensual * 0.02; // 2% de la ganancia de primera generación
@@ -68,33 +71,17 @@ function calcular() {
 
     // Determinar si hay Estancamiento
     const estancamiento = capital < capitalPorRango[siguienteRango] ? 
-        "Te has estancado en el crecimiento. Considera reinvertir más o aumentar tus invitaciones." : 
-        "¡Excelente! Tu capital sigue creciendo sin estancamientos.";
+        "Estancamiento: Considera reinvertir más o aumentar tus invitaciones." : 
+        "¡Excelente! No hay estancamientos.";
 
     // Mensaje sobre Ingreso de Capital Adicional
     const ingresoCapital = capital < capitalPorRango[siguienteRango] ? 
         `Para alcanzar el Rango ${siguienteRango}, necesitas invertir capital adicional hasta alcanzar $${capitalPorRango[siguienteRango]}.` : 
         `Has alcanzado el Rango ${siguienteRango} con tu inversión actual.`;
 
-    // Mostrar Resultados
+    // Mostrar Resultados Clave
     document.getElementById('resultadoRango').textContent = `Rango Final Alcanzado: ${siguienteRango}`;
-    document.getElementById('resultadoGanancia').textContent = `Ganancia Mensual Promedio: $${(capital * interesMensual).toFixed(2)}`;
-    document.getElementById('resultadoExtraccion').textContent = `Extracción Mensual Promedio: $${((capital * interesMensual) / 3).toFixed(2)}`;
-    document.getElementById('resultadoReinversion').textContent = `Reinversión Mensual Promedio: $${((capital * interesMensual) * (2/3)).toFixed(2)}`;
-    document.getElementById('resultadoCapitalFinal').textContent = `Capital Final después de ${cicloMeses} meses: $${capital.toFixed(2)}`;
-    document.getElementById('ganancia1G').textContent = `Ganancia Total por Invitados de 1ª Generación: $${ganancias1G.toFixed(2)}`;
-    document.getElementById('ganancia2G').textContent = `Ganancia Total por Invitados de 2ª Generación: $${ganancias2G.toFixed(2)}`;
-    document.getElementById('gananciaTotal').textContent = `Ganancia Total por Invitaciones: $${gananciaTotalInvitados.toFixed(2)}`;
-    document.getElementById('ingresoCapital').textContent = ingresoCapital;
-    document.getElementById('resumenEstancamiento').textContent = estancamiento;
+    document.getElementById('resultadoCapitalFinal').textContent = `Capital Final: $${capital.toFixed(2)}`;
+    document.getElementById('gananciaTotalInvitados').textContent = `Ganancias por Invitaciones: $${gananciaTotalInvitados.toFixed(2)}`;
+    document.getElementById('mensajeCapital').textContent = ingresoCapital;
 }
-
-// Función para Cerrar el Pop-up
-function cerrarPopup() {
-    document.getElementById('popup').style.display = 'none';
-}
-
-// Mostrar el Pop-up al Cargar la Página
-window.onload = function() {
-    document.getElementById('popup').style.display = 'flex';
-};
