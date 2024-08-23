@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora de Interés Compuesto y Ganancias</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="container">
@@ -62,15 +63,21 @@
             <p><strong>Ganancias 2ª Generación:</strong> <span id="ganancias2G"></span></p>
         </div>
 
+        <!-- Gráfico -->
+        <div class="chart-container">
+            <canvas id="gananciasChart"></canvas>
+        </div>
+
+        <!-- Botón para Ver Tabla -->
+        <button type="button" id="verTablaBtn">Ver Tabla de Ganancias</button>
+
         <!-- Tabla de Ganancias -->
-        <div id="tablaContainer">
+        <div id="tablaContainer" style="display: none;">
             <h3>Tabla de Ganancias Acumuladas</h3>
             <table id="tablaGanancias">
                 <thead>
                     <tr>
                         <th>Mes</th>
-                        <th>Usuarios 1ª Gen</th>
-                        <th>Usuarios 2ª Gen</th>
                         <th>Capital Propio</th>
                         <th>Ganancias 1ª Generación</th>
                         <th>Ganancias 2ª Generación</th>
