@@ -26,19 +26,15 @@ h1 {
     color: #4A90E2;
 }
 
-/* Sección de Entrada de Datos */
-.input-section {
-    margin-bottom: 30px;
-}
-
-.input-section label {
+/* Formulario */
+form label {
     display: block;
     margin: 15px 0 5px;
     font-weight: bold;
     font-size: 14px;
 }
 
-.input-section select, .input-section input {
+form select, form input {
     width: 100%;
     padding: 12px;
     border: 1px solid #ddd;
@@ -48,7 +44,7 @@ h1 {
     margin-bottom: 15px;
 }
 
-.input-section button {
+form button {
     width: 100%;
     padding: 14px;
     background-color: #4A90E2;
@@ -60,12 +56,12 @@ h1 {
     transition: background-color 0.3s ease;
 }
 
-.input-section button:hover {
+form button:hover {
     background-color: #357ABD;
 }
 
 /* Resultados */
-.results-section {
+.results-container {
     margin-top: 30px;
     padding: 20px;
     background-color: #ffffff;
@@ -80,6 +76,15 @@ h1 {
     border-radius: 8px;
     margin-bottom: 15px;
     font-size: 18px;
+}
+
+/* Datos de Generaciones */
+.generations-container {
+    background-color: #f0f0f0;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 16px;
 }
 
 /* Tabla de Ganancias */
@@ -107,7 +112,7 @@ h1 {
 
 /* Responsivo */
 @media (max-width: 600px) {
-    .container, .results-section, .input-section {
+    .container, .results-container, .generations-container {
         padding: 20px;
     }
 }
