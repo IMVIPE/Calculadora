@@ -8,6 +8,19 @@ document.addEventListener('DOMContentLoaded', () => {
         return value >= 100000 ? (value / 1000).toFixed(3) + 'k' : `$${value.toFixed(2)}`;
     }
 
+    function getGradientClass(value) {
+        if (value >= 1000000) {
+            return 'gradient-1000000';
+        } else if (value >= 500000) {
+            return 'gradient-500000';
+        } else if (value >= 250000) {
+            return 'gradient-250000';
+        } else if (value >= 100000) {
+            return 'gradient-100000';
+        }
+        return '';
+    }
+
     function calcular() {
         const capitalInicial = parseInt(document.getElementById('rangoActual').value);
         const cicloMeses = parseInt(document.getElementById('cicloMeses').value);
@@ -50,10 +63,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td>${mes}</td>
                 <td>${usuarios1G}</td>
                 <td>${usuarios2G}</td>
-                <td class="capital-propio">${formatK(capital)}</td>
-                <td>${formatK(gananciaInv1G * usuarios1G)}</td>
-                <td>${formatK(gananciaInv2G * usuarios2G)}</td>
-                <td>${formatK(totalGanancia)}</td>
+                <td class="capital-propio ${getGradientClass(capital)}">${formatK(capital)}</td>
+                <td class="${getGradientClass(gananciaInv1G * usuarios1G)}">${formatK(gananciaInv1G * usuarios1G)}</td>
+                <td class="${getGradientClass(gananciaInv2G * usuarios2G)}">${formatK(gananciaInv2G * usuarios2G)}</td>
+                <td class="${getGradientClass(totalGanancia)}">${formatK(totalGanancia)}</td>
             `;
             tablaGanancias.appendChild(row);
         }
