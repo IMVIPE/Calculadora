@@ -40,36 +40,57 @@ function calcular(event) {
     let siguienteRango = rangoActual;
 
     let totalGananciaInteres = 0;
+    let totalAportacionMensual = 0;
+    let totalGananciaBruta = 0;
+    let capitalFinal = capital;
+
     let ganancias1G = 0;
     let ganancias2G = 0;
 
     for (let mes = 1; mes <= cicloMeses; mes++) {
-        // Cálculo del interés compuesto mensual
-        const gananciaInteres = capital * interesMensual;
-        totalGananciaInteres += gananciaInteres;
+        // Interés sobre el capital inicial aportado mensualmente
+        const gananciaInteresMensual = capitalFinal * interesMensual;
+        totalGananciaInteres += gananciaInteresMensual;
+        totalGananciaBruta += gananciaInteresMensual;
+
+        // Actualización de Capital
+        capitalFinal += gananciaInteresMensual;
+
+        // Cálculo de ganancia por invitados
+        const rangoInvitado1G = siguienteRango > 2 ? siguienteRango - 2 : 1;
+        const gananciaInvitado1G = capitalPorRango[rangoInvitado1G] * interesMensual;
+        const comisionInvitado1G = gananciaInvitado1G * 0.12; // 12% de la ganancia del invitado de primera generación
+
+        const rangoInvitado2G = rangoInvitado1G > 2 ? rangoInvitado1G - 2 : 1;
+        const gananciaInvitado2G = capitalPorRango[rangoInvitado2G] * interesMensual;
+        const comisionInvitado2G = gananciaInvitado2G * 0.005; // 0.5% de la ganancia del invitado de segunda generación
+
+        ganancias1G += comisionInvitado1G;
+        ganancias2G += comisionInvitado2G;
+
+        capitalFinal += comisionInvitado1G + comisionInvitado2G;
 
         // Revisión para subir de rango
-        while (siguienteRango < 20 && capital + gananciaInteres >= capitalPorRango[siguienteRango + 1]) {
+        while (siguienteRango < 20 && capitalFinal >= capitalPorRango[siguienteRango + 1]) {
             siguienteRango++;
         }
 
-        // Acumular el interés ganado
-        capital += gananciaInteres;
-
-        // Ganancias por invitado de 2 rangos inferiores
-        if (siguienteRango > 2) {
-            const rangoInvitado = siguienteRango - 2;
-            const gananciaInvitado = capitalPorRango[rangoInvitado] * interesMensual;
-            const comisionInvitado = gananciaInvitado * 0.12; // 12% de la ganancia del invitado
-            capital += comisionInvitado;
-        }
+        totalGananciaBruta = capitalFinal - capital;
     }
+
+    // Cálculo de cuánto falta para llegar a 1,000,000
+    const faltaParaMillon = 1000000 - capitalFinal;
+
+    // Estrategia para llegar a 1,000,000
+    const estrategia = faltaParaMillon > 0
+        ? `Necesitas incrementar tu capital en $${faltaParaMillon.toFixed(2)} para llegar a $1,000,000.`
+        : `¡Felicidades! Has alcanzado o superado $1,000,000.`;
 
     // Mostrar Resultados en el Pop-up
     document.getElementById('resultadoRango').textContent = siguienteRango;
-    document.getElementById('resultadoCapitalFinal').textContent = `$${capital.toFixed(2)}`;
-    document.getElementById('gananciaTotalInvitados').textContent = `$${(capital - capitalPorRango[rangoActual] - totalGananciaInteres).toFixed(2)}`;
-    document.getElementById('mensajeCapital').textContent = `Has alcanzado el Rango ${siguienteRango} con una ganancia total de interés compuesto de $${totalGananciaInteres.toFixed(2)}.`;
+    document.getElementById('resultadoCapitalFinal').textContent = `$${capitalFinal.toFixed(2)}`;
+    document.getElementById('gananciaTotalInvitados').textContent = `$${(ganancias1G + ganancias2G).toFixed(2)}`;
+    document.getElementById('mensajeCapital').textContent = `Ganancia bruta: $${totalGananciaBruta.toFixed(2)}. ${estrategia}`;
 
     document.getElementById('popup').style.display = 'flex';
 }
