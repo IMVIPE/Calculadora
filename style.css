@@ -57,6 +57,7 @@ p {
 
 .results-section {
     margin-top: 30px;
+    display: none;
 }
 
 .result-highlight {
