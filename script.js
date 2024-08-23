@@ -1,159 +1,133 @@
-/* Estilos Generales */
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f9f9f9;
-    color: #333;
-    margin: 0;
-    padding: 0;
-}
+document.addEventListener('DOMContentLoaded', () => {
+    const calcularBtn = document.getElementById('calcularBtn');
+    const tablaGanancias = document.getElementById('tablaGanancias').querySelector('tbody');
+    const countdownContainer = document.getElementById('countdownContainer');
+    const resultsContainer = document.getElementById('resultsContainer');
+    const countdownElement = document.getElementById('countdown');
+    const clockSound = document.getElementById('clockSound');
 
-/* Contenedor Principal */
-.container {
-    width: 90%;
-    max-width: 800px;
-    margin: 50px auto;
-    background-color: #ffffff;
-    padding: 40px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
-}
+    calcularBtn.addEventListener('click', () => {
+        startCountdown();
+    });
 
-/* Títulos */
-h1 {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 28px;
-    color: #4A90E2;
-}
-
-/* Sección de Entrada de Datos */
-.input-section {
-    margin-bottom: 30px;
-}
-
-.input-section label {
-    display: block;
-    margin: 15px 0 5px;
-    font-weight: bold;
-    font-size: 14px;
-}
-
-.input-section select, .input-section input {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    box-sizing: border-box;
-    font-size: 14px;
-    margin-bottom: 15px;
-}
-
-.input-section button {
-    width: 100%;
-    padding: 14px;
-    background-color: #4A90E2;
-    border: none;
-    color: #ffffff;
-    font-size: 16px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.input-section button:hover {
-    background-color: #357ABD;
-}
-
-/* Cuenta regresiva */
-.countdown-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 1000;
-}
-
-.countdown-circle {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    background-color: #4A90E2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 48px;
-    color: white;
-    position: relative;
-    overflow: hidden;
-}
-
-.countdown-circle:before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: white;
-    transform-origin: center bottom;
-    transform: rotate(0deg);
-    animation: fillCircle 5s linear forwards;
-}
-
-@keyframes fillCircle {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* Resultados */
-.results-section {
-    margin-top: 30px;
-    padding: 20px;
-    background-color: #ffffff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
-    opacity: 0;
-    transition: opacity 1s;
-}
-
-.result-highlight {
-    background-color: #4A90E2;
-    color: #ffffff;
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 15px;
-    font-size: 18px;
-}
-
-/* Tabla de Ganancias */
-#tablaGanancias {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-#tablaGanancias th, #tablaGanancias td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-}
-
-#tablaGanancias th {
-    background-color: #4A90E2;
-    color: white;
-}
-
-/* Estilo para la columna de capital propio */
-#tablaGanancias .capital-propio {
-    background-color: #d0e7ff;
-}
-
-/* Responsivo */
-@media (max-width: 600px) {
-    .container, .results-section, .input-section {
-        padding: 20px;
+    function formatK(value) {
+        if (value >= 1000000) {
+            return (value / 1000000).toFixed(6) + 'M';
+        } else if (value >= 100000) {
+            return (value / 1000).toFixed(3) + 'k';
+        } else {
+            return `$${value.toFixed(2)}`;
+        }
     }
-}
+
+    function getBackgroundColor(value) {
+        if (value >= 1000000) {
+            return '#0056b3'; // Más oscuro para valores a partir de 1M
+        } else if (value >= 500000) {
+            return '#1e90ff';
+        } else if (value >= 250000) {
+            return '#87ceeb';
+        } else if (value >= 100000) {
+            return '#add8e6'; // Más claro para valores desde 100k hasta 250k
+        } else {
+            return 'transparent'; // Sin fondo especial para valores menores a 100k
+        }
+    }
+
+    function startCountdown() {
+        let countdownValue = 5;
+        countdownContainer.style.display = 'flex';
+        clockSound.play();
+
+        const interval = setInterval(() => {
+            countdownElement.textContent = countdownValue;
+            if (countdownValue === 1) {
+                clearInterval(interval);
+                countdownContainer.style.display = 'none';
+                showResults();
+            } else {
+                countdownValue--;
+            }
+        }, 1000);
+    }
+
+    function showResults() {
+        calcular(); // Realiza la simulación
+        resultsContainer.style.display = 'block';
+        animateResults(); // Añadir animación para los resultados
+    }
+
+    function animateResults() {
+        const resultsElements = resultsContainer.querySelectorAll('span');
+        resultsElements.forEach((element, index) => {
+            element.style.opacity = 0;
+            setTimeout(() => {
+                element.style.transition = 'opacity 1s';
+                element.style.opacity = 1;
+            }, index * 500); // Retraso para la animación de cada resultado
+        });
+    }
+
+    function calcular() {
+        const capitalInicial = parseInt(document.getElementById('rangoActual').value);
+        const cicloMeses = parseInt(document.getElementById('cicloMeses').value);
+        const interesMensual = 0.10;
+
+        let capital = capitalInicial;
+        let totalGananciaInteres = 0;
+        let ganancias1G = 0;
+        let ganancias2G = 0;
+
+        let usuarios1G = 0;
+        let usuarios2G = 0;
+
+        // Limpiar la tabla de ganancias anterior
+        tablaGanancias.innerHTML = '';
+
+        for (let mes = 1; mes <= cicloMeses; mes++) {
+            const gananciaInteres = capital * interesMensual;
+            totalGananciaInteres += gananciaInteres;
+            capital += gananciaInteres;
+
+            // Incremento de usuarios: el usuario invita a 1, y cada usuario de 1ª Gen invita a 1.
+            usuarios1G += 1;
+            usuarios2G += usuarios1G;
+
+            const capitalInvitado1G = capitalInicial / 2; 
+            const capitalInvitado2G = capitalInvitado1G / 2;
+
+            const gananciaInv1G = (capitalInvitado1G * interesMensual) * 0.02;
+            const gananciaInv2G = (capitalInvitado2G * interesMensual) * 0.01;
+
+            ganancias1G += gananciaInv1G * usuarios1G;
+            ganancias2G += gananciaInv2G * usuarios2G;
+
+            const totalGanancia = capital + ganancias1G + ganancias2G;
+
+            // Agregar fila a la tabla
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${mes}</td>
+                <td>${usuarios1G}</td>
+                <td>${usuarios2G}</td>
+                <td class="capital-propio" style="background-color:${getBackgroundColor(capital)}">${formatK(capital)}</td>
+                <td style="background-color:${getBackgroundColor(gananciaInv1G * usuarios1G)}">${formatK(gananciaInv1G * usuarios1G)}</td>
+                <td style="background-color:${getBackgroundColor(gananciaInv2G * usuarios2G)}">${formatK(gananciaInv2G * usuarios2G)}</td>
+                <td style="background-color:${getBackgroundColor(totalGanancia)}">${formatK(totalGanancia)}</td>
+            `;
+            tablaGanancias.appendChild(row);
+        }
+
+        const totalGanancias = capital + ganancias1G + ganancias2G;
+        const estrategia = capital < 1000000 
+            ? `Para mejorar tus ganancias, considera aumentar tu inversión inicial en los primeros meses.`
+            : `¡Felicidades! Has alcanzado $1,000,000 en capital.`;
+
+        document.getElementById('resultadoCapitalFinal').textContent = formatK(capital);
+        document.getElementById('gananciasInteres').textContent = formatK(totalGananciaInteres);
+        document.getElementById('ganancias1G').textContent = formatK(ganancias1G);
+        document.getElementById('ganancias2G').textContent = formatK(ganancias2G);
+        document.getElementById('totalGanancias').textContent = formatK(totalGanancias);
+        document.getElementById('mensajeEstrategia').textContent = estrategia;
+    }
+});
