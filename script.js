@@ -26,9 +26,11 @@ document.addEventListener('DOMContentLoaded', () => {
             totalGananciaInteres += gananciaInteres;
             capital += gananciaInteres;
 
-            usuarios1G += 1;
-            usuarios2G += usuarios1G;
+            // Lógica para calcular usuarios invitados
+            usuarios1G += 1; // Un usuario nuevo en cada mes
+            usuarios2G += usuarios1G; // Cada usuario de 1ª gen trae otro en la 2ª gen
 
+            // Ganancias por los usuarios invitados
             const capitalInvitado1G = capitalInicial / 2;
             const capitalInvitado2G = capitalInvitado1G / 2;
 
@@ -40,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const totalGanancia = capital + ganancias1G + ganancias2G;
 
+            // Agregar fila a la tabla
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td>${mes}</td>
@@ -63,6 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('totalGanancias').textContent = totalGanancias.toFixed(2);
         document.getElementById('mensajeEstrategia').textContent = estrategia;
 
+        // Mostrar los resultados inmediatamente después del cálculo
         resultsContainer.style.display = 'block';
     }
 });
