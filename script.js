@@ -1,3 +1,5 @@
+document.getElementById('calcularBtn').addEventListener('click', calcular);
+
 function calcular() {
     const capitalInicial = parseInt(document.getElementById('rangoActual').value);
     const cicloMeses = parseInt(document.getElementById('cicloMeses').value);
