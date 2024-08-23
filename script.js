@@ -1,15 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const calcularBtn = document.getElementById('calcularBtn');
-    const verGraficoBtn = document.getElementById('verGraficoBtn');
-    const chartContainer = document.getElementById('chartContainer');
 
     calcularBtn.addEventListener('click', calcular);
-    verGraficoBtn.addEventListener('click', () => {
-        chartContainer.style.display = chartContainer.style.display === 'none' ? 'block' : 'none';
-        verGraficoBtn.textContent = chartContainer.style.display === 'none' ? 'Ver Gráfico' : 'Ocultar Gráfico';
-    });
-
-    let chartData = {};
 
     function calcular() {
         const capitalInicial = parseInt(document.getElementById('rangoActual').value);
@@ -68,16 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.getElementById('resultsContainer').style.display = 'block';
 
-        // Guardar datos para el gráfico
-        chartData = {
-            capitalMensual,
-            ganancias1GMensual,
-            ganancias2GMensual,
-            totalGananciasMensual
-        };
-
         // Crear el gráfico
-        crearGrafico(chartData);
+        crearGrafico({ capitalMensual, ganancias1GMensual, ganancias2GMensual });
     }
 
     function crearGrafico({ capitalMensual, ganancias1GMensual, ganancias2GMensual }) {
