@@ -4,6 +4,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     calcularBtn.addEventListener('click', calcular);
 
+    function formatK(value) {
+        return value >= 100000 ? (value / 1000).toFixed(3) + 'k' : `$${value.toFixed(2)}`;
+    }
+
     function calcular() {
         const capitalInicial = parseInt(document.getElementById('rangoActual').value);
         const cicloMeses = parseInt(document.getElementById('cicloMeses').value);
@@ -38,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ganancias1G += gananciaInv1G * usuarios1G;
             ganancias2G += gananciaInv2G * usuarios2G;
 
-            const totalGanancia = (capital + ganancias1G + ganancias2G).toFixed(2);
+            const totalGanancia = capital + ganancias1G + ganancias2G;
 
             // Agregar fila a la tabla
             const row = document.createElement('tr');
@@ -46,24 +50,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td>${mes}</td>
                 <td>${usuarios1G}</td>
                 <td>${usuarios2G}</td>
-                <td class="capital-propio">$${capital.toFixed(2)}</td>
-                <td>$${(gananciaInv1G * usuarios1G).toFixed(2)}</td>
-                <td>$${(gananciaInv2G * usuarios2G).toFixed(2)}</td>
-                <td>$${totalGanancia}</td>
+                <td class="capital-propio">${formatK(capital)}</td>
+                <td>${formatK(gananciaInv1G * usuarios1G)}</td>
+                <td>${formatK(gananciaInv2G * usuarios2G)}</td>
+                <td>${formatK(totalGanancia)}</td>
             `;
             tablaGanancias.appendChild(row);
         }
 
-        const totalGanancias = (capital + ganancias1G + ganancias2G).toFixed(2);
+        const totalGanancias = capital + ganancias1G + ganancias2G;
         const estrategia = capital < 1000000 
             ? `Para mejorar tus ganancias, considera aumentar tu inversión inicial en los primeros meses.`
             : `¡Felicidades! Has alcanzado $1,000,000 en capital.`;
 
-        document.getElementById('resultadoCapitalFinal').textContent = `$${capital.toFixed(2)}`;
-        document.getElementById('gananciasInteres').textContent = `$${totalGananciaInteres.toFixed(2)}`;
-        document.getElementById('ganancias1G').textContent = `$${ganancias1G.toFixed(2)}`;
-        document.getElementById('ganancias2G').textContent = `$${ganancias2G.toFixed(2)}`;
-        document.getElementById('totalGanancias').textContent = `$${totalGanancias}`;
+        document.getElementById('resultadoCapitalFinal').textContent = formatK(capital);
+        document.getElementById('gananciasInteres').textContent = formatK(totalGananciaInteres);
+        document.getElementById('ganancias1G').textContent = formatK(ganancias1G);
+        document.getElementById('ganancias2G').textContent = formatK(ganancias2G);
+        document.getElementById('totalGanancias').textContent = formatK(totalGanancias);
         document.getElementById('mensajeEstrategia').textContent = estrategia;
         document.getElementById('usuarios1G').textContent = usuarios1G;
         document.getElementById('usuarios2G').textContent = usuarios2G;
