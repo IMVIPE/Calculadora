@@ -3,46 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Rangos e Interés Compuesto</title>
+    <title>Calculadora de Interés Compuesto y Rangos</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>Calculadora de Rangos e Interés Compuesto</h1>
-        <p>El interés compuesto es como sembrar semillas: plantas hoy y cada día tu cosecha crece más, permitiéndote sembrar aún más semillas y obtener una cosecha cada vez mayor con el tiempo.</p>
+        <h1>Calculadora de Interés Compuesto y Rangos</h1>
+        <p>Calcula tus ganancias según tu rango y capital inicial con un 15% de interés mensual.</p>
         
-        <form id="calculatorForm" onsubmit="calcular(event)">
+        <form id="calculatorForm">
             <label for="rangoActual">Selecciona tu Rango Actual:</label>
-            <select id="rangoActual" required onchange="actualizarCapital()">
-                <option value="20">Rango 20 - $10,000</option>
-                <option value="19">Rango 19 - $9,000</option>
-                <option value="18">Rango 18 - $8,000</option>
-                <option value="17">Rango 17 - $7,000</option>
-                <option value="16">Rango 16 - $6,000</option>
-                <option value="15">Rango 15 - $5,000</option>
-                <option value="14">Rango 14 - $4,500</option>
-                <option value="13">Rango 13 - $4,000</option>
-                <option value="12">Rango 12 - $3,500</option>
-                <option value="11">Rango 11 - $3,000</option>
-                <option value="10">Rango 10 - $2,500</option>
-                <option value="9">Rango 9 - $2,000</option>
-                <option value="8">Rango 8 - $1,500</option>
-                <option value="7">Rango 7 - $1,000</option>
-                <option value="6">Rango 6 - $500</option>
-                <option value="5">Rango 5 - $400</option>
-                <option value="4">Rango 4 - $300</option>
-                <option value="3">Rango 3 - $200</option>
-                <option value="2">Rango 2 - $100</option>
-                <option value="1">Rango 1 - $50</option>
+            <select id="rangoActual" required>
+                <option value="20000">Rango 20 - $10,000</option>
+                <option value="19000">Rango 19 - $9,000</option>
+                <option value="18000">Rango 18 - $8,000</option>
+                <option value="17000">Rango 17 - $7,000</option>
+                <option value="16000">Rango 16 - $6,000</option>
+                <option value="15000">Rango 15 - $5,000</option>
+                <option value="14000">Rango 14 - $4,500</option>
+                <option value="13000">Rango 13 - $4,000</option>
+                <option value="12000">Rango 12 - $3,500</option>
+                <option value="11000">Rango 11 - $3,000</option>
+                <option value="10000">Rango 10 - $2,500</option>
+                <option value="9000">Rango 9 - $2,000</option>
+                <option value="8000">Rango 8 - $1,500</option>
+                <option value="7000">Rango 7 - $1,000</option>
+                <option value="6000">Rango 6 - $500</option>
+                <option value="5000">Rango 5 - $400</option>
+                <option value="4000">Rango 4 - $300</option>
+                <option value="3000">Rango 3 - $200</option>
+                <option value="2000">Rango 2 - $100</option>
+                <option value="1000">Rango 1 - $50</option>
             </select>
             
             <label for="cicloMeses">Ciclo de Inversión (Meses):</label>
             <input type="number" id="cicloMeses" value="12" required min="1">
 
-            <!-- Hidden input for initial capital -->
-            <input type="hidden" id="capitalInicial" value="10000">
-            
-            <button type="submit">Calcular</button>
+            <button type="button" onclick="calcular()">Calcular</button>
         </form>
     </div>
 
@@ -50,61 +47,31 @@
     <div class="popup" id="popup" style="display:none;">
         <div class="popup-content">
             <h2>Resultados del Cálculo</h2>
-            <div id="resultadosGenerales">
-                <table id="resultadosTabla">
-                    <thead>
-                        <tr>
-                            <th>Descripción</th>
-                            <th>Valor</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Rango Final Alcanzado</td>
-                            <td id="resultadoRango"></td>
-                        </tr>
-                        <tr>
-                            <td>Capital Final</td>
-                            <td id="resultadoCapitalFinal"></td>
-                        </tr>
-                        <tr>
-                            <td>Ganancia Bruta Total</td>
-                            <td id="mensajeCapital"></td>
-                        </tr>
-                        <tr>
-                            <td>Estrategia para Alcanzar $1,000,000</td>
-                            <td id="mensajeEstrategia"></td>
-                        </tr>
-                        <tr>
-                            <td>Total de Recompensas</td>
-                            <td id="totalRecompensas"></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <button type="button" onclick="mostrarDetallesGeneraciones()">Mostrar Detalles de Generaciones</button>
-            </div>
-            <div id="detallesGeneraciones" style="display:none;">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Descripción</th>
-                            <th>Valor</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Ganancias por Invitaciones (Generación 1)</td>
-                            <td id="ganancias1G"></td>
-                        </tr>
-                        <tr>
-                            <td>Ganancias por Invitaciones (Generación 2)</td>
-                            <td id="ganancias2G"></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <button type="button" onclick="volverResultadosGenerales()">Volver a Resultados Generales</button>
-            </div>
-            <button type="button" onclick="cerrarPopup()">Cerrar</button>
+            <table id="resultadosTabla">
+                <tbody>
+                    <tr>
+                        <td>Rango Final Alcanzado</td>
+                        <td id="resultadoRango"></td>
+                    </tr>
+                    <tr>
+                        <td>Capital Final</td>
+                        <td id="resultadoCapitalFinal"></td>
+                    </tr>
+                    <tr>
+                        <td>Ganancia Bruta Total</td>
+                        <td id="mensajeCapital"></td>
+                    </tr>
+                    <tr>
+                        <td>Total de Recompensas</td>
+                        <td id="totalRecompensas"></td>
+                    </tr>
+                    <tr>
+                        <td>Estrategia para Alcanzar $1,000,000</td>
+                        <td id="mensajeEstrategia"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button onclick="cerrarPopup()">Cerrar</button>
         </div>
     </div>
 
