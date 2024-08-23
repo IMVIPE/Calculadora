@@ -1,11 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
     const calcularBtn = document.getElementById('calcularBtn');
     const verGraficoBtn = document.getElementById('verGraficoBtn');
-    const cerrarPopupBtn = document.getElementById('cerrarPopupBtn');
+    const chartContainer = document.getElementById('chartContainer');
 
     calcularBtn.addEventListener('click', calcular);
-    verGraficoBtn.addEventListener('click', mostrarGrafico);
-    cerrarPopupBtn.addEventListener('click', cerrarPopup);
+    verGraficoBtn.addEventListener('click', () => {
+        chartContainer.style.display = chartContainer.style.display === 'none' ? 'block' : 'none';
+        verGraficoBtn.textContent = chartContainer.style.display === 'none' ? 'Ver Gráfico' : 'Ocultar Gráfico';
+    });
 
     let chartData = {};
 
@@ -18,7 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
         let totalGananciaInteres = 0;
         let ganancias1G = 0;
         let ganancias2G = 0;
-        let rangoFinal = 0;
+
+        let usuarios1G = 0;
+        let usuarios2G = 0;
 
         const capitalMensual = [];
         const ganancias1GMensual = [];
@@ -30,7 +34,10 @@ document.addEventListener('DOMContentLoaded', () => {
             totalGananciaInteres += gananciaInteres;
             capital += gananciaInteres;
 
-            // Simulación de invitaciones (usuario de 2 rangos inferiores)
+            // Simulación de invitaciones
+            usuarios1G += 1;
+            usuarios2G += usuarios1G;
+
             const capitalInvitado1G = capitalInicial / 2; 
             const capitalInvitado2G = capitalInvitado1G / 2;
 
@@ -44,10 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
             ganancias1GMensual.push(gananciaInv1G.toFixed(2));
             ganancias2GMensual.push(gananciaInv2G.toFixed(2));
             totalGananciasMensual.push((capital + ganancias1G + ganancias2G).toFixed(2));
-
-            if (capital >= capitalInicial) {
-                rangoFinal = mes;
-            }
         }
 
         const totalGanancias = (capital + ganancias1G + ganancias2G).toFixed(2);
@@ -55,12 +58,13 @@ document.addEventListener('DOMContentLoaded', () => {
             ? `Para mejorar tus ganancias, considera aumentar tu inversión inicial en los primeros meses.`
             : `¡Felicidades! Has alcanzado $1,000,000 en capital.`;
 
-        document.getElementById('resultadoRango').textContent = `Mes ${rangoFinal}`;
         document.getElementById('resultadoCapitalFinal').textContent = `$${capital.toFixed(2)}`;
         document.getElementById('ganancias1G').textContent = `$${ganancias1G.toFixed(2)}`;
         document.getElementById('ganancias2G').textContent = `$${ganancias2G.toFixed(2)}`;
         document.getElementById('totalGanancias').textContent = `$${totalGanancias}`;
         document.getElementById('mensajeEstrategia').textContent = estrategia;
+        document.getElementById('usuarios1G').textContent = usuarios1G;
+        document.getElementById('usuarios2G').textContent = usuarios2G;
 
         document.getElementById('resultsContainer').style.display = 'block';
 
@@ -71,11 +75,12 @@ document.addEventListener('DOMContentLoaded', () => {
             ganancias2GMensual,
             totalGananciasMensual
         };
+
+        // Crear el gráfico
+        crearGrafico(chartData);
     }
 
-    function mostrarGrafico() {
-        const { capitalMensual, ganancias1GMensual, ganancias2GMensual } = chartData;
-
+    function crearGrafico({ capitalMensual, ganancias1GMensual, ganancias2GMensual }) {
         const ctx = document.getElementById('gananciasChart').getContext('2d');
         if (window.gananciasChart) {
             window.gananciasChart.destroy();
@@ -125,11 +130,5 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
-
-        document.getElementById('popup').style.display = 'flex';
-    }
-
-    function cerrarPopup() {
-        document.getElementById('popup').style.display = 'none';
     }
 });
