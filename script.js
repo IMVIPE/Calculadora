@@ -89,6 +89,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('ganancias2G').textContent = formatK(ganancias2G);
         document.getElementById('totalGanancias').textContent = formatK(totalGanancias);
         document.getElementById('mensajeEstrategia').textContent = estrategia;
+        document.getElementById('usuarios1G').textContent = usuarios1G;
+        document.getElementById('usuarios2G').textContent = usuarios2G;
 
         document.getElementById('resultsContainer').style.display = 'block';
     }
