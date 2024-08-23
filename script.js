@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let ganancias1G = 0;
         let ganancias2G = 0;
         let rangoFinal = 0;
+        let rangoActual = capitalInicial;
 
         const capitalMensual = [];
         const ganancias1GMensual = [];
@@ -30,8 +31,11 @@ document.addEventListener('DOMContentLoaded', () => {
             totalGananciaInteres += gananciaInteres;
             capital += gananciaInteres;
 
-            // Simulación de invitaciones
-            const capitalInvitado1G = capitalInicial / 2; 
+            // Sumar un usuario 2 rangos por debajo
+            const nuevoRango = Math.max(rangoActual / 2, 50);
+            rangoActual = nuevoRango;
+
+            const capitalInvitado1G = rangoActual; 
             const capitalInvitado2G = capitalInvitado1G / 2;
 
             const gananciaInv1G = (capitalInvitado1G * interesMensual) * 0.02;
@@ -75,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function mostrarGrafico() {
-        const { capitalMensual, ganancias1GMensual, ganancias2GMensual, totalGananciasMensual } = chartData;
+        const { capitalMensual, ganancias1GMensual, ganancias2GMensual } = chartData;
 
         const ctx = document.getElementById('gananciasChart').getContext('2d');
         if (window.gananciasChart) {
@@ -90,25 +94,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     {
                         label: 'Capital Propio',
                         data: capitalMensual,
-                        borderColor: 'blue',
+                        borderColor: 'red',
                         fill: false,
                     },
                     {
                         label: 'Ganancias 1ª Generación',
                         data: ganancias1GMensual,
-                        borderColor: 'green',
+                        borderColor: 'yellow',
                         fill: false,
                     },
                     {
                         label: 'Ganancias 2ª Generación',
                         data: ganancias2GMensual,
-                        borderColor: 'red',
-                        fill: false,
-                    },
-                    {
-                        label: 'Total Ganancias',
-                        data: totalGananciasMensual,
-                        borderColor: 'purple',
+                        borderColor: 'green',
                         fill: false,
                     }
                 ],
