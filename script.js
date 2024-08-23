@@ -12,9 +12,11 @@ function calcular() {
     let rangoFinal = 0;
     let capitalFaltante = 1000000 - capital;
 
-    // Simulación de invitaciones (1 invitado por mes)
+    // Simulación de invitaciones (1 invitado por mes, 2 rangos inferiores)
     let invitaciones1G = 0;
     let invitaciones2G = 0;
+    
+    let rangoActual = capitalInicial;
 
     // Realizar los cálculos para cada mes
     for (let mes = 1; mes <= cicloMeses; mes++) {
@@ -28,8 +30,13 @@ function calcular() {
         invitaciones1G += 1; // Cada mes el usuario invita a 1 persona
         invitaciones2G += invitaciones1G; // Cada invitado invita a 1 persona más
 
-        const gananciaInv1G = (invitaciones1G * gananciaInteres) * 0.02; // 2% de la ganancia de los invitados de 1G
-        const gananciaInv2G = (invitaciones2G * gananciaInteres) * 0.01; // 1% de la ganancia de los invitados de 2G
+        // Determinar capital del invitado (2 rangos inferiores)
+        let capitalInvitado1G = rangoActual / 2;
+        let capitalInvitado2G = capitalInvitado1G / 2;
+
+        // Ganancias por invitaciones
+        const gananciaInv1G = (capitalInvitado1G * interesMensual) * 0.02; // 2% de la ganancia de los invitados de 1G
+        const gananciaInv2G = (capitalInvitado2G * interesMensual) * 0.01; // 1% de la ganancia de los invitados de 2G
 
         ganancias1G += gananciaInv1G;
         ganancias2G += gananciaInv2G;
@@ -40,7 +47,7 @@ function calcular() {
         capitalFaltante = 1000000 - capital;
 
         // Actualizar rango final basado en el capital acumulado
-        if (capital >= capitalInicial) {
+        if (capital >= rangoActual) {
             rangoFinal = mes; // Actualización de rango mes a mes
         }
     }
