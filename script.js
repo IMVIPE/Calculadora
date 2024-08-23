@@ -79,9 +79,16 @@ function calcular() {
         `Para alcanzar el Rango ${siguienteRango}, necesitas invertir capital adicional hasta alcanzar $${capitalPorRango[siguienteRango]}.` : 
         `Has alcanzado el Rango ${siguienteRango} con tu inversión actual.`;
 
-    // Mostrar Resultados Clave
-    document.getElementById('resultadoRango').textContent = `Rango Final Alcanzado: ${siguienteRango}`;
-    document.getElementById('resultadoCapitalFinal').textContent = `Capital Final: $${capital.toFixed(2)}`;
-    document.getElementById('gananciaTotalInvitados').textContent = `Ganancias por Invitaciones: $${gananciaTotalInvitados.toFixed(2)}`;
+    // Mostrar Resultados en el Pop-up
+    document.getElementById('resultadoRango').textContent = siguienteRango;
+    document.getElementById('resultadoCapitalFinal').textContent = `$${capital.toFixed(2)}`;
+    document.getElementById('gananciaTotalInvitados').textContent = `$${gananciaTotalInvitados.toFixed(2)}`;
     document.getElementById('mensajeCapital').textContent = ingresoCapital;
+
+    document.getElementById('popup').style.display = 'flex';
+}
+
+// Función para Cerrar el Pop-up
+function cerrarPopup() {
+    document.getElementById('popup').style.display = 'none';
 }
