@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const capitalFinalElement = document.getElementById('resultadoCapitalFinal');
     const mensajeEstrategiaElement = document.getElementById('mensajeEstrategia');
 
-    // Asegurarnos de que los elementos estén presentes antes de empezar
     if (!calcularBtn || !resultsContainer || !tablaGanancias) {
         console.error('Error: No se encontraron algunos elementos importantes en el DOM.');
         return;
@@ -34,10 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
             let usuarios1G = 0;
             let usuarios2G = 0;
 
-            let totalGananciaAportes = 0;
-            let totalGananciaAportesMitad = 0;
-            let capitalAportes = 0;
-            let capitalAportesMitad = 0;
+            let capitalAportes = capitalInicial;  // Simulación de aportes mensuales iguales al capital inicial
+            let capitalAportesMitad = capitalInicial / 2;  // Simulación de aportes mensuales iguales a la mitad del capital inicial
 
             // Limpiar tabla de resultados anteriores
             tablaGanancias.innerHTML = '';
@@ -47,17 +44,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 const gananciaInteres = capital * interesMensual;
                 capital += gananciaInteres;
 
-                // Simulación de aportes mensuales iguales al capital inicial
+                // Simulación de aportes mensuales acumulativos
                 capitalAportes += capitalInicial;
                 const gananciaAportes = capitalAportes * interesMensual;
                 capitalAportes += gananciaAportes;
-                totalGananciaAportes = capitalAportes;
 
-                // Simulación de aportes mensuales iguales a la mitad del capital inicial
                 capitalAportesMitad += capitalInicial / 2;
                 const gananciaAportesMitad = capitalAportesMitad * interesMensual;
                 capitalAportesMitad += gananciaAportesMitad;
-                totalGananciaAportesMitad = capitalAportesMitad;
 
                 // Calcular las ganancias de la 1ª y 2ª generación
                 usuarios1G += 1;
@@ -84,16 +78,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     <td>${gananciaInv1G.toFixed(2)}</td>
                     <td>${gananciaInv2G.toFixed(2)}</td>
                     <td>${totalGanancia.toFixed(2)}</td>
-                    <td class="aporte-mensual">${totalGananciaAportes.toFixed(2)}</td>
-                    <td class="aporte-mensual">${totalGananciaAportesMitad.toFixed(2)}</td>
+                    <td class="aporte-mensual">${capitalAportes.toFixed(2)}</td>
+                    <td class="aporte-mensual">${capitalAportesMitad.toFixed(2)}</td>
                 `;
                 tablaGanancias.appendChild(row);
             }
 
             // Actualizar resultados finales
             capitalFinalElement.textContent = capital.toFixed(2);
-            gananciasAportesElement.textContent = totalGananciaAportes.toFixed(2);
-            gananciasAportesMitadElement.textContent = totalGananciaAportesMitad.toFixed(2);
+            gananciasAportesElement.textContent = capitalAportes.toFixed(2);
+            gananciasAportesMitadElement.textContent = capitalAportesMitad.toFixed(2);
             totalGananciasElement.textContent = (capital + ganancias1G + ganancias2G).toFixed(2);
             mensajeEstrategiaElement.textContent = capital < 1000000 
                 ? 'Para mejorar tus ganancias, considera aumentar tu inversión inicial en los primeros meses.'
