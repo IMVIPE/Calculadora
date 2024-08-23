@@ -3,8 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const resultsContainer = document.getElementById('resultsContainer');
     const tablaGanancias = document.getElementById('tablaGanancias').querySelector('tbody');
     const totalGananciasElement = document.getElementById('totalGanancias');
-    const gananciasInteresElement = document.getElementById('gananciasInteres');
     const gananciasAportesElement = document.getElementById('gananciasAportes');
+    const gananciasAportesMitadElement = document.getElementById('gananciasAportesMitad');
     const capitalFinalElement = document.getElementById('resultadoCapitalFinal');
     const mensajeEstrategiaElement = document.getElementById('mensajeEstrategia');
 
@@ -24,7 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
         let usuarios2G = 0;
 
         let totalGananciaAportes = 0;
+        let totalGananciaAportesMitad = 0;
         let capitalAportes = 0;
+        let capitalAportesMitad = 0;
 
         // Limpiar tabla de resultados anteriores
         tablaGanancias.innerHTML = '';
@@ -40,8 +42,52 @@ document.addEventListener('DOMContentLoaded', () => {
             totalGananciaAportes += gananciaAportes;
             capitalAportes += gananciaAportes;
 
+            // Simulación de aportes mensuales iguales a la mitad del capital inicial
+            capitalAportesMitad += capitalInicial / 2;
+            const gananciaAportesMitad = capitalAportesMitad * interesMensual;
+            totalGananciaAportesMitad += gananciaAportesMitad;
+            capitalAportesMitad += gananciaAportesMitad;
+
             usuarios1G += 1;
             usuarios2G += usuarios1G;
 
             const capitalInvitado1G = capitalInicial / 2;
-            const capitalInv
+            const capitalInvitado2G = capitalInvitado1G / 2;
+
+            const gananciaInv1G = (capitalInvitado1G * interesMensual) * 0.02;
+            const gananciaInv2G = (capitalInvitado2G * interesMensual) * 0.01;
+
+            ganancias1G += gananciaInv1G * usuarios1G;
+            ganancias2G += gananciaInv2G * usuarios2G;
+
+            const totalGanancia = capital + ganancias1G + ganancias2G;
+
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${mes}</td>
+                <td>${usuarios1G}</td>
+                <td>${usuarios2G}</td>
+                <td class="capital-propio">${capital.toFixed(2)}</td>
+                <td>${gananciaInv1G.toFixed(2)}</td>
+                <td>${gananciaInv2G.toFixed(2)}</td>
+                <td>${totalGanancia.toFixed(2)}</td>
+                <td class="aporte-mensual">${totalGananciaAportes.toFixed(2)}</td>
+                <td class="aporte-mensual">${totalGananciaAportesMitad.toFixed(2)}</td>
+            `;
+            tablaGanancias.appendChild(row);
+        }
+
+        const totalGanancias = capital + ganancias1G + ganancias2G;
+        const estrategia = capital < 1000000 
+            ? 'Para mejorar tus ganancias, considera aumentar tu inversión inicial en los primeros meses.'
+            : '¡Felicidades! Has alcanzado $1,000,000 en capital.';
+
+        capitalFinalElement.textContent = capital.toFixed(2);
+        gananciasAportesElement.textContent = totalGananciaAportes.toFixed(2);
+        gananciasAportesMitadElement.textContent = totalGananciaAportesMitad.toFixed(2);
+        totalGananciasElement.textContent = totalGanancias.toFixed(2);
+        mensajeEstrategiaElement.textContent = estrategia;
+
+        resultsContainer.style.display = 'block';
+    }
+});
