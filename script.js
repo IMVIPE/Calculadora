@@ -80,10 +80,11 @@ function calcular(event) {
     // Mostrar resultados en el Pop-up
     document.getElementById('resultadoRango').textContent = siguienteRango;
     document.getElementById('resultadoCapitalFinal').textContent = `$${capital.toFixed(2)}`;
-    document.getElementById('gananciaTotalInvitados').textContent = `$${(ganancias1G + ganancias2G).toFixed(2)}`;
     document.getElementById('mensajeCapital').textContent = `Ganancia bruta total: $${totalGananciaInteres.toFixed(2)}. Faltan $${capitalFaltante.toFixed(2)} para alcanzar $1,000,000.`;
     document.getElementById('mensajeEstrategia').textContent = estrategia;
     document.getElementById('totalRecompensas').textContent = `Recompensas totales: $${totalRecompensas.toFixed(2)}`;
+    document.getElementById('ganancias1G').textContent = `$${ganancias1G.toFixed(2)}`;
+    document.getElementById('ganancias2G').textContent = `$${ganancias2G.toFixed(2)}`;
 
     document.getElementById('popup').style.display = 'flex';
 }
@@ -91,4 +92,16 @@ function calcular(event) {
 // Función para cerrar el Pop-up
 function cerrarPopup() {
     document.getElementById('popup').style.display = 'none';
+}
+
+// Función para mostrar los detalles de las generaciones
+function mostrarDetallesGeneraciones() {
+    document.getElementById('resultadosGenerales').style.display = 'none';
+    document.getElementById('detallesGeneraciones').style.display = 'block';
+}
+
+// Función para volver a los resultados generales
+function volverResultadosGenerales() {
+    document.getElementById('detallesGeneraciones').style.display = 'none';
+    document.getElementById('resultadosGenerales').style.display = 'block';
 }
