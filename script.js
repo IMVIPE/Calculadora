@@ -1,8 +1,7 @@
 function calcular() {
-    // Obtener valores del formulario
     const capitalInicial = parseInt(document.getElementById('rangoActual').value);
     const cicloMeses = parseInt(document.getElementById('cicloMeses').value);
-    const interesMensual = 0.10; // Interés compuesto del 10%
+    const interesMensual = 0.10; 
 
     let capital = capitalInicial;
     let totalGananciaInteres = 0;
@@ -12,51 +11,53 @@ function calcular() {
     let rangoFinal = 0;
     let capitalFaltante = 1000000 - capital;
 
-    // Simulación de invitaciones (1 invitado por mes, 2 rangos inferiores)
     let invitaciones1G = 0;
     let invitaciones2G = 0;
     
     let rangoActual = capitalInicial;
 
-    // Realizar los cálculos para cada mes
+    const capitalMensual = [];
+    const ganancias1GMensual = [];
+    const ganancias2GMensual = [];
+    const totalRecompensasMensual = [];
+
     for (let mes = 1; mes <= cicloMeses; mes++) {
         const gananciaInteres = capital * interesMensual;
         totalGananciaInteres += gananciaInteres;
 
-        const gananciaUsuario = gananciaInteres * 0.10; // 10% para el usuario
+        const gananciaUsuario = gananciaInteres * 0.10;
         totalRecompensas += gananciaUsuario;
 
-        // Simulación de invitaciones
-        invitaciones1G += 1; // Cada mes el usuario invita a 1 persona
-        invitaciones2G += invitaciones1G; // Cada invitado invita a 1 persona más
+        invitaciones1G += 1;
+        invitaciones2G += invitaciones1G;
 
-        // Determinar capital del invitado (2 rangos inferiores)
         let capitalInvitado1G = rangoActual / 2;
         let capitalInvitado2G = capitalInvitado1G / 2;
 
-        // Ganancias por invitaciones
-        const gananciaInv1G = (capitalInvitado1G * interesMensual) * 0.02; // 2% de la ganancia de los invitados de 1G
-        const gananciaInv2G = (capitalInvitado2G * interesMensual) * 0.01; // 1% de la ganancia de los invitados de 2G
+        const gananciaInv1G = (capitalInvitado1G * interesMensual) * 0.02;
+        const gananciaInv2G = (capitalInvitado2G * interesMensual) * 0.01;
 
         ganancias1G += gananciaInv1G;
         ganancias2G += gananciaInv2G;
 
         capital += gananciaUsuario;
 
-        // Calcular cuánto falta para alcanzar $1,000,000
+        capitalMensual.push(capital.toFixed(2));
+        ganancias1GMensual.push(gananciaInv1G.toFixed(2));
+        ganancias2GMensual.push(gananciaInv2G.toFixed(2));
+        totalRecompensasMensual.push(totalRecompensas.toFixed(2));
+
         capitalFaltante = 1000000 - capital;
 
-        // Actualizar rango final basado en el capital acumulado
         if (capital >= rangoActual) {
-            rangoFinal = mes; // Actualización de rango mes a mes
+            rangoFinal = mes;
         }
     }
 
     const estrategia = capitalFaltante > 0
-        ? `Necesitas continuar invirtiendo para alcanzar $1,000,000.`
+        ? `Podrías haber obtenido más ganancia invirtiendo más capital en los primeros meses.`
         : `¡Felicidades! Has alcanzado el capital de $1,000,000.`;
 
-    // Actualizar el pop-up con los resultados
     document.getElementById('resultadoRango').textContent = `Mes ${rangoFinal}`;
     document.getElementById('resultadoCapitalFinal').textContent = `$${capital.toFixed(2)}`;
     document.getElementById('mensajeCapital').textContent = `$${totalGananciaInteres.toFixed(2)}`;
@@ -65,8 +66,47 @@ function calcular() {
     document.getElementById('totalRecompensas').textContent = `$${totalRecompensas.toFixed(2)}`;
     document.getElementById('mensajeEstrategia').textContent = estrategia;
 
-    // Mostrar el pop-up
+    mostrarGrafico(capitalMensual, ganancias1GMensual, ganancias2GMensual);
+
     document.getElementById('popup').style.display = 'flex';
+}
+
+function mostrarGrafico(capitalMensual, ganancias1GMensual, ganancias2GMensual) {
+    const ctx = document.getElementById('gananciasChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: Array.from({ length: capitalMensual.length }, (_, i) => `Mes ${i + 1}`),
+            datasets: [
+                {
+                    label: 'Capital Propio',
+                    data: capitalMensual,
+                    borderColor: 'blue',
+                    fill: false,
+                },
+                {
+                    label: 'Ganancias 1ª Generación',
+                    data: ganancias1GMensual,
+                    borderColor: 'green',
+                    fill: false,
+                },
+                {
+                    label: 'Ganancias 2ª Generación',
+                    data: ganancias2GMensual,
+                    borderColor: 'red',
+                    fill: false,
+                },
+            ],
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
 }
 
 function cerrarPopup() {
