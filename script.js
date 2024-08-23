@@ -1,4 +1,4 @@
-// Mapeo de Capital por Rango
+// Mapeo de Capital por Rango hasta el Rango 20
 const capitalPorRango = {
     6: 500,
     7: 1000,
@@ -9,7 +9,12 @@ const capitalPorRango = {
     12: 3500,
     13: 4000,
     14: 4500,
-    15: 5000
+    15: 5000,
+    16: 6000,
+    17: 7000,
+    18: 8000,
+    19: 9000,
+    20: 10000
 };
 
 // Actualizar Capital Inicial según el Rango Seleccionado
@@ -24,13 +29,15 @@ function calcular() {
     const rangoActual = parseInt(document.getElementById('rangoActual').value);
     let capitalInicial = capitalPorRango[rangoActual];
     const cicloMeses = parseInt(document.getElementById('cicloMeses').value);
-    const interesMensual = parseFloat(document.getElementById('interesMensual').value) / 100;
+    const interesMensual = 0.10; // Interés compuesto fijo del 10% mensual
     const numInvitadosMensuales = parseInt(document.getElementById('numInvitados').value);
     const numInvitados2G = parseInt(document.getElementById('numInvitados2G').value);
 
     let capital = capitalInicial;
     let totalInvitados1G = 0;
     let totalInvitados2G = 0;
+    let ganancias1G = 0;
+    let ganancias2G = 0;
 
     for (let mes = 1; mes <= cicloMeses; mes++) {
         // Actualización de Invitados
@@ -42,20 +49,22 @@ function calcular() {
         const extraccionMensual = gananciaMensual / 3;
         const reinversionMensual = gananciaMensual - extraccionMensual;
 
+        // Acumulación de Ganancias por Invitados
+        ganancias1G += totalInvitados1G * reinversionMensual * 0.02; // 2% de la ganancia de primera generación
+        ganancias2G += totalInvitados2G * reinversionMensual * 0.01; // 1% de la ganancia de segunda generación
+
         // Actualización de Capital
         capital += reinversionMensual;
 
         // Comprobación y Actualización de Rango
         const siguienteRango = rangoActual + 1;
-        if (capital >= capitalPorRango[siguienteRango]) {
+        if (siguienteRango <= 20 && capital >= capitalPorRango[siguienteRango]) {
             capitalInicial = capitalPorRango[siguienteRango];
         }
     }
 
     // Cálculo de Ganancias por Invitados
-    const ganancia1G = totalInvitados1G * 10; // $10 por cada invitado de 1ª generación
-    const ganancia2G = totalInvitados2G * 5;  // $5 por cada invitado de 2ª generación
-    const gananciaTotal = ganancia1G + ganancia2G;
+    const gananciaTotalInvitados = ganancias1G + ganancias2G;
 
     // Determinar si hay Estancamiento
     const estancamiento = capital < capitalPorRango[siguienteRango] ? 
@@ -73,9 +82,9 @@ function calcular() {
     document.getElementById('resultadoExtraccion').textContent = `Extracción Mensual Promedio: $${((capital * interesMensual) / 3).toFixed(2)}`;
     document.getElementById('resultadoReinversion').textContent = `Reinversión Mensual Promedio: $${((capital * interesMensual) * (2/3)).toFixed(2)}`;
     document.getElementById('resultadoCapitalFinal').textContent = `Capital Final después de ${cicloMeses} meses: $${capital.toFixed(2)}`;
-    document.getElementById('ganancia1G').textContent = `Ganancia Total por Invitados de 1ª Generación: $${ganancia1G.toFixed(2)}`;
-    document.getElementById('ganancia2G').textContent = `Ganancia Total por Invitados de 2ª Generación: $${ganancia2G.toFixed(2)}`;
-    document.getElementById('gananciaTotal').textContent = `Ganancia Total por Invitaciones: $${gananciaTotal.toFixed(2)}`;
+    document.getElementById('ganancia1G').textContent = `Ganancia Total por Invitados de 1ª Generación: $${ganancias1G.toFixed(2)}`;
+    document.getElementById('ganancia2G').textContent = `Ganancia Total por Invitados de 2ª Generación: $${ganancias2G.toFixed(2)}`;
+    document.getElementById('gananciaTotal').textContent = `Ganancia Total por Invitaciones: $${gananciaTotalInvitados.toFixed(2)}`;
     document.getElementById('ingresoCapital').textContent = ingresoCapital;
     document.getElementById('resumenEstancamiento').textContent = estancamiento;
 }
