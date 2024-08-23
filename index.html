@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,42 +7,47 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Pop-up de Opinión -->
+    <div class="popup" id="popup">
+        <div class="popup-content">
+            <h2>Comparte tu Opinión</h2>
+            <p>¿Qué opinas de la metáfora del interés compuesto como sembrar y cosechar?</p>
+            <textarea id="opinion" rows="4" cols="50" placeholder="Escribe tu opinión aquí..."></textarea>
+            <button onclick="cerrarPopup()">Cerrar</button>
+        </div>
+    </div>
+
+    <!-- Contenido Principal -->
     <div class="container">
         <h1>Calculadora de Rangos e Interés Compuesto</h1>
+        <p>El interés compuesto es como sembrar semillas: plantas hoy y cada día tu cosecha crece más, permitiéndote sembrar aún más semillas y obtener una cosecha cada vez mayor con el tiempo.</p>
+        
         <form id="calculatorForm">
-            <label for="capitalInicial">Capital Inicial ($):</label>
-            <input type="number" id="capitalInicial" required>
-            
-            <label for="cicloMeses">Ciclo de Inversión (Meses):</label>
-            <input type="number" id="cicloMeses" required>
-            
-            <label for="interesMensual">Interés Compuesto Mensual (%):</label>
-            <input type="number" id="interesMensual" value="15" required>
-            
-            <label for="rangoActual">Rango Actual:</label>
-            <select id="rangoActual" required>
-                <option value="6">Rango 6</option>
-                <option value="7">Rango 7</option>
-                <option value="8">Rango 8</option>
-                <option value="9">Rango 9</option>
-                <option value="10">Rango 10</option>
-                <option value="11">Rango 11</option>
-                <option value="12">Rango 12</option>
-                <option value="13">Rango 13</option>
-                <option value="14">Rango 14</option>
-                <option value="15">Rango 15</option>
-                <option value="16">Rango 16</option>
-                <option value="17">Rango 17</option>
-                <option value="18">Rango 18</option>
-                <option value="19">Rango 19</option>
-                <option value="20">Rango 20</option>
+            <label for="rangoActual">Selecciona tu Rango Actual:</label>
+            <select id="rangoActual" required onchange="actualizarCapital()">
+                <option value="6">Rango 6 - $500</option>
+                <option value="7">Rango 7 - $1,000</option>
+                <option value="8">Rango 8 - $1,500</option>
+                <option value="9">Rango 9 - $2,000</option>
+                <option value="10">Rango 10 - $2,500</option>
+                <option value="11">Rango 11 - $3,000</option>
+                <option value="12">Rango 12 - $3,500</option>
+                <option value="13">Rango 13 - $4,000</option>
+                <option value="14">Rango 14 - $4,500</option>
+                <option value="15">Rango 15 - $5,000</option>
             </select>
             
-            <label for="numInvitados">Número de Invitados de Primera Generación:</label>
-            <input type="number" id="numInvitados" value="3" required>
+            <label for="cicloMeses">Ciclo de Inversión (Meses):</label>
+            <input type="number" id="cicloMeses" value="12" required>
+            
+            <label for="interesMensual">Interés Compuesto Mensual (%):</label>
+            <input type="number" id="interesMensual" value="5" required>
+            
+            <label for="numInvitados">Número de Invitados de Primera Generación por Mes:</label>
+            <input type="number" id="numInvitados" value="1" required>
             
             <label for="numInvitados2G">Número de Invitados de Segunda Generación por Invitado:</label>
-            <input type="number" id="numInvitados2G" value="3" required>
+            <input type="number" id="numInvitados2G" value="1" required>
             
             <button type="button" onclick="calcular()">Calcular</button>
         </form>
@@ -58,8 +63,10 @@
             <p id="ganancia2G"></p>
             <p id="gananciaTotal"></p>
             <p id="ingresoCapital"></p>
+            <p id="resumenEstancamiento"></p>
         </div>
     </div>
+    
     <script src="script.js"></script>
 </body>
 </html>
