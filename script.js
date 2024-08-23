@@ -5,20 +5,27 @@ document.addEventListener('DOMContentLoaded', () => {
     calcularBtn.addEventListener('click', calcular);
 
     function formatK(value) {
-        return value >= 100000 ? (value / 1000).toFixed(3) + 'k' : `$${value.toFixed(2)}`;
+        if (value >= 1000000) {
+            return (value / 1000000).toFixed(6) + 'M';
+        } else if (value >= 100000) {
+            return (value / 1000).toFixed(3) + 'k';
+        } else {
+            return `$${value.toFixed(2)}`;
+        }
     }
 
-    function getGradientClass(value) {
+    function getBackgroundColor(value) {
         if (value >= 1000000) {
-            return 'gradient-1000000';
+            return '#0056b3'; // Más oscuro para valores a partir de 1M
         } else if (value >= 500000) {
-            return 'gradient-500000';
+            return '#1e90ff';
         } else if (value >= 250000) {
-            return 'gradient-250000';
+            return '#87ceeb';
         } else if (value >= 100000) {
-            return 'gradient-100000';
+            return '#add8e6'; // Más claro para valores desde 100k hasta 250k
+        } else {
+            return 'transparent'; // Sin fondo especial para valores menores a 100k
         }
-        return '';
     }
 
     function calcular() {
@@ -63,10 +70,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td>${mes}</td>
                 <td>${usuarios1G}</td>
                 <td>${usuarios2G}</td>
-                <td class="capital-propio ${getGradientClass(capital)}">${formatK(capital)}</td>
-                <td class="${getGradientClass(gananciaInv1G * usuarios1G)}">${formatK(gananciaInv1G * usuarios1G)}</td>
-                <td class="${getGradientClass(gananciaInv2G * usuarios2G)}">${formatK(gananciaInv2G * usuarios2G)}</td>
-                <td class="${getGradientClass(totalGanancia)}">${formatK(totalGanancia)}</td>
+                <td class="capital-propio" style="background-color:${getBackgroundColor(capital)}">${formatK(capital)}</td>
+                <td style="background-color:${getBackgroundColor(gananciaInv1G * usuarios1G)}">${formatK(gananciaInv1G * usuarios1G)}</td>
+                <td style="background-color:${getBackgroundColor(gananciaInv2G * usuarios2G)}">${formatK(gananciaInv2G * usuarios2G)}</td>
+                <td style="background-color:${getBackgroundColor(totalGanancia)}">${formatK(totalGanancia)}</td>
             `;
             tablaGanancias.appendChild(row);
         }
@@ -82,8 +89,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('ganancias2G').textContent = formatK(ganancias2G);
         document.getElementById('totalGanancias').textContent = formatK(totalGanancias);
         document.getElementById('mensajeEstrategia').textContent = estrategia;
-        document.getElementById('usuarios1G').textContent = usuarios1G;
-        document.getElementById('usuarios2G').textContent = usuarios2G;
 
         document.getElementById('resultsContainer').style.display = 'block';
     }
