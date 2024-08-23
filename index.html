@@ -58,10 +58,13 @@
         <button type="button" id="verGraficoBtn">Ver Gráfico</button>
     </div>
 
-    <!-- Gráfico -->
-    <div class="chart-container" id="chartContainer" style="display: none;">
-        <canvas id="gananciasChart"></canvas>
-        <button type="button" id="verGananciasBtn">Ver Ganancias</button>
+    <!-- Pop-up de Gráfico -->
+    <div class="popup" id="popup" style="display: none;">
+        <div class="popup-content">
+            <h2>Gráfico de Ganancias</h2>
+            <canvas id="gananciasChart"></canvas>
+            <button type="button" id="cerrarPopupBtn">Cerrar</button>
+        </div>
     </div>
 
     <script src="script.js"></script>
