@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const calcularBtn = document.getElementById('calcularBtn');
+    const duplicarTiempoBtn = document.getElementById('duplicarTiempoBtn');
     const resultsContainer = document.getElementById('resultsContainer');
     const tablaGanancias = document.getElementById('tablaGanancias').querySelector('tbody');
     const totalGananciasElement = document.getElementById('totalGanancias');
@@ -7,36 +8,30 @@ document.addEventListener('DOMContentLoaded', () => {
     const gananciasAportesMitadElement = document.getElementById('gananciasAportesMitad');
     const capitalFinalElement = document.getElementById('resultadoCapitalFinal');
     const mensajeEstrategiaElement = document.getElementById('mensajeEstrategia');
-    const doblarTiempoBtn = document.getElementById('doblarTiempoBtn');
 
     const gananciaInteresCompuestoElement = document.getElementById('gananciaInteresCompuesto');
     const gananciaPrimeraGeneracionElement = document.getElementById('gananciaPrimeraGeneracion');
     const gananciaSegundaGeneracionElement = document.getElementById('gananciaSegundaGeneracion');
 
     calcularBtn.addEventListener('click', calcular);
-    doblarTiempoBtn.addEventListener('click', duplicarTiempo);
+    duplicarTiempoBtn.addEventListener('click', duplicarTiempo);
 
-    function calcular(duplicarMeses = false) {
+    function calcular() {
         try {
             const capitalInicial = parseInt(document.getElementById('rangoActual').value);
-            let cicloMeses = parseInt(document.getElementById('cicloMeses').value);
-            if (duplicarMeses) cicloMeses *= 2;
+            const cicloMeses = parseInt(document.getElementById('cicloMeses').value);
+            const usuariosGen1 = parseInt(document.getElementById('usuariosGen1').value);
+            const usuariosGen2 = parseInt(document.getElementById('usuariosGen2').value);
 
-            if (isNaN(capitalInicial) || isNaN(cicloMeses) || cicloMeses < 1) {
-                alert("Por favor, ingrese un rango y un ciclo de meses válidos.");
+            if (isNaN(capitalInicial) || isNaN(cicloMeses) || cicloMeses < 1 || isNaN(usuariosGen1) || isNaN(usuariosGen2)) {
+                alert("Por favor, ingrese todos los valores correctamente.");
                 return;
             }
 
-            const usuarios1GInvitados = parseInt(document.getElementById('usuarios1Gen').value);
-            const usuarios2GInvitados = parseInt(document.getElementById('usuarios2Gen').value);
-
-            const interesMensual = 0.07;
+            const interesMensual = 0.07; // 30% menos del 10% original
             let capital = capitalInicial;
             let ganancias1G = 0;
             let ganancias2G = 0;
-
-            let usuarios1G = usuarios1GInvitados;
-            let usuarios2G = usuarios1GInvitados * usuarios2GInvitados;
 
             let totalGananciaAportes = 0;
             let totalGananciaAportesMitad = 0;
@@ -45,13 +40,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let totalGananciaInteresCompuesto = 0;
 
+            // Limpiar tabla de resultados anteriores
             tablaGanancias.innerHTML = '';
 
             for (let mes = 1; mes <= cicloMeses; mes++) {
+                // Calcular el interés compuesto sobre el capital inicial
                 const gananciaInteres = capital * interesMensual;
                 totalGananciaInteresCompuesto += gananciaInteres;
                 capital += gananciaInteres;
 
+                // Simulación de aportes mensuales acumulativos
                 capitalAportes += capitalInicial;
                 const gananciaAportes = capitalAportes * interesMensual;
                 totalGananciaAportes += gananciaAportes;
@@ -62,33 +60,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 totalGananciaAportesMitad += gananciaAportesMitad;
                 capitalAportesMitad += gananciaAportesMitad;
 
-                if (mes > 1) {
-                    usuarios1G += usuarios1GInvitados;
-                }
+                const totalUsuariosGen1 = usuariosGen1 * mes;
+                const totalUsuariosGen2 = totalUsuariosGen1 * usuariosGen2;
 
-                if (mes > 2) {
-                    usuarios2G += usuarios1GInvitados * usuarios2GInvitados;
-                }
-
-                const capitalInvitado1G = capitalInicial / 2;
-                const capitalInvitado2G = capitalInvitado1G / 2;
-
-                const gananciaInv1G = (capitalInvitado1G * interesMensual) * 0.04 * usuarios1G;
-                const gananciaInv2G = (capitalInvitado2G * interesMensual) * 0.02 * usuarios2G;
+                const gananciaInv1G = (capitalInicial * 0.04) * totalUsuariosGen1;
+                const gananciaInv2G = (capitalInicial * 0.02) * totalUsuariosGen2;
 
                 ganancias1G += gananciaInv1G;
                 ganancias2G += gananciaInv2G;
 
                 const totalGanancia = capital + ganancias1G + ganancias2G;
 
+                // Mostrar ganancias adicionales con símbolo +
                 const gananciaAportesVisual = `<span class="plus-symbol">+${gananciaAportes.toFixed(2)}</span>`;
                 const gananciaAportesMitadVisual = `<span class="plus-symbol">+${gananciaAportesMitad.toFixed(2)}</span>`;
 
+                // Agregar fila a la tabla
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${mes}</td>
-                    <td>${usuarios1G}</td>
-                    <td>${usuarios2G}</td>
+                    <td>${totalUsuariosGen1}</td>
+                    <td>${totalUsuariosGen2}</td>
                     <td class="capital-propio">${capital.toFixed(2)}</td>
                     <td>${gananciaInv1G.toFixed(2)}</td>
                     <td>${gananciaInv2G.toFixed(2)}</td>
@@ -100,6 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 tablaGanancias.appendChild(row);
             }
 
+            // Actualizar resultados finales y desglose
             capitalFinalElement.textContent = capital.toFixed(2);
             gananciasAportesElement.textContent = totalGananciaAportes.toFixed(2);
             gananciasAportesMitadElement.textContent = totalGananciaAportesMitad.toFixed(2);
@@ -109,17 +102,23 @@ document.addEventListener('DOMContentLoaded', () => {
             gananciaPrimeraGeneracionElement.textContent = ganancias1G.toFixed(2);
             gananciaSegundaGeneracionElement.textContent = ganancias2G.toFixed(2);
 
-            let capitalTotal = capital + totalGananciaAportes + totalGananciaAportesMitad;
-            if (capitalTotal < 250000) {
-                mensajeEstrategiaElement.textContent = `Te faltan ${(250000 - capitalTotal).toFixed(2)} para llegar a $250,000.`;
-            } else if (capitalTotal < 500000) {
-                mensajeEstrategiaElement.textContent = `¡Felicidades! Has alcanzado $250,000. Te faltan ${(500000 - capitalTotal).toFixed(2)} para llegar a $500,000.`;
-            } else if (capitalTotal < 1000000) {
-                mensajeEstrategiaElement.textContent = `¡Felicidades! Has alcanzado $500,000. Te faltan ${(1000000 - capitalTotal).toFixed(2)} para llegar a $1,000,000.`;
+            // Estrategia sugerida
+            const capitalFinal = capital + ganancias1G + ganancias2G;
+            let mensajeEstrategia = '';
+
+            if (capitalFinal < 250000) {
+                mensajeEstrategia = `Te faltan ${(250000 - capitalFinal).toFixed(2)} para alcanzar $250,000.`;
+            } else if (capitalFinal < 500000) {
+                mensajeEstrategia = `¡Felicidades! Has alcanzado $250,000. Te faltan ${(500000 - capitalFinal).toFixed(2)} para alcanzar $500,000.`;
+            } else if (capitalFinal < 1000000) {
+                mensajeEstrategia = `¡Felicidades! Has alcanzado $500,000. Te faltan ${(1000000 - capitalFinal).toFixed(2)} para alcanzar $1,000,000.`;
             } else {
-                mensajeEstrategiaElement.textContent = `¡Increíble! Has superado $1,000,000 y formas parte del 1% de los mejores inversores.`;
+                mensajeEstrategia = '¡Felicidades! Has alcanzado $1,000,000 y te encuentras en el 1% más alto.';
             }
 
+            mensajeEstrategiaElement.textContent = mensajeEstrategia;
+
+            // Mostrar la sección de resultados
             resultsContainer.style.display = 'block';
         } catch (error) {
             console.error('Ocurrió un error durante el cálculo:', error);
@@ -127,6 +126,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function duplicarTiempo() {
-        calcular(true);
+        const cicloMesesInput = document.getElementById('cicloMeses');
+        const cicloMeses = parseInt(cicloMesesInput.value);
+        cicloMesesInput.value = cicloMeses * 2;
+
+        // Realizamos un nuevo cálculo con el ciclo de meses duplicado
+        calcular();
     }
 });
