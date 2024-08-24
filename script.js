@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            const interesMensual = 0.10;
+            const interesMensual = 0.07; // 10% original menos 30%
             let capital = capitalInicial;
             let ganancias1G = 0;
             let ganancias2G = 0;
@@ -72,8 +72,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 const capitalInvitado1G = capitalInicial / 2;
                 const capitalInvitado2G = capitalInvitado1G / 2;
 
-                const gananciaInv1G = (capitalInvitado1G * interesMensual) * 0.02 * usuarios1G;
-                const gananciaInv2G = (capitalInvitado2G * interesMensual) * 0.01 * usuarios2G;
+                // Recompensas actualizadas: Doble de la recompensa original
+                const gananciaInv1G = (capitalInvitado1G * interesMensual) * 0.04 * usuarios1G; // Doble de 0.02
+                const gananciaInv2G = (capitalInvitado2G * interesMensual) * 0.02 * usuarios2G; // Doble de 0.01
 
                 ganancias1G += gananciaInv1G;
                 ganancias2G += gananciaInv2G;
