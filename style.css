@@ -13,6 +13,7 @@ body {
     background-color: white;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
+    overflow-x: auto;
 }
 
 h1 {
@@ -20,14 +21,9 @@ h1 {
     color: #4a90e2;
 }
 
-.note {
-    background-color: #FFD700;
-    color: #000;
-    padding: 10px;
-    font-weight: bold;
+p {
     text-align: center;
-    border-radius: 5px;
-    margin-bottom: 15px;
+    font-style: italic;
 }
 
 .input-section {
@@ -47,8 +43,6 @@ h1 {
     margin-bottom: 20px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    background-color: #444;
-    color: white;
 }
 
 .input-section button {
@@ -60,8 +54,7 @@ h1 {
     font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
-    font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 10px; /* Add margin for spacing between buttons */
 }
 
 .results-section {
@@ -75,42 +68,32 @@ h1 {
     padding: 15px;
     border-radius: 5px;
     margin-bottom: 20px;
-    text-align: center;
 }
 
-.result-highlight h2 {
-    margin-bottom: 10px;
-}
-
-#capitalFinalElement {
-    font-size: 24px;
-    color: #FFD700; /* Destaca en dorado */
-    font-weight: bold;
-    margin-top: 20px;
-    text-align: center;
-}
-
-#mensajeEstrategiaElement {
-    font-size: 16px;
-    color: #4a90e2;
-    margin-top: 10px;
-    text-align: center;
-}
-
-table {
-    width: 100%;
+#tablaGanancias,
+#desgloseOperaciones {
+    width: 95%;
+    max-width: 95%;
     border-collapse: collapse;
     margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    word-wrap: break-word;
 }
 
-table, th, td {
+#tablaGanancias th,
+#tablaGanancias td,
+#desgloseOperaciones th,
+#desgloseOperaciones td {
     border: 1px solid #ddd;
+    padding: 10px;
     text-align: center;
-    padding: 8px;
+    box-sizing: border-box;
 }
 
-th {
-    background-color: #4a90e2;
+#tablaGanancias th,
+#desgloseOperaciones th {
+    background-color: #4A90E2;
     color: white;
 }
 
@@ -122,25 +105,46 @@ th {
     background-color: #ffe4b5;
 }
 
+#desgloseContainer {
+    margin-top: 20px;
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #4A90E2;
+}
+
 .plus-symbol {
     color: green;
     font-weight: bold;
 }
 
-#botonDuplicarTiempo {
-    width: 100%;
-    padding: 12px;
-    background-color: #4a90e2;
-    border: none;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-weight: bold;
+#tablaContainer {
     margin-top: 20px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #4A90E2;
+    overflow-x: auto;
+    box-sizing: border-box;
 }
 
-.linha-separadora {
+.separator-row {
     border-top: 2px solid #4A90E2;
-    margin-top: 20px;
+    background-color: #f0f0f0;
+}
+
+/* Consistent button styling */
+#calcularBtn, #duplicarTiempoBtn {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    padding: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+#calcularBtn:hover, #duplicarTiempoBtn:hover {
+    background-color: #357ABD;
 }
