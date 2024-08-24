@@ -47,8 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
             let usuarios1G = duplicarMeses ? usuarios1GPorMes * (cicloMeses / 2) : 0;
             let usuarios2G = duplicarMeses ? usuarios1G * usuarios2GPorUsuario1G : 0;
 
-            let totalGananciaAportes = duplicarMeses ? parseFloat(gananciasAportesElement.textContent) : 0;
-            let totalGananciaAportesMitad = duplicarMeses ? parseFloat(gananciasAportesMitadElement.textContent) : 0;
+            let totalGananciaAportes = duplicarMeses ? parseFloat(gananciasAportesElement.textContent.replace(/[^0-9.-]+/g,"")) : 0;
+            let totalGananciaAportesMitad = duplicarMeses ? parseFloat(gananciasAportesMitadElement.textContent.replace(/[^0-9.-]+/g,"")) : 0;
             let capitalAportes = duplicarMeses ? parseFloat(capitalFinalElement.textContent) : capitalInicial;
             let capitalAportesMitad = duplicarMeses ? parseFloat(capitalFinalElement.textContent) / 2 : capitalInicial / 2;
 
