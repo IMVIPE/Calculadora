@@ -1,29 +1,31 @@
 body {
-    font-family: 'Montserrat', 'Helvetica', sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: #f7f7f7;
     color: #333;
     margin: 0;
     padding: 0;
 }
 
 .container {
-    max-width: 800px;
-    margin: 50px auto;
+    max-width: 900px;
+    margin: 40px auto;
     padding: 20px;
     background-color: white;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     overflow-x: auto;
 }
 
 h1 {
     text-align: center;
-    color: #4a90e2;
+    color: #007acc;
+    font-weight: 700;
 }
 
 p {
     text-align: center;
     font-style: italic;
+    color: #555;
 }
 
 .input-section {
@@ -32,28 +34,34 @@ p {
 
 .input-section label {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     font-weight: bold;
 }
 
 .input-section select,
 .input-section input {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     margin-bottom: 20px;
-    border: 1px solid #ddd;
+    border: 1px solid #ccc;
     border-radius: 5px;
+    font-size: 16px;
 }
 
 .input-section button {
     width: 100%;
     padding: 12px;
-    background-color: #4a90e2;
+    background-color: #007acc;
     border: none;
     color: white;
-    font-size: 16px;
+    font-size: 18px;
     cursor: pointer;
     border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.input-section button:hover {
+    background-color: #005f99;
 }
 
 .results-section {
@@ -62,20 +70,20 @@ p {
 }
 
 .result-highlight {
-    background-color: #4a90e2;
+    background-color: #007acc;
     color: white;
     padding: 15px;
     border-radius: 5px;
     margin-bottom: 20px;
-    font-family: 'Montserrat', Helvetica, sans-serif; /* Tipografía */
+    font-family: 'Roboto', Arial, sans-serif;
 }
 
 #capitalFinalElement {
     font-size: 24px;
-    color: #FFD700;
+    color: #ffd700;
     font-weight: bold;
-    background-color: #333; /* Fondo resaltado */
-    padding: 10px;
+    background-color: #333;
+    padding: 12px;
     border-radius: 5px;
     margin-top: 20px;
     text-align: center;
@@ -83,30 +91,29 @@ p {
 
 #mensajeEstrategiaElement {
     font-size: 16px;
-    color: #4a90e2;
-    margin-top: 10px;
+    color: #007acc;
+    margin-top: 15px;
     text-align: center;
-    font-family: 'Montserrat', Helvetica, sans-serif; /* Tipografía */
-    background-color: #f9f9f9; /* Fondo para el marco */
+    background-color: #f0f8ff;
     padding: 15px;
     border-radius: 8px;
-    border: 1px solid #4a90e2;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    border: 1px solid #007acc;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
 }
 
 #mensajeEstrategiaElement .highlight-amount {
     font-size: 18px;
-    color: #FF4500; /* Rojo para destacar */
+    color: #32cd32;
     font-weight: bold;
-    margin-top: 5px;
     display: block;
+    margin-top: 5px;
 }
 
 #tablaGanancias, #desgloseOperaciones {
-    width: 95%;
-    max-width: 95%;
+    width: 100%;
+    max-width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin-top: 25px;
     margin-left: auto;
     margin-right: auto;
     word-wrap: break-word;
@@ -117,51 +124,31 @@ p {
 #desgloseOperaciones th,
 #desgloseOperaciones td {
     border: 1px solid #ddd;
-    padding: 10px;
+    padding: 12px;
     text-align: center;
     box-sizing: border-box;
 }
 
 #tablaGanancias th,
 #desgloseOperaciones th {
-    background-color: #4A90E2;
+    background-color: #007acc;
     color: white;
-    font-family: 'Montserrat', Helvetica, sans-serif;
     font-weight: bold;
+    font-size: 16px;
 }
 
-#desgloseOperaciones {
-    margin-top: 10px;
-    background-color: #fff;
-    border-radius: 8px;
-    border: 2px solid #4a90e2;
-    padding: 15px;
-    text-align: center;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-
-#desgloseOperaciones th {
-    background-color: #FFD700;
-    color: #333;
-    border-radius: 5px;
-}
-
+#tablaGanancias td,
 #desgloseOperaciones td {
-    color: #4a90e2;
-    font-weight: bold;
-}
-
-#desgloseOperaciones h2 {
-    font-family: 'Montserrat', Helvetica, sans-serif;
-    margin-bottom: 15px;
+    font-size: 14px;
+    color: #333;
 }
 
 .capital-propio {
-    background-color: #d0e7ff;
+    background-color: #e6f2ff;
 }
 
 .aporte-mensual {
-    background-color: #ffe4b5;
+    background-color: #fff0b3;
 }
 
 .aporte-mensual .plus-symbol {
@@ -169,12 +156,38 @@ p {
     font-weight: bold;
 }
 
+#desgloseOperaciones {
+    margin-top: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    border: 2px solid #007acc;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.05);
+}
+
+#desgloseOperaciones th {
+    background-color: #ffd700;
+    color: #333;
+    border-radius: 5px;
+}
+
+#desgloseOperaciones td {
+    color: #007acc;
+    font-weight: bold;
+}
+
+#desgloseOperaciones h2 {
+    font-family: 'Roboto', Arial, sans-serif;
+    margin-bottom: 15px;
+}
+
 #tablaContainer {
     margin-top: 20px;
     background-color: #fff;
-    padding: 10px;
-    border-radius: 5px;
-    border: 2px solid #4A90E2;
+    padding: 15px;
+    border-radius: 10px;
+    border: 2px solid #007acc;
     overflow-x: auto;
     box-sizing: border-box;
 }
