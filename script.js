@@ -1,123 +1,117 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const calcularBtn = document.getElementById('calcularBtn');
-    const resultsContainer = document.getElementById('resultsContainer');
-    const tablaGanancias = document.getElementById('tablaGanancias').querySelector('tbody');
-    const totalGananciasElement = document.getElementById('totalGanancias');
-    const gananciasAportesElement = document.getElementById('gananciasAportes');
-    const gananciasAportesMitadElement = document.getElementById('gananciasAportesMitad');
-    const capitalFinalElement = document.getElementById('resultadoCapitalFinal');
-    const mensajeEstrategiaElement = document.getElementById('mensajeEstrategia');
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Ganancias Compuestas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora de Ganancias Compuestas</h1>
+        <p>El interés compuesto es como sembrar semillas: plantas hoy y cada día tu cosecha crece más, permitiéndote sembrar aún más semillas y obtener una cosecha cada vez mayor con el tiempo.</p>
+        
+        <form id="calculatorForm">
+            <div class="input-section">
+                <label for="rangoActual">Selecciona tu Rango Actual:</label>
+                <select id="rangoActual" required>
+                    <option value="10000">Rango 20 - $10,000</option>
+                    <option value="9000">Rango 19 - $9,000</option>
+                    <option value="8000">Rango 18 - $8,000</option>
+                    <option value="7000">Rango 17 - $7,000</option>
+                    <option value="6000">Rango 16 - $6,000</option>
+                    <option value="5000">Rango 15 - $5,000</option>
+                    <option value="4500">Rango 14 - $4,500</option>
+                    <option value="4000">Rango 13 - $4,000</option>
+                    <option value="3500">Rango 12 - $3,500</option>
+                    <option value="3000">Rango 11 - $3,000</option>
+                    <option value="2500">Rango 10 - $2,500</option>
+                    <option value="2000">Rango 9 - $2,000</option>
+                    <option value="1500">Rango 8 - $1,500</option>
+                    <option value="1000">Rango 7 - $1,000</option>
+                    <option value="500">Rango 6 - $500 (Nota: Necesitas invitar a 3 personas para ascender de rango)</option>
+                    <option value="400">Rango 5 - $400</option>
+                    <option value="300">Rango 4 - $300</option>
+                    <option value="200">Rango 3 - $200</option>
+                    <option value="100">Rango 2 - $100</option>
+                    <option value="50">Rango 1 - $50</option>
+                </select>
 
-    const gananciaInteresCompuestoElement = document.getElementById('gananciaInteresCompuesto');
-    const gananciaPrimeraGeneracionElement = document.getElementById('gananciaPrimeraGeneracion');
-    const gananciaSegundaGeneracionElement = document.getElementById('gananciaSegundaGeneracion');
+                <label for="cicloMeses">Ciclo de Inversión (Meses):</label>
+                <input type="number" id="cicloMeses" value="12" required min="1">
 
-    calcularBtn.addEventListener('click', calcular);
+                <label for="usuariosPrimeraGeneracion">Número de usuarios de 1ª generación que invitarás al mes:</label>
+                <input type="number" id="usuariosPrimeraGeneracion" value="1" required min="0">
+                <small>Nota: Te llevarás el 4% de las ganancias de tus invitados directos.</small>
 
-    function calcular() {
-        try {
-            const capitalInicial = parseInt(document.getElementById('rangoActual').value);
-            const cicloMeses = parseInt(document.getElementById('cicloMeses').value);
-            const usuarios1GPorMes = parseInt(document.getElementById('usuariosPrimeraGeneracion').value);
-            const usuarios2GPorUsuario1G = parseInt(document.getElementById('usuariosSegundaGeneracion').value);
+                <label for="usuariosSegundaGeneracion">Número de usuarios invitados por miembros de 1ª generación:</label>
+                <input type="number" id="usuariosSegundaGeneracion" value="1" required min="0">
+                <small>Nota: Te llevarás el 2% de las ganancias de los invitados de tus invitados.</small>
 
-            if (isNaN(capitalInicial) || isNaN(cicloMeses) || isNaN(usuarios1GPorMes) || isNaN(usuarios2GPorUsuario1G) || cicloMeses < 1) {
-                alert("Por favor, ingrese valores válidos.");
-                return;
-            }
+                <button type="button" id="calcularBtn">Calcular</button>
+            </div>
+        </form>
 
-            const interesMensual = 0.07; // 10% original menos 30%
-            let capital = capitalInicial;
-            let ganancias1G = 0;
-            let ganancias2G = 0;
+        <div class="results-section" id="resultsContainer" style="display: none;">
+            <h2>Resultados del Cálculo</h2>
+            <div class="result-highlight">
+                <p><strong>Total de Ganancias del Usuario:</strong> <span id="totalGanancias"></span></p>
+                <p><strong>Ganancias con Aportes Mensuales:</strong> <span id="gananciasAportes"></span></p>
+                <p><strong>Ganancias con Aportes Mensuales (Mitad del Capital Inicial):</strong> <span id="gananciasAportesMitad"></span></p>
+            </div>
+            <p><strong>Capital Final:</strong> <span id="resultadoCapitalFinal"></span></p>
+            <p><strong>Estrategia Sugerida:</strong> <span id="mensajeEstrategia"></span></p>
 
-            let usuarios1G = 0; 
-            let usuarios2G = 0;
+            <div id="desgloseContainer">
+                <h3>Desglose de Operaciones</h3>
+                <table id="desgloseOperaciones">
+                    <thead>
+                        <tr>
+                            <th>Descripción</th>
+                            <th>Monto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Ganancia por Interés Compuesto</td>
+                            <td id="gananciaInteresCompuesto"></td>
+                        </tr>
+                        <tr>
+                            <td>Ganancia por 1ª Generación</td>
+                            <td id="gananciaPrimeraGeneracion"></td>
+                        </tr>
+                        <tr>
+                            <td>Ganancia por Invitados de 1ª Generación</td>
+                            <td id="gananciaSegundaGeneracion"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-            let totalGananciaAportes = 0;
-            let totalGananciaAportesMitad = 0;
-            let capitalAportes = capitalInicial;
-            let capitalAportesMitad = capitalInicial / 2;
+            <div id="tablaContainer">
+                <h3>Tabla de Ganancias Acumuladas</h3>
+                <table id="tablaGanancias">
+                    <thead>
+                        <tr>
+                            <th>Mes</th>
+                            <th>Usuarios 1ª Gen</th>
+                            <th>Usuarios Invitados por 1ª Gen</th>
+                            <th>Capital Propio</th>
+                            <th>Ganancias 1ª Generación</th>
+                            <th>Ganancias Invitados por 1ª Gen</th>
+                            <th>Ganancias Totales</th>
+                            <th>Ganancias por Interés Compuesto</th>
+                            <th>Ganancias con Aportes Mensuales</th>
+                            <th>Ganancias con Aportes (Mitad)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
-            let totalGananciaInteresCompuesto = 0;
-
-            // Limpiar tabla de resultados anteriores
-            tablaGanancias.innerHTML = '';
-
-            for (let mes = 1; mes <= cicloMeses; mes++) {
-                // Calcular el interés compuesto sobre el capital inicial
-                const gananciaInteres = capital * interesMensual;
-                totalGananciaInteresCompuesto += gananciaInteres;
-                capital += gananciaInteres;
-
-                // Simulación de aportes mensuales acumulativos
-                capitalAportes += capitalInicial;
-                const gananciaAportes = capitalAportes * interesMensual;
-                totalGananciaAportes += gananciaAportes;
-                capitalAportes += gananciaAportes;
-
-                capitalAportesMitad += capitalInicial / 2;
-                const gananciaAportesMitad = capitalAportesMitad * interesMensual;
-                totalGananciaAportesMitad += gananciaAportesMitad;
-                capitalAportesMitad += gananciaAportesMitad;
-
-                // Gen 1 aumenta en usuarios1GPorMes cada mes
-                usuarios1G += usuarios1GPorMes; 
-
-                // Gen 2 se calcula en función de los usuarios de Gen 1 y su capacidad de invitar
-                usuarios2G = usuarios1G * usuarios2GPorUsuario1G; 
-
-                const capitalInvitado1G = capitalInicial / 2;
-                const capitalInvitado2G = capitalInvitado1G / 2;
-
-                // Recompensas actualizadas: Doble de la recompensa original
-                const gananciaInv1G = (capitalInvitado1G * interesMensual) * 0.04 * usuarios1G; // Doble de 0.02
-                const gananciaInv2G = (capitalInvitado2G * interesMensual) * 0.02 * usuarios2G; // Doble de 0.01
-
-                ganancias1G += gananciaInv1G;
-                ganancias2G += gananciaInv2G;
-
-                const totalGanancia = capital + ganancias1G + ganancias2G;
-
-                // Mostrar ganancias adicionales con símbolo +
-                const gananciaAportesVisual = `<span class="plus-symbol">+${gananciaAportes.toFixed(2)}</span>`;
-                const gananciaAportesMitadVisual = `<span class="plus-symbol">+${gananciaAportesMitad.toFixed(2)}</span>`;
-
-                // Agregar fila a la tabla
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${mes}</td>
-                    <td>${usuarios1G}</td>
-                    <td>${usuarios2G}</td>
-                    <td class="capital-propio">${capital.toFixed(2)}</td>
-                    <td>${gananciaInv1G.toFixed(2)}</td>
-                    <td>${gananciaInv2G.toFixed(2)}</td>
-                    <td>${totalGanancia.toFixed(2)}</td>
-                    <td>${totalGananciaInteresCompuesto.toFixed(2)}</td>
-                    <td class="aporte-mensual">${totalGananciaAportes.toFixed(2)} ${gananciaAportesVisual}</td>
-                    <td class="aporte-mensual">${totalGananciaAportesMitad.toFixed(2)} ${gananciaAportesMitadVisual}</td>
-                `;
-                tablaGanancias.appendChild(row);
-            }
-
-            // Actualizar resultados finales y desglose
-            capitalFinalElement.textContent = capital.toFixed(2);
-            gananciasAportesElement.textContent = totalGananciaAportes.toFixed(2);
-            gananciasAportesMitadElement.textContent = totalGananciaAportesMitad.toFixed(2);
-            totalGananciasElement.textContent = (capital + ganancias1G + ganancias2G).toFixed(2);
-
-            gananciaInteresCompuestoElement.textContent = totalGananciaInteresCompuesto.toFixed(2);
-            gananciaPrimeraGeneracionElement.textContent = ganancias1G.toFixed(2);
-            gananciaSegundaGeneracionElement.textContent = ganancias2G.toFixed(2);
-
-            mensajeEstrategiaElement.textContent = capital < 1000000 
-                ? 'Para mejorar tus ganancias, considera aumentar tu inversión inicial en los primeros meses.'
-                : '¡Felicidades! Has alcanzado $1,000,000 en capital.';
-
-            // Mostrar la sección de resultados
-            resultsContainer.style.display = 'block';
-        } catch (error) {
-            console.error('Ocurrió un error durante el cálculo:', error);
-        }
-    }
-});
+    <script src="script.js"></script>
+</body>
+</html>
