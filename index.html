@@ -29,7 +29,7 @@
                     <option value="2000">Rango 9 - $2,000</option>
                     <option value="1500">Rango 8 - $1,500</option>
                     <option value="1000">Rango 7 - $1,000</option>
-                    <option value="500">Rango 6 - $500 (Nota: Necesitas invitar a 3 personas para ascender de rango)</option>
+                    <option value="500">Rango 6 - $500</option>
                     <option value="400">Rango 5 - $400</option>
                     <option value="300">Rango 4 - $300</option>
                     <option value="200">Rango 3 - $200</option>
@@ -41,14 +41,12 @@
                 <input type="number" id="cicloMeses" value="12" required min="1">
 
                 <label for="usuariosPrimeraGeneracion">Número de usuarios de 1ª generación que invitarás al mes:</label>
-                <input type="number" id="usuariosPrimeraGeneracion" value="1" required min="0">
-                <small>Nota: Te llevarás el 4% de las ganancias de tus invitados directos.</small>
+                <input type="number" id="usuariosPrimeraGeneracion" value="1" required min="1">
 
                 <label for="usuariosSegundaGeneracion">Número de usuarios invitados por miembros de 1ª generación:</label>
-                <input type="number" id="usuariosSegundaGeneracion" value="1" required min="0">
-                <small>Nota: Te llevarás el 2% de las ganancias de los invitados de tus invitados.</small>
+                <input type="number" id="usuariosSegundaGeneracion" value="1" required min="1">
 
-                <button type="button" id="calcularBtn" class="action-button">Calcular</button>
+                <button type="button" id="calcularBtn">Calcular</button>
             </div>
         </form>
 
@@ -81,7 +79,7 @@
                             <td id="gananciaPrimeraGeneracion"></td>
                         </tr>
                         <tr>
-                            <td>Ganancia por Invitados de 1ª Generación</td>
+                            <td>Ganancia por 2ª Generación</td>
                             <td id="gananciaSegundaGeneracion"></td>
                         </tr>
                     </tbody>
@@ -98,7 +96,7 @@
                             <th>Usuarios Invitados por 1ª Gen</th>
                             <th>Capital Propio</th>
                             <th>Ganancias 1ª Generación</th>
-                            <th>Ganancias Invitados por 1ª Gen</th>
+                            <th>Ganancias 2ª Generación</th>
                             <th>Ganancias Totales</th>
                             <th>Ganancias por Interés Compuesto</th>
                             <th>Ganancias con Aportes Mensuales</th>
@@ -109,11 +107,7 @@
                     </tbody>
                 </table>
             </div>
-
-            <!-- Contenedor para el botón de duplicar meses -->
-            <div id="duplicarTiempoContainer" style="text-align: center; margin-top: 20px;">
-                <button type="button" id="duplicarTiempoBtn" class="action-button" style="display: none;">¿Quieres duplicar el tiempo de inversión?</button>
-            </div>
+            <button type="button" id="duplicarTiempoBtn">¿Quieres duplicar el tiempo de inversión?</button>
         </div>
     </div>
 
