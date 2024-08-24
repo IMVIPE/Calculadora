@@ -104,9 +104,9 @@ document.addEventListener('DOMContentLoaded', () => {
             gananciaSegundaGeneracionElement.textContent = ganancias2G.toFixed(2);
 
             const capitalTotal = capital + totalGananciaAportes + totalGananciaAportesMitad;
-            const mensajeEstrategia = `Si hubieras invertido una cantidad adicional cada mes, podrías haber ganado aún más. Mira la tabla para ver cuánto más podrías haber ganado. ¡Tu capital final sería de $${capitalTotal.toFixed(2)}!`;
+            const mensajeEstrategia = `Si hubieras invertido una cantidad adicional cada mes, podrías haber ganado aún más. Mira la tabla para ver cuánto más podrías haber ganado. <span class="highlight-amount">¡Tu capital final sería de $${capitalTotal.toFixed(2)}!</span>`;
 
-            mensajeEstrategiaElement.textContent = capital < 1000000 ? mensajeEstrategia : '¡Felicidades! Has alcanzado $1,000,000 en capital.';
+            mensajeEstrategiaElement.innerHTML = capital < 1000000 ? mensajeEstrategia : '¡Felicidades! Has alcanzado $1,000,000 en capital.';
 
             resultsContainer.style.display = 'block';
         } catch (error) {
