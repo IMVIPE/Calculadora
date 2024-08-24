@@ -14,19 +14,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const gananciaSegundaGeneracionElement = document.getElementById('gananciaSegundaGeneracion');
 
     let cicloMeses;
-    let totalMeses = 0;
     let duplicarMeses = false;
 
     calcularBtn.addEventListener('click', () => {
         cicloMeses = parseInt(document.getElementById('cicloMeses').value);
-        totalMeses = cicloMeses;
         duplicarMeses = false;
         calcular();
     });
 
     duplicarTiempoBtn.addEventListener('click', () => {
         duplicarMeses = true;
-        totalMeses *= 2;
+        cicloMeses *= 2;  // Duplicamos los meses para extender la tabla
         calcular();
     });
 
@@ -36,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const usuarios1GPorMes = parseInt(document.getElementById('usuariosPrimeraGeneracion').value);
             const usuarios2GPorUsuario1G = parseInt(document.getElementById('usuariosSegundaGeneracion').value);
 
-            if (isNaN(capitalInicial) || isNaN(totalMeses) || isNaN(usuarios1GPorMes) || isNaN(usuarios2GPorUsuario1G) || totalMeses < 1) {
+            if (isNaN(capitalInicial) || isNaN(cicloMeses) || isNaN(usuarios1GPorMes) || isNaN(usuarios2GPorUsuario1G) || cicloMeses < 1) {
                 alert("Por favor, ingrese valores válidos.");
                 return;
             }
@@ -46,19 +44,23 @@ document.addEventListener('DOMContentLoaded', () => {
             let ganancias1G = duplicarMeses ? parseFloat(gananciaPrimeraGeneracionElement.textContent) : 0;
             let ganancias2G = duplicarMeses ? parseFloat(gananciaSegundaGeneracionElement.textContent) : 0;
 
-            let usuarios1G = duplicarMeses ? parseInt(tablaGanancias.lastElementChild.cells[1].textContent) : 0;
-            let usuarios2G = duplicarMeses ? parseInt(tablaGanancias.lastElementChild.cells[2].textContent) : 0;
+            let usuarios1G = duplicarMeses ? usuarios1GPorMes * (cicloMeses / 2) : 0;
+            let usuarios2G = duplicarMeses ? usuarios1G * usuarios2GPorUsuario1G : 0;
 
             let totalGananciaAportes = duplicarMeses ? parseFloat(gananciasAportesElement.textContent) : 0;
             let totalGananciaAportesMitad = duplicarMeses ? parseFloat(gananciasAportesMitadElement.textContent) : 0;
-            let capitalAportes = duplicarMeses ? capital : capitalInicial;
-            let capitalAportesMitad = duplicarMeses ? capital / 2 : capitalInicial / 2;
+            let capitalAportes = duplicarMeses ? parseFloat(capitalFinalElement.textContent) : capitalInicial;
+            let capitalAportesMitad = duplicarMeses ? parseFloat(capitalFinalElement.textContent) / 2 : capitalInicial / 2;
 
             let totalGananciaInteresCompuesto = duplicarMeses ? parseFloat(gananciaInteresCompuestoElement.textContent) : 0;
 
-            const mesInicio = duplicarMeses ? parseInt(tablaGanancias.lastElementChild.cells[0].textContent) + 1 : 1;
+            if (!duplicarMeses) {
+                tablaGanancias.innerHTML = '';
+            }
 
-            for (let mes = mesInicio; mes <= totalMeses; mes++) {
+            const inicioCiclo = duplicarMeses ? cicloMeses / 2 + 1 : 1;
+
+            for (let mes = inicioCiclo; mes <= cicloMeses; mes++) {
                 const gananciaInteres = capital * interesMensual;
                 totalGananciaInteresCompuesto += gananciaInteres;
                 capital += gananciaInteres;
@@ -73,8 +75,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 totalGananciaAportesMitad += gananciaAportesMitad;
                 capitalAportesMitad += gananciaAportesMitad;
 
-                usuarios1G += usuarios1GPorMes; 
-                usuarios2G = usuarios1G * usuarios2GPorUsuario1G; 
+                usuarios1G += usuarios1GPorMes;
+                usuarios2G = usuarios1G * usuarios2GPorUsuario1G;
 
                 const capitalInvitado1G = capitalInicial / 2;
                 const capitalInvitado2G = capitalInvitado1G / 2;
@@ -91,9 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const gananciaAportesMitadVisual = `<span class="plus-symbol">+${gananciaAportesMitad.toFixed(2)}</span>`;
 
                 const row = document.createElement('tr');
-                if (duplicarMeses) {
-                    row.classList.add('new-cells');
-                }
+                row.style.backgroundColor = duplicarMeses && mes > inicioCiclo ? '#f2f2f2' : '#fff'; // Color clarito para nuevas celdas
                 row.innerHTML = `
                     <td>${mes}</td>
                     <td>${usuarios1G}</td>
