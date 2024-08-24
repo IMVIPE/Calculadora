@@ -14,14 +14,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const gananciaSegundaGeneracionElement = document.getElementById('gananciaSegundaGeneracion');
 
     let cicloMeses;
+    let duplicarMeses = false;
 
     calcularBtn.addEventListener('click', () => {
         cicloMeses = parseInt(document.getElementById('cicloMeses').value);
+        duplicarMeses = false;
         calcular();
     });
 
     duplicarTiempoBtn.addEventListener('click', () => {
         cicloMeses *= 2;
+        duplicarMeses = true;
         document.getElementById('cicloMeses').value = cicloMeses;
         calcular();
     });
@@ -52,8 +55,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let totalGananciaInteresCompuesto = 0;
 
-            // Limpiar tabla de resultados anteriores
-            tablaGanancias.innerHTML = '';
+            if (!duplicarMeses) {
+                tablaGanancias.innerHTML = '';
+            } else {
+                const separatorRow = document.createElement('tr');
+                separatorRow.classList.add('separator-row');
+                separatorRow.innerHTML = `<td colspan="10">Continuación del cálculo</td>`;
+                tablaGanancias.appendChild(separatorRow);
+            }
 
             for (let mes = 1; mes <= cicloMeses; mes++) {
                 const gananciaInteres = capital * interesMensual;
