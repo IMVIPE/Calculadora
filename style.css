@@ -36,15 +36,20 @@ p {
     font-weight: bold;
 }
 
-.input-section .note {
-    font-weight: bold;
-    color: #ff3333;
-    margin-bottom: 10px;
-    margin-top: -15px;
+.nota-rango {
+    background-color: #f5f5f5;
+    border-left: 5px solid #4a90e2;
     padding: 10px;
-    border: 2px solid #ff3333;
-    border-radius: 5px;
-    background-color: #fff4f4;
+    margin-bottom: 15px;
+    color: #4a90e2;
+}
+
+.nota-invitados {
+    background-color: #f5f5f5;
+    border-left: 5px solid #f39c12;
+    padding: 10px;
+    margin-bottom: 15px;
+    color: #f39c12;
 }
 
 .input-section select,
@@ -56,7 +61,7 @@ p {
     border-radius: 5px;
 }
 
-.input-section button {
+.input-section .btn-calculate {
     width: 100%;
     padding: 12px;
     background-color: #333;
@@ -65,11 +70,6 @@ p {
     font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
-    font-weight: bold;
-}
-
-.input-section button:hover {
-    background-color: #555;
 }
 
 .results-section {
@@ -85,13 +85,33 @@ p {
     margin-bottom: 20px;
 }
 
+.capital-final {
+    font-size: 24px;
+    color: #FFD700;
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: center;
+    border: 2px solid #FFD700;
+    padding: 10px;
+    background-color: #333;
+}
+
+.mensaje-estrategia {
+    font-size: 16px;
+    color: #4a90e2;
+    margin-top: 10px;
+    text-align: center;
+    border: 2px solid #FFD700;
+    padding: 10px;
+}
+
 #tablaGanancias, #desgloseOperaciones {
-    width: 95%;
+    width: 95%; /* Hice la tabla un poco más estrecha para mejorar el centrado */
     max-width: 95%;
     border-collapse: collapse;
     margin-top: 20px;
     margin-left: auto;
-    margin-right: auto;
+    margin-right: auto; /* Centramos la tabla */
     word-wrap: break-word;
 }
 
@@ -142,58 +162,16 @@ p {
     box-sizing: border-box;
 }
 
-/* Botón de duplicar el tiempo */
-#duplicarTiempoBtn {
-    font-weight: bold;
-    background-color: #333;
-    color: white;
-    padding: 12px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 20px;
+.btn-duplicate {
     width: 100%;
-    text-align: center;
-}
-
-#duplicarTiempoBtn:hover {
-    background-color: #555;
-}
-
-/* Estilos de fondo para los rangos */
-select option {
-    background-color: white;
-    color: black;
-}
-
-select option[value="10000"] {
-    background-color: black;
-    color: gold;
-}
-
-select option[value="9000"],
-select option[value="8000"],
-select option[value="7000"],
-select option[value="6000"] {
-    background-color: #2e2e2e;
+    padding: 12px;
+    background-color: #4a90e2;
+    border: none;
     color: white;
-}
-
-select option[value="5000"],
-select option[value="4500"],
-select option[value="4000"],
-select option[value="3500"],
-select option[value="3000"],
-select option[value="2500"],
-select option[value="2000"],
-select option[value="1500"],
-select option[value="1000"],
-select option[value="500"],
-select option[value="400"],
-select option[value="300"],
-select option[value="200"],
-select option[value="100"],
-select option[value="50"] {
-    background-color: #ccc;
-    color: black;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
 }
