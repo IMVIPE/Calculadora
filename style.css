@@ -45,7 +45,7 @@ p {
     border-radius: 5px;
 }
 
-.input-section button {
+.input-section .action-button {
     width: 100%;
     padding: 12px;
     background-color: #4a90e2;
@@ -54,7 +54,11 @@ p {
     font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
-    margin-bottom: 10px; /* Add margin for spacing between buttons */
+    margin-top: 10px;
+}
+
+.input-section .action-button:hover {
+    background-color: #357ab7;
 }
 
 .results-section {
@@ -70,14 +74,13 @@ p {
     margin-bottom: 20px;
 }
 
-#tablaGanancias,
-#desgloseOperaciones {
+#tablaGanancias, #desgloseOperaciones {
     width: 95%;
     max-width: 95%;
     border-collapse: collapse;
     margin-top: 20px;
     margin-left: auto;
-    margin-right: auto;
+    margin-right: auto; /* Centramos la tabla */
     word-wrap: break-word;
 }
 
@@ -131,20 +134,4 @@ p {
 .separator-row {
     border-top: 2px solid #4A90E2;
     background-color: #f0f0f0;
-}
-
-/* Consistent button styling */
-#calcularBtn, #duplicarTiempoBtn {
-    background-color: #4a90e2;
-    color: white;
-    border: none;
-    padding: 12px;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 5px;
-    margin-top: 10px;
-}
-
-#calcularBtn:hover, #duplicarTiempoBtn:hover {
-    background-color: #357ABD;
 }
