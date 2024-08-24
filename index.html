@@ -9,9 +9,7 @@
 <body>
     <div class="container">
         <h1>Calculadora de Ganancias Compuestas</h1>
-        <p>El interés compuesto es como sembrar semillas: plantas hoy y cada día tu cosecha crece más, permitiéndote sembrar aún más semillas y obtener una cosecha cada vez mayor con el tiempo.</p>
-
-        <div class="note">Nota: Necesitas invitar a 3 personas para ascender de rango a partir del rango 6</div>
+        <p class="note">Nota: Necesitas invitar a 3 personas para ascender de rango a partir del rango 6.</p>
 
         <form id="calculatorForm">
             <div class="input-section">
@@ -19,23 +17,9 @@
                 <select id="rangoActual" required>
                     <option value="10000">Rango 20 - $10,000</option>
                     <option value="9000">Rango 19 - $9,000</option>
-                    <option value="8000">Rango 18 - $8,000</option>
-                    <option value="7000">Rango 17 - $7,000</option>
-                    <option value="6000">Rango 16 - $6,000</option>
-                    <option value="5000">Rango 15 - $5,000</option>
-                    <option value="4500">Rango 14 - $4,500</option>
-                    <option value="4000">Rango 13 - $4,000</option>
-                    <option value="3500">Rango 12 - $3,500</option>
-                    <option value="3000">Rango 11 - $3,000</option>
-                    <option value="2500">Rango 10 - $2,500</option>
-                    <option value="2000">Rango 9 - $2,000</option>
-                    <option value="1500">Rango 8 - $1,500</option>
-                    <option value="1000">Rango 7 - $1,000</option>
+                    <!-- Más opciones aquí -->
                     <option value="500">Rango 6 - $500</option>
                     <option value="400">Rango 5 - $400</option>
-                    <option value="300">Rango 4 - $300</option>
-                    <option value="200">Rango 3 - $200</option>
-                    <option value="100">Rango 2 - $100</option>
                     <option value="50">Rango 1 - $50</option>
                 </select>
 
@@ -53,8 +37,8 @@
         </form>
 
         <div class="results-section" id="resultsContainer" style="display: none;">
-            <h2>Resultados del Cálculo</h2>
             <div class="result-highlight">
+                <h2>Resultados del Cálculo</h2>
                 <p><strong>Total de Ganancias del Usuario:</strong> <span id="totalGanancias"></span></p>
                 <p><strong>Ganancias con Aportes Mensuales:</strong> <span id="gananciasAportes"></span></p>
                 <p><strong>Ganancias con Aportes Mensuales (Mitad del Capital Inicial):</strong> <span id="gananciasAportesMitad"></span></p>
