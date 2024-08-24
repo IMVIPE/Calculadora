@@ -36,6 +36,13 @@ p {
     font-weight: bold;
 }
 
+.input-section .note {
+    font-weight: bold;
+    color: #ff3333;
+    margin-bottom: 10px;
+    margin-top: -15px; /* Para acercar la nota al selector */
+}
+
 .input-section select,
 .input-section input {
     width: 100%;
@@ -48,13 +55,17 @@ p {
 .input-section button {
     width: 100%;
     padding: 12px;
-    background-color: #4a90e2;
+    background-color: #333;
     border: none;
     color: white;
     font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
-    margin-bottom: 10px; /* Add margin for spacing between buttons */
+    font-weight: bold; /* Hacemos la tipografía más gruesa */
+}
+
+.input-section button:hover {
+    background-color: #555; /* Añadimos un efecto al pasar el ratón */
 }
 
 .results-section {
@@ -70,14 +81,13 @@ p {
     margin-bottom: 20px;
 }
 
-#tablaGanancias,
-#desgloseOperaciones {
-    width: 95%;
+#tablaGanancias, #desgloseOperaciones {
+    width: 95%; /* Hice la tabla un poco más estrecha para mejorar el centrado */
     max-width: 95%;
     border-collapse: collapse;
     margin-top: 20px;
     margin-left: auto;
-    margin-right: auto;
+    margin-right: auto; /* Centramos la tabla */
     word-wrap: break-word;
 }
 
@@ -128,23 +138,20 @@ p {
     box-sizing: border-box;
 }
 
-.separator-row {
-    border-top: 2px solid #4A90E2;
-    background-color: #f0f0f0;
-}
-
-/* Consistent button styling */
-#calcularBtn, #duplicarTiempoBtn {
-    background-color: #4a90e2;
+/* Botón de duplicar el tiempo */
+#duplicarTiempoBtn {
+    font-weight: bold;
+    background-color: #333;
     color: white;
-    border: none;
     padding: 12px;
-    cursor: pointer;
-    font-size: 16px;
+    border: none;
     border-radius: 5px;
-    margin-top: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
 }
 
-#calcularBtn:hover, #duplicarTiempoBtn:hover {
-    background-color: #357ABD;
+#duplicarTiempoBtn:hover {
+    background-color: #555;
 }
