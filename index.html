@@ -10,10 +10,11 @@
     <div class="container">
         <h1>Calculadora de Ganancias Compuestas</h1>
         <p>El interés compuesto es como sembrar semillas: plantas hoy y cada día tu cosecha crece más, permitiéndote sembrar aún más semillas y obtener una cosecha cada vez mayor con el tiempo.</p>
-        
+
+        <div class="note">Nota: Necesitas invitar a 3 personas para ascender de rango a partir del rango 6</div>
+
         <form id="calculatorForm">
             <div class="input-section">
-                <label for="rangoActual" style="background-color: #FFD700; color: #333;">Nota: Necesitas invitar a 3 personas para ascender de rango a partir del rango 6 y todos tus invitados deben estar por lo menos 2 rangos por debajo para ascender.</label>
                 <label for="rangoActual">Selecciona tu Rango Actual:</label>
                 <select id="rangoActual" required>
                     <option value="10000">Rango 20 - $10,000</option>
@@ -38,13 +39,11 @@
                     <option value="50">Rango 1 - $50</option>
                 </select>
 
-                <label for="usuariosGen1" style="background-color: #FFD700; color: #333;">Nota: Te llevarás el 4% de las ganancias de tus invitados directos.</label>
-                <label for="usuariosGen1">Número de usuarios de 1ª generación que invitarás al mes:</label>
-                <input type="number" id="usuariosGen1" value="1" required min="1">
+                <label for="usuarios1G">Número de usuarios de 1ª generación que invitarás al mes:</label>
+                <input type="number" id="usuarios1G" value="1" required min="1">
 
-                <label for="usuariosGen2PorGen1" style="background-color: #FFD700; color: #333;">Nota: Te llevarás el 2% de las ganancias de los invitados de tus invitados.</label>
-                <label for="usuariosGen2PorGen1">Número de usuarios invitados por miembros de 1ª generación:</label>
-                <input type="number" id="usuariosGen2PorGen1" value="1" required min="1">
+                <label for="usuariosInvitadosPorGen1">Número de usuarios invitados por miembros de 1ª generación:</label>
+                <input type="number" id="usuariosInvitadosPorGen1" value="1" required min="1">
 
                 <label for="cicloMeses">Ciclo de Inversión (Meses):</label>
                 <input type="number" id="cicloMeses" value="12" required min="1">
@@ -110,9 +109,9 @@
                     </tbody>
                 </table>
             </div>
-            <div id="separador"></div>
-            <button type="button" id="duplicarTiempoBtn">¿Qué pasaría si... doblamos el tiempo de inversión?</button>
         </div>
+
+        <button id="botonDuplicarTiempo">¿Qué pasaría si... doblamos el tiempo de inversión?</button>
     </div>
 
     <script src="script.js"></script>
