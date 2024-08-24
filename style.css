@@ -1,5 +1,5 @@
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Montserrat', 'Helvetica', sans-serif;
     background-color: #f4f4f4;
     color: #333;
     margin: 0;
@@ -11,7 +11,7 @@ body {
     margin: 50px auto;
     padding: 20px;
     background-color: white;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     overflow-x: auto;
 }
@@ -162,6 +162,11 @@ p {
 
 .aporte-mensual {
     background-color: #ffe4b5;
+}
+
+.aporte-mensual .plus-symbol {
+    color: green;
+    font-weight: bold;
 }
 
 #tablaContainer {
