@@ -1,1 +1,1 @@
-# Calculadora
+# Calculadora de Interés Compuesto de Project Sigma. uso principal calcular datos de inversiones con interés compuesto
