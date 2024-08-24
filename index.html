@@ -13,38 +13,24 @@
         
         <form id="calculatorForm">
             <div class="input-section">
+                <label class="note">Nota: Necesitas invitar a 3 personas para ascender de rango</label>
                 <label for="rangoActual">Selecciona tu Rango Actual:</label>
                 <select id="rangoActual" required>
                     <option value="10000">Rango 20 - $10,000</option>
                     <option value="9000">Rango 19 - $9,000</option>
-                    <option value="8000">Rango 18 - $8,000</option>
-                    <option value="7000">Rango 17 - $7,000</option>
-                    <option value="6000">Rango 16 - $6,000</option>
-                    <option value="5000">Rango 15 - $5,000</option>
-                    <option value="4500">Rango 14 - $4,500</option>
-                    <option value="4000">Rango 13 - $4,000</option>
-                    <option value="3500">Rango 12 - $3,500</option>
-                    <option value="3000">Rango 11 - $3,000</option>
-                    <option value="2500">Rango 10 - $2,500</option>
-                    <option value="2000">Rango 9 - $2,000</option>
-                    <option value="1500">Rango 8 - $1,500</option>
-                    <option value="1000">Rango 7 - $1,000</option>
-                    <option value="500">Rango 6 - $500</option>
-                    <option value="400">Rango 5 - $400</option>
-                    <option value="300">Rango 4 - $300</option>
-                    <option value="200">Rango 3 - $200</option>
-                    <option value="100">Rango 2 - $100</option>
-                    <option value="50">Rango 1 - $50</option>
+                    <!-- Más opciones -->
                 </select>
 
                 <label for="cicloMeses">Ciclo de Inversión (Meses):</label>
                 <input type="number" id="cicloMeses" value="12" required min="1">
 
-                <label for="usuariosPrimeraGeneracion">Número de usuarios de 1ª generación que invitarás al mes:</label>
-                <input type="number" id="usuariosPrimeraGeneracion" value="1" required min="1">
+                <label class="note">Nota: Te llevarás el 4% de las ganancias de tus invitados directos.</label>
+                <label for="usuariosGen1">Número de usuarios de 1ª generación que invitarás al mes:</label>
+                <input type="number" id="usuariosGen1" value="1" required min="1">
 
-                <label for="usuariosSegundaGeneracion">Número de usuarios invitados por miembros de 1ª generación:</label>
-                <input type="number" id="usuariosSegundaGeneracion" value="1" required min="1">
+                <label class="note">Nota: Te llevarás el 2% de las ganancias de los invitados de tus invitados.</label>
+                <label for="usuariosGen2">Número de usuarios invitados por miembros de 1ª generación:</label>
+                <input type="number" id="usuariosGen2" value="1" required min="1">
 
                 <button type="button" id="calcularBtn">Calcular</button>
             </div>
@@ -93,7 +79,7 @@
                         <tr>
                             <th>Mes</th>
                             <th>Usuarios 1ª Gen</th>
-                            <th>Usuarios Invitados por 1ª Gen</th>
+                            <th>Usuarios Invitados por Gen 1</th>
                             <th>Capital Propio</th>
                             <th>Ganancias 1ª Generación</th>
                             <th>Ganancias 2ª Generación</th>
