@@ -91,7 +91,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 const gananciaAportesMitadVisual = `<span class="plus-symbol">+${gananciaAportesMitad.toFixed(2)}</span>`;
 
                 const row = document.createElement('tr');
-                row.classList.add(duplicarMeses ? 'new-cells' : '');
+                if (duplicarMeses) {
+                    row.classList.add('new-cells');
+                }
                 row.innerHTML = `
                     <td>${mes}</td>
                     <td>${usuarios1G}</td>
