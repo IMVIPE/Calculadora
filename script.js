@@ -74,6 +74,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const totalGanancia = capital + ganancias1G + ganancias2G;
 
+                // Mostrar ganancias adicionales con símbolo +
+                const gananciaAportesVisual = `<span class="plus-symbol">+${(totalGananciaAportes - totalGanancia).toFixed(2)}</span>`;
+                const gananciaAportesMitadVisual = `<span class="plus-symbol">+${(totalGananciaAportesMitad - totalGanancia).toFixed(2)}</span>`;
+
                 // Agregar fila a la tabla
                 const row = document.createElement('tr');
                 row.innerHTML = `
@@ -84,8 +88,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     <td>${gananciaInv1G.toFixed(2)}</td>
                     <td>${gananciaInv2G.toFixed(2)}</td>
                     <td>${totalGanancia.toFixed(2)}</td>
-                    <td class="aporte-mensual">${totalGananciaAportes.toFixed(2)}</td>
-                    <td class="aporte-mensual">${totalGananciaAportesMitad.toFixed(2)}</td>
+                    <td class="aporte-mensual">${totalGananciaAportes.toFixed(2)} ${gananciaAportesVisual}</td>
+                    <td class="aporte-mensual">${totalGananciaAportesMitad.toFixed(2)} ${gananciaAportesMitadVisual}</td>
                 `;
                 tablaGanancias.appendChild(row);
             }
