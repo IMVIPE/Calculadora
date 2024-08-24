@@ -45,7 +45,7 @@ p {
     border-radius: 5px;
 }
 
-.input-section button {
+.input-section .action-button {
     width: 100%;
     padding: 12px;
     background-color: #4a90e2;
@@ -54,6 +54,11 @@ p {
     font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
+    margin-top: 10px;
+}
+
+.input-section .action-button:hover {
+    background-color: #357ab7;
 }
 
 .results-section {
@@ -70,7 +75,7 @@ p {
 }
 
 #tablaGanancias, #desgloseOperaciones {
-    width: 95%; /* Hice la tabla un poco más estrecha para mejorar el centrado */
+    width: 95%;
     max-width: 95%;
     border-collapse: collapse;
     margin-top: 20px;
@@ -124,4 +129,9 @@ p {
     border: 2px solid #4A90E2;
     overflow-x: auto;
     box-sizing: border-box;
+}
+
+.separator-row {
+    border-top: 2px solid #4A90E2;
+    background-color: #f0f0f0;
 }
