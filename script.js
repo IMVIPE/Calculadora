@@ -29,13 +29,13 @@ document.addEventListener('DOMContentLoaded', () => {
             let ganancias1G = 0;
             let ganancias2G = 0;
 
-            let usuarios1G = 0;
+            let usuarios1G = 1; // El usuario principal invita a un usuario en el primer mes
             let usuarios2G = 0;
 
             let totalGananciaAportes = 0;
             let totalGananciaAportesMitad = 0;
-            let capitalAportes = capitalInicial;  // Simulación de aportes mensuales iguales al capital inicial
-            let capitalAportesMitad = capitalInicial / 2;  // Simulación de aportes mensuales iguales a la mitad del capital inicial
+            let capitalAportes = capitalInicial;
+            let capitalAportesMitad = capitalInicial / 2;
 
             let totalGananciaInteresCompuesto = 0;
 
@@ -59,9 +59,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 totalGananciaAportesMitad += gananciaAportesMitad;
                 capitalAportesMitad += gananciaAportesMitad;
 
-                // Calcular las ganancias de la 1ª y 2ª generación
-                usuarios1G += mes;
-                usuarios2G += usuarios1G * 2; // Cada usuario de la primera generación trae 2 usuarios de la segunda
+                // Los usuarios de la primera generación (Gen 1) invitan nuevos usuarios después del primer mes
+                if (mes > 1) {
+                    usuarios2G += usuarios1G; // Cada usuario de Gen 1 invita a un nuevo usuario para Gen 2
+                }
+
+                usuarios1G += 1; // Cada mes, el usuario principal invita a un nuevo usuario de Gen 1
 
                 const capitalInvitado1G = capitalInicial / 2;
                 const capitalInvitado2G = capitalInvitado1G / 2;
@@ -88,6 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <td>${gananciaInv1G.toFixed(2)}</td>
                     <td>${gananciaInv2G.toFixed(2)}</td>
                     <td>${totalGanancia.toFixed(2)}</td>
+                    <td>${totalGananciaInteresCompuesto.toFixed(2)}</td>
                     <td class="aporte-mensual">${totalGananciaAportes.toFixed(2)} ${gananciaAportesVisual}</td>
                     <td class="aporte-mensual">${totalGananciaAportesMitad.toFixed(2)} ${gananciaAportesMitadVisual}</td>
                 `;
