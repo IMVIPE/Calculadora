@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let ganancias1G = 0;
             let ganancias2G = 0;
 
-            let usuarios1G = 1; // El usuario principal invita a un usuario en el primer mes
+            let usuarios1G = 1;
             let usuarios2G = 0;
 
             let totalGananciaAportes = 0;
@@ -39,16 +39,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let totalGananciaInteresCompuesto = 0;
 
-            // Limpiar tabla de resultados anteriores
             tablaGanancias.innerHTML = '';
 
             for (let mes = 1; mes <= cicloMeses; mes++) {
-                // Calcular el interés compuesto sobre el capital inicial
                 const gananciaInteres = capital * interesMensual;
                 totalGananciaInteresCompuesto += gananciaInteres;
                 capital += gananciaInteres;
 
-                // Simulación de aportes mensuales acumulativos
                 capitalAportes += capitalInicial;
                 const gananciaAportes = capitalAportes * interesMensual;
                 totalGananciaAportes += gananciaAportes;
@@ -59,14 +56,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 totalGananciaAportesMitad += gananciaAportesMitad;
                 capitalAportesMitad += gananciaAportesMitad;
 
-                // Gen 1 aumenta en 1 usuario cada mes
                 if (mes > 1) {
-                    usuarios1G += 1; // Cada mes, un nuevo usuario es invitado por Gen 1
+                    usuarios1G += 1;
                 }
 
-                // Gen 2 aumenta en 1 usuario cada mes por cada usuario en Gen 1, empezando desde el segundo mes
                 if (mes > 2) {
-                    usuarios2G += (mes - 2); // Gen 2 empieza a crecer después de que Gen 1 haya pasado un mes
+                    usuarios2G += (mes - 2);
                 }
 
                 const capitalInvitado1G = capitalInicial / 2;
@@ -80,11 +75,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const totalGanancia = capital + ganancias1G + ganancias2G;
 
-                // Mostrar ganancias adicionales con símbolo +
                 const gananciaAportesVisual = `<span class="plus-symbol">+${gananciaAportes.toFixed(2)}</span>`;
                 const gananciaAportesMitadVisual = `<span class="plus-symbol">+${gananciaAportesMitad.toFixed(2)}</span>`;
 
-                // Agregar fila a la tabla
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${mes}</td>
@@ -101,7 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 tablaGanancias.appendChild(row);
             }
 
-            // Actualizar resultados finales y desglose
             capitalFinalElement.textContent = capital.toFixed(2);
             gananciasAportesElement.textContent = totalGananciaAportes.toFixed(2);
             gananciasAportesMitadElement.textContent = totalGananciaAportesMitad.toFixed(2);
@@ -111,11 +103,11 @@ document.addEventListener('DOMContentLoaded', () => {
             gananciaPrimeraGeneracionElement.textContent = ganancias1G.toFixed(2);
             gananciaSegundaGeneracionElement.textContent = ganancias2G.toFixed(2);
 
-            mensajeEstrategiaElement.textContent = capital < 1000000 
-                ? 'Para mejorar tus ganancias, considera aumentar tu inversión inicial en los primeros meses.'
-                : '¡Felicidades! Has alcanzado $1,000,000 en capital.';
+            const capitalTotal = capital + totalGananciaAportes + totalGananciaAportesMitad;
+            const mensajeEstrategia = `Si hubieras invertido una cantidad adicional cada mes, podrías haber ganado aún más. Mira la tabla para ver cuánto más podrías haber ganado. ¡Tu capital final sería de $${capitalTotal.toFixed(2)}!`;
 
-            // Mostrar la sección de resultados
+            mensajeEstrategiaElement.textContent = capital < 1000000 ? mensajeEstrategia : '¡Felicidades! Has alcanzado $1,000,000 en capital.';
+
             resultsContainer.style.display = 'block';
         } catch (error) {
             console.error('Ocurrió un error durante el cálculo:', error);
