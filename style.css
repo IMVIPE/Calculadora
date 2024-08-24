@@ -1,31 +1,29 @@
 body {
-    font-family: 'Roboto', Arial, sans-serif;
-    background-color: #f7f7f7;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
     color: #333;
     margin: 0;
     padding: 0;
 }
 
 .container {
-    max-width: 900px;
-    margin: 40px auto;
+    max-width: 800px;
+    margin: 50px auto;
     padding: 20px;
     background-color: white;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     overflow-x: auto;
 }
 
 h1 {
     text-align: center;
-    color: #007acc;
-    font-weight: 700;
+    color: #4a90e2;
 }
 
 p {
     text-align: center;
     font-style: italic;
-    color: #555;
 }
 
 .input-section {
@@ -34,34 +32,28 @@ p {
 
 .input-section label {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     font-weight: bold;
 }
 
 .input-section select,
 .input-section input {
     width: 100%;
-    padding: 12px;
+    padding: 10px;
     margin-bottom: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid #ddd;
     border-radius: 5px;
-    font-size: 16px;
 }
 
 .input-section button {
     width: 100%;
     padding: 12px;
-    background-color: #007acc;
+    background-color: #4a90e2;
     border: none;
     color: white;
-    font-size: 18px;
+    font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-.input-section button:hover {
-    background-color: #005f99;
 }
 
 .results-section {
@@ -70,52 +62,32 @@ p {
 }
 
 .result-highlight {
-    background-color: #007acc;
+    background-color: #4a90e2;
     color: white;
     padding: 15px;
     border-radius: 5px;
     margin-bottom: 20px;
-    font-family: 'Roboto', Arial, sans-serif;
 }
 
 #capitalFinalElement {
     font-size: 24px;
-    color: #ffd700;
+    color: #FFD700;
     font-weight: bold;
-    background-color: #333;
-    padding: 12px;
-    border-radius: 5px;
-    margin-top: 20px;
-    text-align: center;
 }
 
 #mensajeEstrategiaElement {
     font-size: 16px;
-    color: #007acc;
-    margin-top: 15px;
-    text-align: center;
-    background-color: #f0f8ff;
-    padding: 15px;
-    border-radius: 8px;
-    border: 1px solid #007acc;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
-}
-
-#mensajeEstrategiaElement .highlight-amount {
-    font-size: 18px;
-    color: #32cd32;
-    font-weight: bold;
-    display: block;
-    margin-top: 5px;
+    color: #4a90e2;
+    margin-top: 10px;
 }
 
 #tablaGanancias, #desgloseOperaciones {
-    width: 100%;
-    max-width: 100%;
+    width: 95%;
+    max-width: 95%;
     border-collapse: collapse;
-    margin-top: 25px;
+    margin-top: 20px;
     margin-left: auto;
-    margin-right: auto;
+    margin-right: auto; /* Centramos la tabla */
     word-wrap: break-word;
 }
 
@@ -124,70 +96,83 @@ p {
 #desgloseOperaciones th,
 #desgloseOperaciones td {
     border: 1px solid #ddd;
-    padding: 12px;
+    padding: 10px;
     text-align: center;
     box-sizing: border-box;
 }
 
 #tablaGanancias th,
 #desgloseOperaciones th {
-    background-color: #007acc;
+    background-color: #4A90E2;
     color: white;
-    font-weight: bold;
-    font-size: 16px;
-}
-
-#tablaGanancias td,
-#desgloseOperaciones td {
-    font-size: 14px;
-    color: #333;
 }
 
 .capital-propio {
-    background-color: #e6f2ff;
+    background-color: #d0e7ff;
 }
 
 .aporte-mensual {
-    background-color: #fff0b3;
+    background-color: #ffe4b5;
 }
 
-.aporte-mensual .plus-symbol {
+#desgloseContainer {
+    margin-top: 20px;
+    background-color: #f4f4f4;
+    padding: 15px;
+    border-radius: 10px;
+    border: 2px solid #4A90E2;
+}
+
+.plus-symbol {
     color: green;
     font-weight: bold;
-}
-
-#desgloseOperaciones {
-    margin-top: 10px;
-    background-color: #fff;
-    border-radius: 8px;
-    border: 2px solid #007acc;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.05);
-}
-
-#desgloseOperaciones th {
-    background-color: #ffd700;
-    color: #333;
-    border-radius: 5px;
-}
-
-#desgloseOperaciones td {
-    color: #007acc;
-    font-weight: bold;
-}
-
-#desgloseOperaciones h2 {
-    font-family: 'Roboto', Arial, sans-serif;
-    margin-bottom: 15px;
 }
 
 #tablaContainer {
     margin-top: 20px;
     background-color: #fff;
-    padding: 15px;
-    border-radius: 10px;
-    border: 2px solid #007acc;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #4A90E2;
     overflow-x: auto;
     box-sizing: border-box;
 }
+
+#desgloseOperaciones {
+    margin-top: 10px;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 15px;
+    text-align: center;
+}
+
+#desgloseOperaciones th {
+    background-color: #FFD700;
+    color: #333;
+}
+
+#desgloseOperaciones td {
+    color: #4a90e2;
+    font-weight: bold;
+}
+
+.result-highlight h2 {
+    margin-bottom: 10px;
+}
+
+#capitalFinalElement {
+    font-size: 24px;
+    color: #FFD700; /* Destaca en dorado */
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: center;
+}
+
+#mensajeEstrategiaElement {
+    font-size: 16px;
+    color: #4a90e2;
+    margin-top: 10px;
+    text-align: center;
+}
+
