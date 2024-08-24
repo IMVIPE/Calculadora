@@ -68,20 +68,23 @@ p {
     margin-bottom: 20px;
 }
 
-#tablaGanancias {
+#tablaGanancias, #desgloseOperaciones {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
 }
 
 #tablaGanancias th,
-#tablaGanancias td {
+#tablaGanancias td,
+#desgloseOperaciones th,
+#desgloseOperaciones td {
     border: 1px solid #ddd;
     padding: 10px;
     text-align: center;
 }
 
-#tablaGanancias th {
+#tablaGanancias th,
+#desgloseOperaciones th {
     background-color: #4A90E2;
     color: white;
 }
@@ -92,4 +95,11 @@ p {
 
 .aporte-mensual {
     background-color: #ffe4b5;
+}
+
+#desgloseContainer {
+    margin-top: 20px;
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-radius: 5px;
 }
