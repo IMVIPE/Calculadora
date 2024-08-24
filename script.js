@@ -25,8 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     duplicarTiempoBtn.addEventListener('click', () => {
-        totalMeses *= 2;
         duplicarMeses = true;
+        totalMeses *= 2;
         calcular();
     });
 
@@ -91,6 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const gananciaAportesMitadVisual = `<span class="plus-symbol">+${gananciaAportesMitad.toFixed(2)}</span>`;
 
                 const row = document.createElement('tr');
+                row.classList.add(duplicarMeses ? 'new-cells' : '');
                 row.innerHTML = `
                     <td>${mes}</td>
                     <td>${usuarios1G}</td>
