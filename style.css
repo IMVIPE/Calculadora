@@ -26,109 +26,16 @@ p {
     font-style: italic;
 }
 
-/* Estilo para notas */
-.note {
-    border: 2px solid #FFD700; /* Borde dorado */
-    background-color: #333; /* Fondo gris oscuro */
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 15px;
-    font-weight: bold;
-    text-align: center;
-}
-
-/* Estilo para las notas de rango */
-.note-range {
-    border: 2px solid #FFD700;
-    background-color: #333;
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 15px;
-    font-weight: bold;
-    text-align: center;
-}
-
-/* Estilo para selección de rangos */
-select#rangoActual option {
-    background-color: #333; /* Fondo gris oscuro por defecto */
-    color: white;
-}
-
-/* Fondo blanco para rangos 1 a 5 */
-#rangoActual option[value="50"], 
-#rangoActual option[value="100"],
-#rangoActual option[value="200"],
-#rangoActual option[value="300"],
-#rangoActual option[value="400"] {
-    background-color: #fff;
-    color: #333;
-}
-
-/* Fondo gris para rango 6 */
-#rangoActual option[value="500"] {
-    background-color: #B0B0B0;
-    color: #fff;
-}
-
-/* Degradado desde rango 7 hasta 19 */
-#rangoActual option[value="1000"],
-#rangoActual option[value="1500"],
-#rangoActual option[value="2000"],
-#rangoActual option[value="2500"],
-#rangoActual option[value="3000"],
-#rangoActual option[value="3500"],
-#rangoActual option[value="4000"],
-#rangoActual option[value="4500"],
-#rangoActual option[value="5000"] {
-    background: linear-gradient(to right, #B0B0B0, #000);
-    color: #fff;
-}
-
-/* Fondo negro con letras doradas para rango 20 */
-#rangoActual option[value="10000"] {
-    background-color: #000;
-    color: #FFD700;
-}
-
-/* Estilo general para botones */
-button {
-    background-color: #4A90E2; /* Color azul */
-    color: white; /* Letras blancas */
-    font-weight: bold; /* Letras gruesas */
-    border: none;
-    border-radius: 5px;
-    padding: 12px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-button:hover {
-    background-color: #357ABD; /* Color azul más oscuro al pasar el cursor */
-}
-
-/* Estilo específico para botón duplicar */
-#duplicarBtn {
-    background-color: #4A90E2;
-    color: white;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    padding: 12px;
-    cursor: pointer;
-    font-size: 16px;
-    width: 100%;
-    margin-top: 20px;
-}
-
-#duplicarBtn:hover {
-    background-color: #357ABD;
-}
-
-/* Estilo para otros elementos */
 .input-section {
     margin-bottom: 30px;
+}
+
+.nota {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 .input-section label {
@@ -146,7 +53,106 @@ button:hover {
     border-radius: 5px;
 }
 
+.input-section button,
+#doblarTiempoBtn {
+    width: 100%;
+    padding: 12px;
+    background-color: #4a90e2;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
 .results-section {
     margin-top: 30px;
     display: none;
 }
+
+.result-highlight {
+    background-color: #4a90e2;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+#tablaGanancias, #desgloseOperaciones {
+    width: 95%; 
+    max-width: 95%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    word-wrap: break-word;
+}
+
+#tablaGanancias th,
+#tablaGanancias td,
+#desgloseOperaciones th,
+#desgloseOperaciones td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+#tablaGanancias th,
+#desgloseOperaciones th {
+    background-color: #4A90E2;
+    color: white;
+}
+
+.capital-propio {
+    background-color: #d0e7ff;
+}
+
+.aporte-mensual {
+    background-color: #ffe4b5;
+}
+
+#desgloseContainer {
+    margin-top: 20px;
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #4A90E2;
+}
+
+.plus-symbol {
+    color: green;
+    font-weight: bold;
+}
+
+#tablaContainer {
+    margin-top: 20px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #4A90E2;
+    overflow-x: auto;
+    box-sizing: border-box;
+}
+
+.rango1 { background-color: #fff; color: black; }
+.rango2 { background-color: #f7f7f7; color: black; }
+.rango3 { background-color: #e6e6e6; color: black; }
+.rango4 { background-color: #d4d4d4; color: black; }
+.rango5 { background-color: #c3c3c3; color: black; }
+.rango6 { background-color: #b1b1b1; color: black; }
+.rango7 { background-color: #9e9e9e; color: white; }
+.rango8 { background-color: #8b8b8b; color: white; }
+.rango9 { background-color: #787878; color: white; }
+.rango10 { background-color: #656565; color: white; }
+.rango11 { background-color: #525252; color: white; }
+.rango12 { background-color: #404040; color: white; }
+.rango13 { background-color: #2d2d2d; color: white; }
+.rango14 { background-color: #1a1a1a; color: white; }
+.rango15 { background-color: #070707; color: white; }
+.rango16 { background-color: #000000; color: white; }
+.rango17 { background-color: #000000; color: white; }
+.rango18 { background-color: #000000; color: white; }
+.rango19 { background-color: #000000; color: white; }
+.rango20 { background-color: #000000; color: #FFD700; }
