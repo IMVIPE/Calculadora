@@ -13,7 +13,7 @@ body {
     background-color: white;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
-    overflow-x: auto; /* Permite el desplazamiento horizontal si el contenido se desborda */
+    overflow-x: auto;
 }
 
 h1 {
@@ -71,11 +71,10 @@ p {
 
 #tablaGanancias, #desgloseOperaciones {
     width: 100%;
-    max-width: 100%; /* Asegura que la tabla no sobrepase el contenedor */
+    max-width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-    table-layout: auto; /* Cambié de fixed a auto para ajustar el ancho de las columnas automáticamente */
-    word-wrap: break-word; /* Permite que el contenido se ajuste dentro de la celda */
+    word-wrap: break-word;
 }
 
 #tablaGanancias th,
@@ -85,6 +84,7 @@ p {
     border: 1px solid #ddd;
     padding: 10px;
     text-align: center;
+    box-sizing: border-box; /* Asegura que el padding y border se incluyan en el tamaño de la celda */
 }
 
 #tablaGanancias th,
@@ -106,7 +106,7 @@ p {
     background-color: #f4f4f4;
     padding: 10px;
     border-radius: 5px;
-    border: 2px solid #4A90E2; /* Para resaltar el marco */
+    border: 2px solid #4A90E2;
 }
 
 .plus-symbol {
@@ -120,5 +120,6 @@ p {
     padding: 10px;
     border-radius: 5px;
     border: 2px solid #4A90E2;
-    overflow-x: auto; /* Permite el desplazamiento horizontal si el contenido se desborda */
+    overflow-x: auto;
+    box-sizing: border-box; /* Asegura que el padding y border se incluyan en el tamaño del contenedor */
 }
