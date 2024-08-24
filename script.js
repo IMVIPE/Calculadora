@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let ganancias1G = 0;
             let ganancias2G = 0;
 
-            let usuarios1G = usuariosGen1PorMes; // Se inicializa según el número de usuarios que elija el usuario
+            let usuarios1G = usuariosGen1PorMes;
             let usuarios2G = 0;
 
             let totalGananciaAportes = 0;
@@ -44,16 +44,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let totalGananciaInteresCompuesto = 0;
 
-            // Limpiar tabla de resultados anteriores
             tablaGanancias.innerHTML = '';
 
             for (let mes = 1; mes <= cicloMeses; mes++) {
-                // Calcular el interés compuesto sobre el capital inicial
                 const gananciaInteres = capital * interesMensual;
                 totalGananciaInteresCompuesto += gananciaInteres;
                 capital += gananciaInteres;
 
-                // Simulación de aportes mensuales acumulativos
                 capitalAportes += capitalInicial;
                 const gananciaAportes = capitalAportes * interesMensual;
                 totalGananciaAportes += gananciaAportes;
@@ -64,12 +61,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 totalGananciaAportesMitad += gananciaAportesMitad;
                 capitalAportesMitad += gananciaAportesMitad;
 
-                // Gen 1 aumenta según lo que se configure
                 if (mes > 1) {
                     usuarios1G += usuariosGen1PorMes;
                 }
 
-                // Gen 2 aumenta según el número de usuarios de Gen 1, a partir del segundo mes
                 if (mes > 2) {
                     usuarios2G += usuariosGen1PorMes * usuariosGen2PorMes;
                 }
@@ -85,11 +80,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const totalGanancia = capital + ganancias1G + ganancias2G;
 
-                // Mostrar ganancias adicionales con símbolo +
                 const gananciaAportesVisual = `<span class="plus-symbol">+${gananciaAportes.toFixed(2)}</span>`;
                 const gananciaAportesMitadVisual = `<span class="plus-symbol">+${gananciaAportesMitad.toFixed(2)}</span>`;
 
-                // Agregar fila a la tabla
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${mes}</td>
@@ -106,7 +99,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 tablaGanancias.appendChild(row);
             }
 
-            // Actualizar resultados finales y desglose
             capitalFinalElement.textContent = capital.toFixed(2);
             gananciasAportesElement.textContent = totalGananciaAportes.toFixed(2);
             gananciasAportesMitadElement.textContent = totalGananciaAportesMitad.toFixed(2);
@@ -130,7 +122,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             mensajeEstrategiaElement.textContent = estrategiaMensaje;
 
-            // Mostrar la sección de resultados
             resultsContainer.style.display = 'block';
         } catch (error) {
             console.error('Ocurrió un error durante el cálculo:', error);
@@ -140,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function duplicarTiempo() {
         const cicloMesesInput = document.getElementById('cicloMeses');
         const cicloMeses = parseInt(cicloMesesInput.value);
-        cicloMesesInput.value = cicloMeses * 2; // Duplicar el tiempo de inversión
-        calcular(); // Recalcular con el nuevo tiempo
+        cicloMesesInput.value = cicloMeses * 2;
+        calcular();
     }
 });
