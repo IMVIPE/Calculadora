@@ -13,15 +13,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const gananciaPrimeraGeneracionElement = document.getElementById('gananciaPrimeraGeneracion');
     const gananciaSegundaGeneracionElement = document.getElementById('gananciaSegundaGeneracion');
 
-    let cicloMeses = parseInt(document.getElementById('cicloMeses').value);
+    let cicloMeses;
 
-    calcularBtn.addEventListener('click', calcular);
-    duplicarTiempoBtn.addEventListener('click', duplicarTiempo);
+    calcularBtn.addEventListener('click', () => {
+        cicloMeses = parseInt(document.getElementById('cicloMeses').value);
+        calcular();
+    });
+
+    duplicarTiempoBtn.addEventListener('click', () => {
+        cicloMeses *= 2;
+        document.getElementById('cicloMeses').value = cicloMeses;
+        calcular();
+    });
 
     function calcular() {
         try {
             const capitalInicial = parseInt(document.getElementById('rangoActual').value);
-            cicloMeses = parseInt(document.getElementById('cicloMeses').value);
             const usuarios1GPorMes = parseInt(document.getElementById('usuariosPrimeraGeneracion').value);
             const usuarios2GPorUsuario1G = parseInt(document.getElementById('usuariosSegundaGeneracion').value);
 
@@ -49,12 +56,10 @@ document.addEventListener('DOMContentLoaded', () => {
             tablaGanancias.innerHTML = '';
 
             for (let mes = 1; mes <= cicloMeses; mes++) {
-                // Calcular el interés compuesto sobre el capital inicial
                 const gananciaInteres = capital * interesMensual;
                 totalGananciaInteresCompuesto += gananciaInteres;
                 capital += gananciaInteres;
 
-                // Simulación de aportes mensuales acumulativos
                 capitalAportes += capitalInicial;
                 const gananciaAportes = capitalAportes * interesMensual;
                 totalGananciaAportes += gananciaAportes;
@@ -65,29 +70,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 totalGananciaAportesMitad += gananciaAportesMitad;
                 capitalAportesMitad += gananciaAportesMitad;
 
-                // Gen 1 aumenta en usuarios1GPorMes cada mes
                 usuarios1G += usuarios1GPorMes; 
-
-                // Gen 2 se calcula en función de los usuarios de Gen 1 y su capacidad de invitar
                 usuarios2G = usuarios1G * usuarios2GPorUsuario1G; 
 
                 const capitalInvitado1G = capitalInicial / 2;
                 const capitalInvitado2G = capitalInvitado1G / 2;
 
-                // Recompensas actualizadas: Doble de la recompensa original
-                const gananciaInv1G = (capitalInvitado1G * interesMensual) * 0.04 * usuarios1G; // Doble de 0.02
-                const gananciaInv2G = (capitalInvitado2G * interesMensual) * 0.02 * usuarios2G; // Doble de 0.01
+                const gananciaInv1G = (capitalInvitado1G * interesMensual) * 0.04 * usuarios1G;
+                const gananciaInv2G = (capitalInvitado2G * interesMensual) * 0.02 * usuarios2G;
 
                 ganancias1G += gananciaInv1G;
                 ganancias2G += gananciaInv2G;
 
                 const totalGanancia = capital + ganancias1G + ganancias2G;
 
-                // Mostrar ganancias adicionales con símbolo +
                 const gananciaAportesVisual = `<span class="plus-symbol">+${gananciaAportes.toFixed(2)}</span>`;
                 const gananciaAportesMitadVisual = `<span class="plus-symbol">+${gananciaAportesMitad.toFixed(2)}</span>`;
 
-                // Agregar fila a la tabla
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${mes}</td>
@@ -104,7 +103,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 tablaGanancias.appendChild(row);
             }
 
-            // Actualizar resultados finales y desglose
             capitalFinalElement.textContent = capital.toFixed(2);
             gananciasAportesElement.textContent = totalGananciaAportes.toFixed(2);
             gananciasAportesMitadElement.textContent = totalGananciaAportesMitad.toFixed(2);
@@ -118,18 +116,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 ? 'Para mejorar tus ganancias, considera aumentar tu inversión inicial en los primeros meses.'
                 : '¡Felicidades! Has alcanzado $1,000,000 en capital.';
 
-            // Mostrar la sección de resultados
             resultsContainer.style.display = 'block';
             duplicarTiempoBtn.style.display = 'block';
         } catch (error) {
             console.error('Ocurrió un error durante el cálculo:', error);
         }
-    }
-
-    function duplicarTiempo() {
-        const cicloMesesInput = document.getElementById('cicloMeses');
-        cicloMeses = cicloMeses * 2;
-        cicloMesesInput.value = cicloMeses;
-        calcular(); // Recalcula con el nuevo ciclo de meses
     }
 });
