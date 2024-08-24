@@ -30,18 +30,16 @@ p {
     margin-bottom: 30px;
 }
 
-.nota {
-    margin-bottom: 10px;
-    padding: 10px;
-    background-color: #f4f4f4;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
 .input-section label {
     display: block;
     margin-bottom: 10px;
     font-weight: bold;
+}
+
+.input-section .note {
+    font-weight: bold;
+    color: #FFA500; /* Mostaza/amarillo */
+    margin-bottom: 10px;
 }
 
 .input-section select,
@@ -53,17 +51,20 @@ p {
     border-radius: 5px;
 }
 
-.input-section button,
-#doblarTiempoBtn {
+.input-section button {
     width: 100%;
     padding: 12px;
-    background-color: #4a90e2;
+    background-color: #333;
     border: none;
     color: white;
     font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
     font-weight: bold;
+}
+
+.input-section button:hover {
+    background-color: #555;
 }
 
 .results-section {
@@ -80,7 +81,7 @@ p {
 }
 
 #tablaGanancias, #desgloseOperaciones {
-    width: 95%; 
+    width: 95%;
     max-width: 95%;
     border-collapse: collapse;
     margin-top: 20px;
@@ -136,23 +137,27 @@ p {
     box-sizing: border-box;
 }
 
-.rango1 { background-color: #fff; color: black; }
-.rango2 { background-color: #f7f7f7; color: black; }
-.rango3 { background-color: #e6e6e6; color: black; }
-.rango4 { background-color: #d4d4d4; color: black; }
-.rango5 { background-color: #c3c3c3; color: black; }
-.rango6 { background-color: #b1b1b1; color: black; }
-.rango7 { background-color: #9e9e9e; color: white; }
-.rango8 { background-color: #8b8b8b; color: white; }
-.rango9 { background-color: #787878; color: white; }
-.rango10 { background-color: #656565; color: white; }
-.rango11 { background-color: #525252; color: white; }
-.rango12 { background-color: #404040; color: white; }
-.rango13 { background-color: #2d2d2d; color: white; }
-.rango14 { background-color: #1a1a1a; color: white; }
-.rango15 { background-color: #070707; color: white; }
-.rango16 { background-color: #000000; color: white; }
-.rango17 { background-color: #000000; color: white; }
-.rango18 { background-color: #000000; color: white; }
-.rango19 { background-color: #000000; color: white; }
-.rango20 { background-color: #000000; color: #FFD700; }
+#duplicarTiempoBtn {
+    font-weight: bold;
+    background-color: #333;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+#duplicarTiempoBtn:hover {
+    background-color: #555;
+}
+
+.note {
+    display: block;
+    font-weight: bold;
+    color: #FFA500; /* Mostaza/amarillo */
+    margin-bottom: 10px;
+    margin-top: -15px; /* Para acercar la nota al selector */
+}
