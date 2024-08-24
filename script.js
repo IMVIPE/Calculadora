@@ -40,32 +40,23 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const interesMensual = 0.07; // 7% de interés mensual
-            let capital = capitalInicial;
-            let ganancias1G = 0;
-            let ganancias2G = 0;
+            let capital = duplicarMeses ? parseFloat(capitalFinalElement.textContent) : capitalInicial;
+            let ganancias1G = duplicarMeses ? parseFloat(gananciaPrimeraGeneracionElement.textContent) : 0;
+            let ganancias2G = duplicarMeses ? parseFloat(gananciaSegundaGeneracionElement.textContent) : 0;
 
-            let usuarios1G = 0; 
-            let usuarios2G = 0;
+            let usuarios1G = duplicarMeses ? tablaGanancias.lastElementChild.cells[1].textContent : 0;
+            let usuarios2G = duplicarMeses ? tablaGanancias.lastElementChild.cells[2].textContent : 0;
 
-            let totalGananciaAportes = 0;
-            let totalGananciaAportesMitad = 0;
-            let capitalAportes = capitalInicial;
-            let capitalAportesMitad = capitalInicial / 2;
+            let totalGananciaAportes = duplicarMeses ? parseFloat(gananciasAportesElement.textContent) : 0;
+            let totalGananciaAportesMitad = duplicarMeses ? parseFloat(gananciasAportesMitadElement.textContent) : 0;
+            let capitalAportes = duplicarMeses ? capital : capitalInicial;
+            let capitalAportesMitad = duplicarMeses ? capital / 2 : capitalInicial / 2;
 
-            let totalGananciaInteresCompuesto = 0;
+            let totalGananciaInteresCompuesto = duplicarMeses ? parseFloat(gananciaInteresCompuestoElement.textContent) : 0;
 
-            if (!duplicarMeses) {
-                tablaGanancias.innerHTML = '';
-            } else {
-                const separatorRow = document.createElement('tr');
-                separatorRow.classList.add('separator-row');
-                separatorRow.innerHTML = `<td colspan="10">Continuación del cálculo</td>`;
-                tablaGanancias.appendChild(separatorRow);
-            }
+            const mesInicio = duplicarMeses ? parseInt(tablaGanancias.lastElementChild.cells[0].textContent) + 1 : 1;
 
-            const mitadCiclo = duplicarMeses ? cicloMeses / 2 : cicloMeses;
-
-            for (let mes = 1; mes <= cicloMeses; mes++) {
+            for (let mes = mesInicio; mes < mesInicio + cicloMeses / 2; mes++) {
                 const gananciaInteres = capital * interesMensual;
                 totalGananciaInteresCompuesto += gananciaInteres;
                 capital += gananciaInteres;
@@ -80,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 totalGananciaAportesMitad += gananciaAportesMitad;
                 capitalAportesMitad += gananciaAportesMitad;
 
-                usuarios1G += usuarios1GPorMes; 
+                usuarios1G = parseInt(usuarios1G) + usuarios1GPorMes; 
                 usuarios2G = usuarios1G * usuarios2GPorUsuario1G; 
 
                 const capitalInvitado1G = capitalInicial / 2;
@@ -97,12 +88,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 const gananciaAportesVisual = `<span class="plus-symbol">+${gananciaAportes.toFixed(2)}</span>`;
                 const gananciaAportesMitadVisual = `<span class="plus-symbol">+${gananciaAportesMitad.toFixed(2)}</span>`;
 
-                const mesVisual = duplicarMeses && mes > mitadCiclo ? mes + mitadCiclo : mes;
-
                 const row = document.createElement('tr');
-                row.style.backgroundColor = duplicarMeses && mes > mitadCiclo ? '#e0e0e0' : '#fff'; // Apply subtle color difference
+                row.style.backgroundColor = duplicarMeses && mes > mesInicio ? '#e0e0e0' : '#fff'; // Apply subtle color difference
                 row.innerHTML = `
-                    <td>${mesVisual}</td>
+                    <td>${mes}</td>
                     <td>${usuarios1G}</td>
                     <td>${usuarios2G}</td>
                     <td class="capital-propio">${capital.toFixed(2)}</td>
