@@ -25,7 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
     duplicarTiempoBtn.addEventListener('click', () => {
         cicloMeses *= 2;
         duplicarMeses = true;
-        document.getElementById('cicloMeses').value = cicloMeses;
         calcular();
     });
 
@@ -40,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            const interesMensual = 0.07; // 10% original menos 30%
+            const interesMensual = 0.07; // 7% de interés mensual
             let capital = capitalInicial;
             let ganancias1G = 0;
             let ganancias2G = 0;
@@ -63,6 +62,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 separatorRow.innerHTML = `<td colspan="10">Continuación del cálculo</td>`;
                 tablaGanancias.appendChild(separatorRow);
             }
+
+            const mitadCiclo = cicloMeses / 2;
 
             for (let mes = 1; mes <= cicloMeses; mes++) {
                 const gananciaInteres = capital * interesMensual;
@@ -97,6 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const gananciaAportesMitadVisual = `<span class="plus-symbol">+${gananciaAportesMitad.toFixed(2)}</span>`;
 
                 const row = document.createElement('tr');
+                row.style.backgroundColor = duplicarMeses && mes > mitadCiclo ? '#e0e0e0' : '#fff'; // Apply subtle color difference
                 row.innerHTML = `
                     <td>${mes}</td>
                     <td>${usuarios1G}</td>
