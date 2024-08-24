@@ -59,14 +59,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 totalGananciaAportesMitad += gananciaAportesMitad;
                 capitalAportesMitad += gananciaAportesMitad;
 
-                // Gen 1 aumenta en 1 usuario por mes
+                // Gen 1 aumenta en 1 usuario cada mes
                 if (mes > 1) {
                     usuarios1G += 1; // Cada mes, un nuevo usuario es invitado por Gen 1
                 }
 
-                // Gen 2 aumenta en 1 usuario por mes, pero solo si hay usuarios en Gen 1
+                // Gen 2 aumenta en 1 usuario cada mes por cada usuario en Gen 1, empezando desde el segundo mes
                 if (mes > 2) {
-                    usuarios2G += 1; // A partir del segundo mes, cada Gen 1 invita a un nuevo usuario de Gen 2
+                    usuarios2G += (mes - 2); // Gen 2 empieza a crecer después de que Gen 1 haya pasado un mes
                 }
 
                 const capitalInvitado1G = capitalInicial / 2;
