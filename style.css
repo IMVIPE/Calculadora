@@ -36,12 +36,6 @@ p {
     font-weight: bold;
 }
 
-.input-section .note {
-    font-weight: bold;
-    color: #FFA500; /* Mostaza/amarillo */
-    margin-bottom: 10px;
-}
-
 .input-section select,
 .input-section input {
     width: 100%;
@@ -51,20 +45,17 @@ p {
     border-radius: 5px;
 }
 
-.input-section button {
+.input-section button,
+#duplicarBtn {
     width: 100%;
     padding: 12px;
-    background-color: #333;
+    background-color: #4a90e2;
     border: none;
     color: white;
     font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
-    font-weight: bold;
-}
-
-.input-section button:hover {
-    background-color: #555;
+    margin-top: 10px;
 }
 
 .results-section {
@@ -78,6 +69,18 @@ p {
     padding: 15px;
     border-radius: 5px;
     margin-bottom: 20px;
+}
+
+#capitalFinalElement {
+    font-size: 24px;
+    color: #FFD700;
+    font-weight: bold;
+}
+
+#mensajeEstrategiaElement {
+    font-size: 16px;
+    color: #4a90e2;
+    margin-top: 10px;
 }
 
 #tablaGanancias, #desgloseOperaciones {
@@ -137,27 +140,34 @@ p {
     box-sizing: border-box;
 }
 
-#duplicarTiempoBtn {
-    font-weight: bold;
-    background-color: #333;
-    color: white;
-    padding: 12px;
-    border: none;
+#desgloseOperaciones {
+    margin-top: 10px;
+    background-color: white;
     border-radius: 5px;
-    cursor: pointer;
-    margin-top: 20px;
-    width: 100%;
+    border: 1px solid #ddd;
+    padding: 15px;
     text-align: center;
 }
 
-#duplicarTiempoBtn:hover {
-    background-color: #555;
+#desgloseOperaciones th {
+    background-color: #FFD700;
+    color: #333;
+}
+
+#desgloseOperaciones td {
+    color: #4a90e2;
+    font-weight: bold;
 }
 
 .note {
-    display: block;
-    font-weight: bold;
-    color: #FFA500; /* Mostaza/amarillo */
+    font-size: 14px;
+    color: #FFA500;
     margin-bottom: 10px;
-    margin-top: -15px; /* Para acercar la nota al selector */
+    font-weight: bold;
+}
+
+.line-divider {
+    margin-top: 20px;
+    border-top: 2px dashed #4A90E2;
+    margin-bottom: 20px;
 }
