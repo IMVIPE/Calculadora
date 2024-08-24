@@ -131,8 +131,9 @@ p {
     box-sizing: border-box;
 }
 
-.new-cells {
-    background-color: #e0e0e0; /* Color más oscuro para las nuevas filas */
+.separator-row {
+    border-top: 2px solid #4A90E2;
+    background-color: #f0f0f0;
 }
 
 #duplicarTiempoContainer {
