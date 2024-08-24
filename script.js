@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const calcularBtn = document.getElementById('calcularBtn');
+    const duplicarBtn = document.getElementById('duplicarBtn');
     const resultsContainer = document.getElementById('resultsContainer');
     const tablaGanancias = document.getElementById('tablaGanancias').querySelector('tbody');
     const totalGananciasElement = document.getElementById('totalGanancias');
@@ -12,30 +13,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const gananciaPrimeraGeneracionElement = document.getElementById('gananciaPrimeraGeneracion');
     const gananciaSegundaGeneracionElement = document.getElementById('gananciaSegundaGeneracion');
 
-    const duplicarTiempoBtn = document.getElementById('duplicarTiempoBtn');
-
     calcularBtn.addEventListener('click', calcular);
-    duplicarTiempoBtn.addEventListener('click', duplicarTiempo);
+    duplicarBtn.addEventListener('click', duplicarTiempo);
 
     function calcular() {
         try {
             const capitalInicial = parseInt(document.getElementById('rangoActual').value);
             const cicloMeses = parseInt(document.getElementById('cicloMeses').value);
-            const usuariosGen1PorMes = parseInt(document.getElementById('usuariosGen1').value);
-            const usuariosGen2PorMes = parseInt(document.getElementById('usuariosGen2').value);
+            const usuariosPrimeraGen = parseInt(document.getElementById('usuariosPrimeraGen').value);
+            const usuariosSegundaGen = parseInt(document.getElementById('usuariosSegundaGen').value);
 
             if (isNaN(capitalInicial) || isNaN(cicloMeses) || cicloMeses < 1) {
                 alert("Por favor, ingrese un rango y un ciclo de meses válidos.");
                 return;
             }
 
-            const interesMensual = 0.10;
+            const interesMensual = 0.10 * 0.7; // Ajuste del 30% menos
             let capital = capitalInicial;
             let ganancias1G = 0;
             let ganancias2G = 0;
-
-            let usuarios1G = usuariosGen1PorMes;
-            let usuarios2G = 0;
 
             let totalGananciaAportes = 0;
             let totalGananciaAportesMitad = 0;
@@ -61,19 +57,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 totalGananciaAportesMitad += gananciaAportesMitad;
                 capitalAportesMitad += gananciaAportesMitad;
 
-                if (mes > 1) {
-                    usuarios1G += usuariosGen1PorMes;
-                }
-
-                if (mes > 2) {
-                    usuarios2G += usuariosGen1PorMes * usuariosGen2PorMes;
-                }
+                const usuarios1G = mes * usuariosPrimeraGen;
+                const usuarios2G = usuarios1G * usuariosSegundaGen;
 
                 const capitalInvitado1G = capitalInicial / 2;
                 const capitalInvitado2G = capitalInvitado1G / 2;
 
-                const gananciaInv1G = (capitalInvitado1G * interesMensual) * 0.02 * usuarios1G;
-                const gananciaInv2G = (capitalInvitado2G * interesMensual) * 0.01 * usuarios2G;
+                const gananciaInv1G = (capitalInvitado1G * interesMensual) * 0.04 * usuarios1G;
+                const gananciaInv2G = (capitalInvitado2G * interesMensual) * 0.02 * usuarios2G;
 
                 ganancias1G += gananciaInv1G;
                 ganancias2G += gananciaInv2G;
@@ -108,19 +99,20 @@ document.addEventListener('DOMContentLoaded', () => {
             gananciaPrimeraGeneracionElement.textContent = ganancias1G.toFixed(2);
             gananciaSegundaGeneracionElement.textContent = ganancias2G.toFixed(2);
 
-            let estrategiaMensaje = '';
+            const capitalTotal = capital + totalGananciaAportes + totalGananciaAportesMitad;
 
-            if (capital < 250000) {
-                estrategiaMensaje = `Te faltan ${(250000 - capital).toFixed(2)} para llegar a $250,000.`;
-            } else if (capital < 500000) {
-                estrategiaMensaje = `¡Felicidades! Has alcanzado $250,000. Te faltan ${(500000 - capital).toFixed(2)} para llegar a $500,000.`;
-            } else if (capital < 1000000) {
-                estrategiaMensaje = `¡Felicidades! Has alcanzado $500,000. Te faltan ${(1000000 - capital).toFixed(2)} para llegar a $1,000,000.`;
-            } else {
-                estrategiaMensaje = '¡Felicidades! Has alcanzado $1,000,000 en capital. Eres parte del 1% que llega tan lejos.';
+            let mensajeEstrategia = `Te faltan ${(250000 - capitalTotal).toFixed(2)} para llegar a $250,000.`;
+            if (capitalTotal > 250000) {
+                mensajeEstrategia = `¡Felicidades! Has superado los $250,000.`;
+            }
+            if (capitalTotal > 500000) {
+                mensajeEstrategia = `¡Felicidades! Has superado los $500,000.`;
+            }
+            if (capitalTotal > 1000000) {
+                mensajeEstrategia = `¡Increíble! Has alcanzado $1,000,000 en capital.`;
             }
 
-            mensajeEstrategiaElement.textContent = estrategiaMensaje;
+            mensajeEstrategiaElement.textContent = mensajeEstrategia;
 
             resultsContainer.style.display = 'block';
         } catch (error) {
@@ -129,9 +121,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function duplicarTiempo() {
-        const cicloMesesInput = document.getElementById('cicloMeses');
-        const cicloMeses = parseInt(cicloMesesInput.value);
-        cicloMesesInput.value = cicloMeses * 2;
+        const cicloMeses = parseInt(document.getElementById('cicloMeses').value);
+        document.getElementById('cicloMeses').value = cicloMeses * 2;
         calcular();
     }
 });
