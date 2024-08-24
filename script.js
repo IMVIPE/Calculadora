@@ -19,9 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const capitalInicial = parseInt(document.getElementById('rangoActual').value);
             const cicloMeses = parseInt(document.getElementById('cicloMeses').value);
             const usuarios1GPorMes = parseInt(document.getElementById('usuariosPrimeraGeneracion').value);
-            const usuarios2GPorMes = parseInt(document.getElementById('usuariosSegundaGeneracion').value);
+            const usuarios2GPorUsuario1G = parseInt(document.getElementById('usuariosSegundaGeneracion').value);
 
-            if (isNaN(capitalInicial) || isNaN(cicloMeses) || isNaN(usuarios1GPorMes) || isNaN(usuarios2GPorMes) || cicloMeses < 1) {
+            if (isNaN(capitalInicial) || isNaN(cicloMeses) || isNaN(usuarios1GPorMes) || isNaN(usuarios2GPorUsuario1G) || cicloMeses < 1) {
                 alert("Por favor, ingrese valores válidos.");
                 return;
             }
@@ -64,8 +64,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Gen 1 aumenta en usuarios1GPorMes cada mes
                 usuarios1G += usuarios1GPorMes; 
 
-                // Gen 2 aumenta en usuarios2GPorMes cada mes
-                usuarios2G += usuarios2GPorMes; 
+                // Gen 2 se calcula en función de los usuarios de Gen 1 y su capacidad de invitar
+                usuarios2G = usuarios1G * usuarios2GPorUsuario1G; 
 
                 const capitalInvitado1G = capitalInicial / 2;
                 const capitalInvitado2G = capitalInvitado1G / 2;
