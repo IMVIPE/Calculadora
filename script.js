@@ -29,8 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
             let ganancias1G = 0;
             let ganancias2G = 0;
 
-            let usuarios1G = 1; // Inicialmente hay 1 usuario en Gen 1
-            let usuarios2G = 0; // Inicialmente no hay usuarios en Gen 2
+            let usuarios1G = 1;
+            let usuarios2G = 0;
 
             let totalGananciaAportes = 0;
             let totalGananciaAportesMitad = 0;
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Gen 2: a partir del segundo mes, cada usuario de Gen 1 comienza a invitar a un nuevo usuario de Gen 2
                 if (mes > 2) {
-                    usuarios2G += (usuarios1G - 1); // Se añade un usuario de Gen 2 por cada usuario en Gen 1
+                    usuarios2G += (usuarios1G - 1);
                 }
 
                 const capitalInvitado1G = capitalInicial / 2;
