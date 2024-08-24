@@ -42,12 +42,10 @@ document.addEventListener('DOMContentLoaded', () => {
             tablaGanancias.innerHTML = '';
 
             for (let mes = 1; mes <= cicloMeses; mes++) {
-                // Cálculo del interés compuesto sobre el capital inicial
                 const gananciaInteres = capital * interesMensual;
                 totalGananciaInteresCompuesto += gananciaInteres;
                 capital += gananciaInteres;
 
-                // Simulación de aportes mensuales acumulativos
                 capitalAportes += capitalInicial;
                 const gananciaAportes = capitalAportes * interesMensual;
                 totalGananciaAportes += gananciaAportes;
@@ -58,14 +56,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 totalGananciaAportesMitad += gananciaAportesMitad;
                 capitalAportesMitad += gananciaAportesMitad;
 
-                // Gen 1: cada mes, se añade un nuevo usuario
                 if (mes > 1) {
                     usuarios1G += 1;
                 }
 
-                // Gen 2: a partir del segundo mes, cada usuario de Gen 1 comienza a invitar a un nuevo usuario de Gen 2
                 if (mes > 2) {
-                    usuarios2G += (usuarios1G - 1);
+                    usuarios2G += (mes - 2);
                 }
 
                 const capitalInvitado1G = capitalInicial / 2;
@@ -82,7 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const gananciaAportesVisual = `<span class="plus-symbol">+${gananciaAportes.toFixed(2)}</span>`;
                 const gananciaAportesMitadVisual = `<span class="plus-symbol">+${gananciaAportesMitad.toFixed(2)}</span>`;
 
-                // Agregar fila a la tabla
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${mes}</td>
@@ -109,9 +104,9 @@ document.addEventListener('DOMContentLoaded', () => {
             gananciaSegundaGeneracionElement.textContent = ganancias2G.toFixed(2);
 
             const capitalTotal = capital + totalGananciaAportes + totalGananciaAportesMitad;
-            const mensajeEstrategia = `Si hubieras invertido una cantidad adicional cada mes, podrías haber ganado aún más. Mira la tabla para ver cuánto más podrías haber ganado. <span class="highlight-amount">¡Tu capital final sería de $${capitalTotal.toFixed(2)}!</span>`;
+            const mensajeEstrategia = `Si hubieras invertido una cantidad adicional cada mes, podrías haber ganado aún más. Mira la tabla para ver cuánto más podrías haber ganado. ¡Tu capital final sería de $${capitalTotal.toFixed(2)}!`;
 
-            mensajeEstrategiaElement.innerHTML = capital < 1000000 ? mensajeEstrategia : '¡Felicidades! Has alcanzado $1,000,000 en capital.';
+            mensajeEstrategiaElement.textContent = capital < 1000000 ? mensajeEstrategia : '¡Felicidades! Has alcanzado $1,000,000 en capital.';
 
             resultsContainer.style.display = 'block';
         } catch (error) {
