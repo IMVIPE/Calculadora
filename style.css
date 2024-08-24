@@ -26,152 +26,95 @@ p {
     font-style: italic;
 }
 
-.input-section {
-    margin-bottom: 30px;
-}
-
-.input-section label {
-    display: block;
-    margin-bottom: 10px;
+/* Estilo para notas */
+.note {
+    border: 2px solid #FFD700; /* Borde dorado */
+    background-color: #333; /* Fondo gris oscuro */
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
     font-weight: bold;
+    text-align: center;
 }
 
-.nota-rango {
-    background-color: #f5f5f5;
-    border-left: 5px solid #4a90e2;
+/* Estilo para las notas de rango */
+.note-range {
+    border: 2px solid #FFD700;
+    background-color: #333;
+    color: white;
     padding: 10px;
+    border-radius: 5px;
     margin-bottom: 15px;
-    color: #4a90e2;
+    font-weight: bold;
+    text-align: center;
 }
 
-.nota-invitados {
-    background-color: #f5f5f5;
-    border-left: 5px solid #f39c12;
-    padding: 10px;
-    margin-bottom: 15px;
-    color: #f39c12;
-}
-
-.input-section select,
-.input-section input {
+/* Estilo para selección de rangos */
+select#rangoActual {
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #ddd;
     border-radius: 5px;
+    background-color: #333; /* Fondo gris oscuro por defecto */
+    color: white;
 }
 
-.input-section .btn-calculate {
-    width: 100%;
-    padding: 12px;
-    background-color: #333;
+/* Fondo blanco para rangos 1 a 5 */
+#rangoActual option[value="50"], 
+#rangoActual option[value="100"],
+#rangoActual option[value="200"],
+#rangoActual option[value="300"],
+#rangoActual option[value="400"] {
+    background-color: #fff;
+    color: #333;
+}
+
+/* Fondo gris para rango 6 */
+#rangoActual option[value="500"] {
+    background-color: #B0B0B0;
+    color: #fff;
+}
+
+/* Degradado desde rango 7 hasta 19 */
+#rangoActual option[value="1000"],
+#rangoActual option[value="1500"],
+#rangoActual option[value="2000"],
+#rangoActual option[value="2500"],
+#rangoActual option[value="3000"],
+#rangoActual option[value="3500"],
+#rangoActual option[value="4000"],
+#rangoActual option[value="4500"],
+#rangoActual option[value="5000"] {
+    background: linear-gradient(to right, #B0B0B0, #000);
+    color: #fff;
+}
+
+/* Fondo negro con letras doradas para rango 20 */
+#rangoActual option[value="10000"] {
+    background-color: #000;
+    color: #FFD700;
+}
+
+/* Estilo general para botones */
+button {
+    background-color: #4A90E2; /* Color azul */
+    color: white; /* Letras blancas */
+    font-weight: bold; /* Letras gruesas */
     border: none;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
     border-radius: 5px;
+    padding: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #357ABD; /* Color azul más oscuro al pasar el cursor */
 }
 
 .results-section {
     margin-top: 30px;
     display: none;
-}
-
-.result-highlight {
-    background-color: #4a90e2;
-    color: white;
-    padding: 15px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-}
-
-.capital-final {
-    font-size: 24px;
-    color: #FFD700;
-    font-weight: bold;
-    margin-top: 20px;
-    text-align: center;
-    border: 2px solid #FFD700;
-    padding: 10px;
-    background-color: #333;
-}
-
-.mensaje-estrategia {
-    font-size: 16px;
-    color: #4a90e2;
-    margin-top: 10px;
-    text-align: center;
-    border: 2px solid #FFD700;
-    padding: 10px;
-}
-
-#tablaGanancias, #desgloseOperaciones {
-    width: 95%; /* Hice la tabla un poco más estrecha para mejorar el centrado */
-    max-width: 95%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    margin-left: auto;
-    margin-right: auto; /* Centramos la tabla */
-    word-wrap: break-word;
-}
-
-#tablaGanancias th,
-#tablaGanancias td,
-#desgloseOperaciones th,
-#desgloseOperaciones td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: center;
-    box-sizing: border-box;
-}
-
-#tablaGanancias th,
-#desgloseOperaciones th {
-    background-color: #4A90E2;
-    color: white;
-}
-
-.capital-propio {
-    background-color: #d0e7ff;
-}
-
-.aporte-mensual {
-    background-color: #ffe4b5;
-}
-
-#desgloseContainer {
-    margin-top: 20px;
-    background-color: #f4f4f4;
-    padding: 10px;
-    border-radius: 5px;
-    border: 2px solid #4A90E2;
-}
-
-.plus-symbol {
-    color: green;
-    font-weight: bold;
-}
-
-#tablaContainer {
-    margin-top: 20px;
-    background-color: #fff;
-    padding: 10px;
-    border-radius: 5px;
-    border: 2px solid #4A90E2;
-    overflow-x: auto;
-    box-sizing: border-box;
-}
-
-.btn-duplicate {
-    width: 100%;
-    padding: 12px;
-    background-color: #4a90e2;
-    border: none;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-top: 20px;
-    font-weight: bold;
-    text-transform: uppercase;
 }
