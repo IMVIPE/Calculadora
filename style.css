@@ -135,3 +135,24 @@ p {
     border-top: 2px solid #4A90E2;
     background-color: #f0f0f0;
 }
+
+#duplicarTiempoContainer {
+    text-align: center; 
+    margin-top: 20px;
+}
+
+#duplicarTiempoBtn {
+    padding: 12px;
+    background-color: #4a90e2;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+    width: auto;
+}
+
+#duplicarTiempoBtn:hover {
+    background-color: #357ab7;
+}
