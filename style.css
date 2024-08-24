@@ -40,7 +40,11 @@ p {
     font-weight: bold;
     color: #ff3333;
     margin-bottom: 10px;
-    margin-top: -15px; /* Para acercar la nota al selector */
+    margin-top: -15px;
+    padding: 10px;
+    border: 2px solid #ff3333;
+    border-radius: 5px;
+    background-color: #fff4f4;
 }
 
 .input-section select,
@@ -61,11 +65,11 @@ p {
     font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
-    font-weight: bold; /* Hacemos la tipografía más gruesa */
+    font-weight: bold;
 }
 
 .input-section button:hover {
-    background-color: #555; /* Añadimos un efecto al pasar el ratón */
+    background-color: #555;
 }
 
 .results-section {
@@ -82,12 +86,12 @@ p {
 }
 
 #tablaGanancias, #desgloseOperaciones {
-    width: 95%; /* Hice la tabla un poco más estrecha para mejorar el centrado */
+    width: 95%;
     max-width: 95%;
     border-collapse: collapse;
     margin-top: 20px;
     margin-left: auto;
-    margin-right: auto; /* Centramos la tabla */
+    margin-right: auto;
     word-wrap: break-word;
 }
 
@@ -154,4 +158,42 @@ p {
 
 #duplicarTiempoBtn:hover {
     background-color: #555;
+}
+
+/* Estilos de fondo para los rangos */
+select option {
+    background-color: white;
+    color: black;
+}
+
+select option[value="10000"] {
+    background-color: black;
+    color: gold;
+}
+
+select option[value="9000"],
+select option[value="8000"],
+select option[value="7000"],
+select option[value="6000"] {
+    background-color: #2e2e2e;
+    color: white;
+}
+
+select option[value="5000"],
+select option[value="4500"],
+select option[value="4000"],
+select option[value="3500"],
+select option[value="3000"],
+select option[value="2500"],
+select option[value="2000"],
+select option[value="1500"],
+select option[value="1000"],
+select option[value="500"],
+select option[value="400"],
+select option[value="300"],
+select option[value="200"],
+select option[value="100"],
+select option[value="50"] {
+    background-color: #ccc;
+    color: black;
 }
