@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 tablaGanancias.appendChild(separatorRow);
             }
 
-            const mitadCiclo = cicloMeses / 2;
+            const mitadCiclo = duplicarMeses ? cicloMeses / 2 : cicloMeses;
 
             for (let mes = 1; mes <= cicloMeses; mes++) {
                 const gananciaInteres = capital * interesMensual;
@@ -99,8 +99,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const row = document.createElement('tr');
                 row.style.backgroundColor = duplicarMeses && mes > mitadCiclo ? '#e0e0e0' : '#fff'; // Apply subtle color difference
+
+                // Ajustar el número de mes correctamente
+                const mesReal = duplicarMeses && mes > mitadCiclo ? mes : mes;
+                const mesVisual = duplicarMeses && mes > mitadCiclo ? mesReal : mes;
                 row.innerHTML = `
-                    <td>${mes}</td>
+                    <td>${mesVisual}</td>
                     <td>${usuarios1G}</td>
                     <td>${usuarios2G}</td>
                     <td class="capital-propio">${capital.toFixed(2)}</td>
