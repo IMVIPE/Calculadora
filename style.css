@@ -13,7 +13,6 @@ body {
     background-color: white;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
-    overflow-x: auto;
 }
 
 h1 {
@@ -21,9 +20,14 @@ h1 {
     color: #4a90e2;
 }
 
-p {
+.note {
+    background-color: #FFD700;
+    color: #000;
+    padding: 10px;
+    font-weight: bold;
     text-align: center;
-    font-style: italic;
+    border-radius: 5px;
+    margin-bottom: 15px;
 }
 
 .input-section {
@@ -43,11 +47,6 @@ p {
     margin-bottom: 20px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    background-color: #333;
-    color: white;
-}
-
-.input-section select option {
     background-color: #444;
     color: white;
 }
@@ -62,6 +61,12 @@ p {
     cursor: pointer;
     border-radius: 5px;
     font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.results-section {
+    margin-top: 30px;
+    display: none;
 }
 
 .result-highlight {
@@ -70,41 +75,42 @@ p {
     padding: 15px;
     border-radius: 5px;
     margin-bottom: 20px;
-}
-
-.note {
-    background-color: #FFD700;
-    color: black;
-    padding: 10px;
-    font-weight: bold;
     text-align: center;
-    margin-bottom: 20px;
-    border-radius: 5px;
 }
 
-#tablaGanancias, #desgloseOperaciones {
-    width: 95%;
-    max-width: 95%;
+.result-highlight h2 {
+    margin-bottom: 10px;
+}
+
+#capitalFinalElement {
+    font-size: 24px;
+    color: #FFD700; /* Destaca en dorado */
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: center;
+}
+
+#mensajeEstrategiaElement {
+    font-size: 16px;
+    color: #4a90e2;
+    margin-top: 10px;
+    text-align: center;
+}
+
+table {
+    width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-    margin-left: auto;
-    margin-right: auto;
-    word-wrap: break-word;
 }
 
-#tablaGanancias th,
-#tablaGanancias td,
-#desgloseOperaciones th,
-#desgloseOperaciones td {
+table, th, td {
     border: 1px solid #ddd;
-    padding: 10px;
     text-align: center;
-    box-sizing: border-box;
+    padding: 8px;
 }
 
-#tablaGanancias th,
-#desgloseOperaciones th {
-    background-color: #4A90E2;
+th {
+    background-color: #4a90e2;
     color: white;
 }
 
@@ -121,26 +127,7 @@ p {
     font-weight: bold;
 }
 
-#tablaContainer {
-    margin-top: 20px;
-    background-color: #fff;
-    padding: 10px;
-    border-radius: 5px;
-    border: 2px solid #4A90E2;
-    overflow-x: auto;
-    box-sizing: border-box;
-}
-
-#desgloseContainer {
-    margin-top: 20px;
-    background-color: #f4f4f4;
-    padding: 15px;
-    border-radius: 10px;
-    border: 2px solid #4A90E2;
-}
-
 #botonDuplicarTiempo {
-    margin-top: 20px;
     width: 100%;
     padding: 12px;
     background-color: #4a90e2;
@@ -150,6 +137,7 @@ p {
     cursor: pointer;
     border-radius: 5px;
     font-weight: bold;
+    margin-top: 20px;
 }
 
 .linha-separadora {
