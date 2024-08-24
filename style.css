@@ -74,7 +74,7 @@ p {
     max-width: 100%; /* Asegura que la tabla no sobrepase el contenedor */
     border-collapse: collapse;
     margin-top: 20px;
-    table-layout: fixed; /* Distribuye las columnas equitativamente */
+    table-layout: auto; /* Cambié de fixed a auto para ajustar el ancho de las columnas automáticamente */
     word-wrap: break-word; /* Permite que el contenido se ajuste dentro de la celda */
 }
 
