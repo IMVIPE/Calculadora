@@ -97,12 +97,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 const gananciaAportesVisual = `<span class="plus-symbol">+${gananciaAportes.toFixed(2)}</span>`;
                 const gananciaAportesMitadVisual = `<span class="plus-symbol">+${gananciaAportesMitad.toFixed(2)}</span>`;
 
+                const mesVisual = duplicarMeses && mes > mitadCiclo ? mes + mitadCiclo : mes;
+
                 const row = document.createElement('tr');
                 row.style.backgroundColor = duplicarMeses && mes > mitadCiclo ? '#e0e0e0' : '#fff'; // Apply subtle color difference
-
-                // Ajustar el número de mes correctamente
-                const mesReal = duplicarMeses && mes > mitadCiclo ? mes : mes;
-                const mesVisual = duplicarMeses && mes > mitadCiclo ? mesReal : mes;
                 row.innerHTML = `
                     <td>${mesVisual}</td>
                     <td>${usuarios1G}</td>
