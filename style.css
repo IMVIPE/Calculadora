@@ -70,10 +70,12 @@ p {
 }
 
 #tablaGanancias, #desgloseOperaciones {
-    width: 100%;
-    max-width: 100%;
+    width: 95%; /* Hice la tabla un poco más estrecha para mejorar el centrado */
+    max-width: 95%;
     border-collapse: collapse;
     margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto; /* Centramos la tabla */
     word-wrap: break-word;
 }
 
@@ -84,7 +86,7 @@ p {
     border: 1px solid #ddd;
     padding: 10px;
     text-align: center;
-    box-sizing: border-box; /* Asegura que el padding y border se incluyan en el tamaño de la celda */
+    box-sizing: border-box;
 }
 
 #tablaGanancias th,
@@ -121,5 +123,5 @@ p {
     border-radius: 5px;
     border: 2px solid #4A90E2;
     overflow-x: auto;
-    box-sizing: border-box; /* Asegura que el padding y border se incluyan en el tamaño del contenedor */
+    box-sizing: border-box;
 }
