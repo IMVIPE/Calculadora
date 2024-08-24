@@ -13,7 +13,7 @@
         
         <form id="calculatorForm">
             <div class="input-section">
-                <label class="note">Nota: Necesitas invitar a 3 personas para ascender de rango</label>
+                <p class="note">Nota: Necesitas invitar a 3 personas para ascender de rango a partir del rango 6 y que todos tus invitados estén por lo menos 2 rangos por debajo para poder ascender.</p>
                 <label for="rangoActual">Selecciona tu Rango Actual:</label>
                 <select id="rangoActual" required>
                     <option value="10000">Rango 20 - $10,000</option>
@@ -38,16 +38,16 @@
                     <option value="50">Rango 1 - $50</option>
                 </select>
 
+                <p class="note">Nota: Te llevarás el 4% de las ganancias de tus invitados directos.</p>
+                <label for="numInvitadosGen1">Número de usuarios de 1ª generación que invitarás al mes:</label>
+                <input type="number" id="numInvitadosGen1" value="1" min="1">
+
+                <p class="note">Nota: Te llevarás el 2% de las ganancias de los invitados de tus invitados.</p>
+                <label for="numInvitadosGen2">Número de usuarios invitados por miembros de 1ª generación:</label>
+                <input type="number" id="numInvitadosGen2" value="1" min="1">
+
                 <label for="cicloMeses">Ciclo de Inversión (Meses):</label>
                 <input type="number" id="cicloMeses" value="12" required min="1">
-
-                <label class="note">Nota: Te llevarás el 4% de las ganancias de tus invitados directos.</label>
-                <label for="usuariosGen1">Número de usuarios de 1ª generación que invitarás al mes:</label>
-                <input type="number" id="usuariosGen1" value="1" required min="1">
-
-                <label class="note">Nota: Te llevarás el 2% de las ganancias de los invitados de tus invitados.</label>
-                <label for="usuariosGen2">Número de usuarios invitados por miembros de 1ª generación:</label>
-                <input type="number" id="usuariosGen2" value="1" required min="1">
 
                 <button type="button" id="calcularBtn">Calcular</button>
             </div>
@@ -60,8 +60,8 @@
                 <p><strong>Ganancias con Aportes Mensuales:</strong> <span id="gananciasAportes"></span></p>
                 <p><strong>Ganancias con Aportes Mensuales (Mitad del Capital Inicial):</strong> <span id="gananciasAportesMitad"></span></p>
             </div>
-            <p><strong>Capital Final:</strong> <span id="resultadoCapitalFinal"></span></p>
-            <p><strong>Estrategia Sugerida:</strong> <span id="mensajeEstrategia"></span></p>
+            <p id="capitalFinalElement"><strong>Capital Final:</strong> <span id="resultadoCapitalFinal"></span></p>
+            <p id="mensajeEstrategiaElement"><strong>Estrategia Sugerida:</strong> <span id="mensajeEstrategia"></span></p>
 
             <div id="desgloseContainer">
                 <h3>Desglose de Operaciones</h3>
@@ -96,7 +96,7 @@
                         <tr>
                             <th>Mes</th>
                             <th>Usuarios 1ª Gen</th>
-                            <th>Usuarios 2ª Gen</th>
+                            <th>Usuarios Invitados por Gen 1</th>
                             <th>Capital Propio</th>
                             <th>Ganancias 1ª Generación</th>
                             <th>Ganancias 2ª Generación</th>
@@ -110,8 +110,7 @@
                     </tbody>
                 </table>
             </div>
-
-            <button id="duplicarTiempoBtn">¿Quieres duplicar el tiempo de inversión?</button>
+            <button type="button" id="duplicarBtn" class="btn-duplicar">¿Qué pasaría si... doblamos el tiempo de inversión?</button>
         </div>
     </div>
 
