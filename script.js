@@ -121,17 +121,12 @@ document.addEventListener('DOMContentLoaded', () => {
             gananciaPrimeraGeneracionElement.textContent = ganancias1G.toFixed(2);
             gananciaSegundaGeneracionElement.textContent = ganancias2G.toFixed(2);
 
-            const mensajeEstrategia = capital < 250000 
-                ? `Te faltan $${(250000 - capital).toFixed(2)} para alcanzar $250,000.` 
-                : capital < 500000 
-                ? `¡Felicidades! Has alcanzado $250,000. Te faltan $${(500000 - capital).toFixed(2)} para alcanzar $500,000.` 
-                : capital < 1000000 
-                ? `¡Increíble! Has alcanzado $500,000. Te faltan $${(1000000 - capital).toFixed(2)} para alcanzar $1,000,000.` 
-                : '¡Felicidades! Has superado $1,000,000 en capital. Eres del 1% que llega tan lejos.';
-
-            mensajeEstrategiaElement.textContent = mensajeEstrategia;
+            mensajeEstrategiaElement.textContent = capital < 1000000 
+                ? 'Para mejorar tus ganancias, considera aumentar tu inversión inicial en los primeros meses.'
+                : '¡Felicidades! Has alcanzado $1,000,000 en capital.';
 
             resultsContainer.style.display = 'block';
+            duplicarTiempoBtn.style.display = 'block';
         } catch (error) {
             console.error('Ocurrió un error durante el cálculo:', error);
         }
