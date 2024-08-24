@@ -75,8 +75,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const totalGanancia = capital + ganancias1G + ganancias2G;
 
                 // Mostrar ganancias adicionales con símbolo +
-                const gananciaAportesVisual = `<span class="plus-symbol">+${(totalGananciaAportes - totalGanancia).toFixed(2)}</span>`;
-                const gananciaAportesMitadVisual = `<span class="plus-symbol">+${(totalGananciaAportesMitad - totalGanancia).toFixed(2)}</span>`;
+                const gananciaAportesVisual = `<span class="plus-symbol">+${gananciaAportes.toFixed(2)}</span>`;
+                const gananciaAportesMitadVisual = `<span class="plus-symbol">+${gananciaAportesMitad.toFixed(2)}</span>`;
 
                 // Agregar fila a la tabla
                 const row = document.createElement('tr');
