@@ -29,8 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
             let ganancias1G = 0;
             let ganancias2G = 0;
 
-            let usuarios1G = 1;
-            let usuarios2G = 0;
+            let usuarios1G = 1; // Inicialmente hay 1 usuario en Gen 1
+            let usuarios2G = 0; // Inicialmente no hay usuarios en Gen 2
 
             let totalGananciaAportes = 0;
             let totalGananciaAportesMitad = 0;
@@ -42,10 +42,12 @@ document.addEventListener('DOMContentLoaded', () => {
             tablaGanancias.innerHTML = '';
 
             for (let mes = 1; mes <= cicloMeses; mes++) {
+                // Cálculo del interés compuesto sobre el capital inicial
                 const gananciaInteres = capital * interesMensual;
                 totalGananciaInteresCompuesto += gananciaInteres;
                 capital += gananciaInteres;
 
+                // Simulación de aportes mensuales acumulativos
                 capitalAportes += capitalInicial;
                 const gananciaAportes = capitalAportes * interesMensual;
                 totalGananciaAportes += gananciaAportes;
@@ -56,12 +58,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 totalGananciaAportesMitad += gananciaAportesMitad;
                 capitalAportesMitad += gananciaAportesMitad;
 
+                // Gen 1: cada mes, se añade un nuevo usuario
                 if (mes > 1) {
                     usuarios1G += 1;
                 }
 
+                // Gen 2: a partir del segundo mes, cada usuario de Gen 1 comienza a invitar a un nuevo usuario de Gen 2
                 if (mes > 2) {
-                    usuarios2G += (mes - 2);
+                    usuarios2G += usuarios1G; // Se añade un usuario de Gen 2 por cada usuario en Gen 1
                 }
 
                 const capitalInvitado1G = capitalInicial / 2;
@@ -78,6 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const gananciaAportesVisual = `<span class="plus-symbol">+${gananciaAportes.toFixed(2)}</span>`;
                 const gananciaAportesMitadVisual = `<span class="plus-symbol">+${gananciaAportesMitad.toFixed(2)}</span>`;
 
+                // Agregar fila a la tabla
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${mes}</td>
