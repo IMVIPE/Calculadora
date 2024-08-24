@@ -18,9 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const capitalInicial = parseInt(document.getElementById('rangoActual').value);
             const cicloMeses = parseInt(document.getElementById('cicloMeses').value);
+            const usuariosPorMes = parseInt(document.getElementById('usuariosInvitados').value);
 
-            if (isNaN(capitalInicial) || isNaN(cicloMeses) || cicloMeses < 1) {
-                alert("Por favor, ingrese un rango y un ciclo de meses válidos.");
+            if (isNaN(capitalInicial) || isNaN(cicloMeses) || isNaN(usuariosPorMes) || cicloMeses < 1 || usuariosPorMes < 1) {
+                alert("Por favor, ingrese valores válidos.");
                 return;
             }
 
@@ -29,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let ganancias1G = 0;
             let ganancias2G = 0;
 
-            let usuarios1G = 1; // El usuario principal invita a un usuario en el primer mes
+            let usuarios1G = usuariosPorMes; // Usuarios invitados en el primer mes
             let usuarios2G = 0;
 
             let totalGananciaAportes = 0;
@@ -59,14 +60,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 totalGananciaAportesMitad += gananciaAportesMitad;
                 capitalAportesMitad += gananciaAportesMitad;
 
-                // Gen 1 aumenta en 1 usuario cada mes
+                // Gen 1 aumenta en usuariosPorMes cada mes
                 if (mes > 1) {
-                    usuarios1G += 1; // Cada mes, un nuevo usuario es invitado por Gen 1
+                    usuarios1G += usuariosPorMes; // Nuevos usuarios invitados por el usuario principal
                 }
 
-                // Gen 2 aumenta en 1 usuario cada mes por cada usuario en Gen 1, empezando desde el segundo mes
+                // Gen 2 aumenta en usuariosPorMes cada mes por cada usuario en Gen 1, empezando desde el segundo mes
                 if (mes > 2) {
-                    usuarios2G += (mes - 2); // Gen 2 empieza a crecer después de que Gen 1 haya pasado un mes
+                    usuarios2G += usuariosPorMes * (mes - 2); // Gen 2 empieza a crecer después de que Gen 1 haya pasado un mes
                 }
 
                 const capitalInvitado1G = capitalInicial / 2;
