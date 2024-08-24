@@ -69,8 +69,20 @@ p {
     margin-bottom: 20px;
 }
 
+#capitalFinalElement {
+    font-size: 24px;
+    color: #FFD700;
+    font-weight: bold;
+}
+
+#mensajeEstrategiaElement {
+    font-size: 16px;
+    color: #4a90e2;
+    margin-top: 10px;
+}
+
 #tablaGanancias, #desgloseOperaciones {
-    width: 95%; /* Hice la tabla un poco más estrecha para mejorar el centrado */
+    width: 95%;
     max-width: 95%;
     border-collapse: collapse;
     margin-top: 20px;
@@ -106,8 +118,8 @@ p {
 #desgloseContainer {
     margin-top: 20px;
     background-color: #f4f4f4;
-    padding: 10px;
-    border-radius: 5px;
+    padding: 15px;
+    border-radius: 10px;
     border: 2px solid #4A90E2;
 }
 
@@ -125,3 +137,42 @@ p {
     overflow-x: auto;
     box-sizing: border-box;
 }
+
+#desgloseOperaciones {
+    margin-top: 10px;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 15px;
+    text-align: center;
+}
+
+#desgloseOperaciones th {
+    background-color: #FFD700;
+    color: #333;
+}
+
+#desgloseOperaciones td {
+    color: #4a90e2;
+    font-weight: bold;
+}
+
+.result-highlight h2 {
+    margin-bottom: 10px;
+}
+
+#capitalFinalElement {
+    font-size: 24px;
+    color: #FFD700; /* Destaca en dorado */
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: center;
+}
+
+#mensajeEstrategiaElement {
+    font-size: 16px;
+    color: #4a90e2;
+    margin-top: 10px;
+    text-align: center;
+}
+
