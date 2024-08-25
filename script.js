@@ -89,8 +89,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const totalGanancia = capital + ganancias1G + ganancias2G;
 
-                const gananciaAportesVisual = `<span class="plus-symbol">+${(gananciaAportes).toFixed(2)}</span>`;
-                const gananciaAportesMitadVisual = `<span class="plus-symbol">+${(gananciaAportesMitad).toFixed(2)}</span>`;
+                const totalAcumuladoAportes = capitalAportes - capitalInicial + totalGananciaInteresCompuesto;
+                const totalAcumuladoAportesMitad = capitalAportesMitad - (capitalInicial / 2) + totalGananciaInteresCompuesto;
+
+                const gananciaAportesVisual = `<span class="plus-symbol">+${(totalAcumuladoAportes).toFixed(2)}</span>`;
+                const gananciaAportesMitadVisual = `<span class="plus-symbol">+${(totalAcumuladoAportesMitad).toFixed(2)}</span>`;
 
                 const row = document.createElement('tr');
                 row.style.backgroundColor = duplicarMeses && mes > inicioCiclo ? '#f2f2f2' : '#fff'; // Color clarito para nuevas celdas
