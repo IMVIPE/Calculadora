@@ -47,8 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
             let usuarios1G = duplicarMeses ? usuarios1GPorMes * (cicloMeses / 2) : 0;
             let usuarios2G = duplicarMeses ? usuarios1G * usuarios2GPorUsuario1G : 0;
 
-            let totalGananciaAportes = duplicarMeses ? parseFloat(gananciasAportesElement.textContent.replace(/[^0-9.-]+/g,"")) : 0;
-            let totalGananciaAportesMitad = duplicarMeses ? parseFloat(gananciasAportesMitadElement.textContent.replace(/[^0-9.-]+/g,"")) : 0;
+            let totalGananciaAportes = duplicarMeses ? parseFloat(gananciasAportesElement.getAttribute('data-total')) : 0;
+            let totalGananciaAportesMitad = duplicarMeses ? parseFloat(gananciasAportesMitadElement.getAttribute('data-total')) : 0;
             let capitalAportes = duplicarMeses ? parseFloat(capitalFinalElement.textContent) : capitalInicial;
             let capitalAportesMitad = duplicarMeses ? parseFloat(capitalFinalElement.textContent) / 2 : capitalInicial / 2;
 
@@ -89,8 +89,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const totalGanancia = capital + ganancias1G + ganancias2G;
 
-                const gananciaAportesVisual = `<span class="plus-symbol">+${gananciaAportes.toFixed(2)}</span>`;
-                const gananciaAportesMitadVisual = `<span class="plus-symbol">+${gananciaAportesMitad.toFixed(2)}</span>`;
+                const gananciaAportesVisual = `<span class="plus-symbol">+${(gananciaAportes).toFixed(2)}</span>`;
+                const gananciaAportesMitadVisual = `<span class="plus-symbol">+${(gananciaAportesMitad).toFixed(2)}</span>`;
 
                 const row = document.createElement('tr');
                 row.style.backgroundColor = duplicarMeses && mes > inicioCiclo ? '#f2f2f2' : '#fff'; // Color clarito para nuevas celdas
@@ -113,6 +113,10 @@ document.addEventListener('DOMContentLoaded', () => {
             gananciasAportesElement.textContent = totalGananciaAportes.toFixed(2);
             gananciasAportesMitadElement.textContent = totalGananciaAportesMitad.toFixed(2);
             totalGananciasElement.textContent = (capital + ganancias1G + ganancias2G).toFixed(2);
+
+            // Guardar el total en data-attribute para acumulación futura
+            gananciasAportesElement.setAttribute('data-total', totalGananciaAportes.toFixed(2));
+            gananciasAportesMitadElement.setAttribute('data-total', totalGananciaAportesMitad.toFixed(2));
 
             gananciaInteresCompuestoElement.textContent = totalGananciaInteresCompuesto.toFixed(2);
             gananciaPrimeraGeneracionElement.textContent = ganancias1G.toFixed(2);
