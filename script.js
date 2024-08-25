@@ -89,8 +89,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const totalGanancia = capital + ganancias1G + ganancias2G;
 
-                const totalAcumuladoAportes = capitalAportes - capitalInicial + totalGananciaInteresCompuesto;
-                const totalAcumuladoAportesMitad = capitalAportesMitad - (capitalInicial / 2) + totalGananciaInteresCompuesto;
+                // Acumulación correcta después de la duplicación
+                const totalAcumuladoAportes = totalGananciaAportes + (capitalAportes - capitalInicial) - (duplicarMeses && mes === inicioCiclo ? 0 : gananciaAportes);
+                const totalAcumuladoAportesMitad = totalGananciaAportesMitad + (capitalAportesMitad - (capitalInicial / 2)) - (duplicarMeses && mes === inicioCiclo ? 0 : gananciaAportesMitad);
 
                 const gananciaAportesVisual = `<span class="plus-symbol">+${(totalAcumuladoAportes).toFixed(2)}</span>`;
                 const gananciaAportesMitadVisual = `<span class="plus-symbol">+${(totalAcumuladoAportesMitad).toFixed(2)}</span>`;
